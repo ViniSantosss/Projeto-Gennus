@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registre sua conta - Gennus</title>
+
+    <link rel="stylesheet" href=""> <!--pode fazer o arquivo css e colocar ai-->
+
+</head>
+<body>
+
+    <main class="register-page">
+
+        <div class="user-register-container">
+            <h2 class="register-title">Registre sua conta</h2>
+
+            <form action="/servidor-php-aqui">
+
+                <!-- formulario de nome -->
+
+                <div class="form-register-group">
+                    <label for="name">Nome completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <!-- formulario de email -->
+
+                <div class="form-register-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <!--formulario pra senha, falta o negocio pra confirmar senha
+                e talvez eu mude isso de lugar, aqui ta meio estranho-->
+
+                <div class="form-register-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <!--formulario pro telefone, depois dá pra colocar em qual pais é, tipo 55 do brasil ou qualquer outro-->
+
+                <div class="form-register-group">
+                    <label for="phone-number">Número de telefone:</label>
+                    <input type="tel" id="phone-number" name="phone-number" required placeholder="(00) 12345-6789">
+                </div>
+
+                <!--formulario pra ver o tipo de pessoa, fisica ou juridica-->
+
+                <div class="form-register-group">
+                    <label for="person-type">Tipo de Pessoa</label>
+                        <select name="person-type" id="person-type">
+                            <option value="natural-person" selected>Pessoa Fisica</option>
+                            <option value="legal-person">Pessoa Juridica</option>
+                    </select>
+                </div>
+
+                <!-- o ideal é que quando o usuário selecionar se é pessoa fisica ou
+                    juridica apareça outros tipos de cadastro, tipo CNPJ, mas ai tem que fazer com JS-->
+
+                <div class="form-register-group">
+                    <label for="busines-name" id="business-name">Nome da Empresa (só pra teste):</label>
+                    <input type="text" id="business-name">
+                </div>
+
+                <!-- formulario dos termos de uso-->
+
+                <div class="form-register-group">
+                    <input type="checkbox" id="use-terms" required>
+                    <label for="use-terms">Aceitar <a href="use-terms.html">Termos de uso</a></label>  
+                </div>
+
+                <!-- formulario do captcha-->
+
+                <div class="form-register-group">
+                    <!-- Aqui dentro vai o CAPTCHA, mas pra ele funcionar tem que ter JS-->
+
+                    <input type="text" id="captcha-test" required>
+                    <label for="captcha-test" id = "captcha-test">Verificar Captcha</label>
+
+                    <!--**o ideal é ou usar o recaptcha de algum jeito, que ele já vem pronto OU criar o captcha
+                    usando JS o que eu acho que não é legal**-->
+                </div>
+
+                <div class="form-register-group">
+                    <p id="form-register-error">Placeholder erro de cadastro precisa do backend</p>
+                </div>
+
+                <button type="submit">Criar Conta</button>
+
+            </form>
+
+    </div>
+
+    </main>
+</body>
+</html>
