@@ -1,0 +1,32 @@
+.product-filters-group {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre a lupa e o campo de texto */
+    border: 1px solid #ccc; /* Uma bordinha suave para o conjunto */
+    padding: 4px 10px;
+    border-radius: 4px;
+    width: fit-content; /* Faz o grupo ocupar apenas o espaço necessário */
+}
+   
+    /* Ajusta o tamanho da imagem da lupa */
+ .search-icon img {
+    width: 16px;   /* Tamanho pequeno, proporcional ao texto */
+    height: 16px;
+    display: block; /* Remove espaços vazios embaixo da imagem */
+    filter: grayscale(1); /* Opcional: deixa a lupa cinza se ela for colorida */
+}
+
+    /* Limpa o visual do input para ele não parecer um quadrado solto */
+    #product-search {
+    border: none;
+    outline: none; /* Tira aquela borda azul ao clicar */
+    font-size: 14px;
+    padding: 4px;
+    background: transparent;
+}
+
+
+/* esse css é 100% provisório, só para deixar o simbolo de lupa no form de pesquisa na página de lista de produto, se quiser excluir, mudar,
+ou sei lá o que pode fazer, só lembrando que dai tem que tirar o icone do código*/
+
+/* se quiser tirar essa é a linha: 27 -- <i class="search-icon"><img src="../assets/search-icon.png" alt=""></i> */

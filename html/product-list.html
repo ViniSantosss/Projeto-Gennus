@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos - Gennus</title>
+    <link rel="stylesheet" href="../css/css-provisório.css">
+</head>
+<body>
+
+    <main class="product-list-page">
+
+        <nav class="sidebar-main">
+            <a href="product.html">Produtos</a>
+            <a href="sales.html">Vendas</a>
+            <a href="financial.html">Finanças</a>
+            <a href="reports.html">Relatórios</a>
+        </nav>
+
+        <div class="product-list-filters">
+
+            <div class="product-list-options">
+
+                <form action="/servidor-php-aqui">
+
+                    <!-- o class da barra de pesquisa e dos filtros está igual, se quiser fazer um css espeficico pra barra e outro pras
+                     categorias pode trocar-->
+
+                    <div class="product-filters-group"> <!-- aqui são os filtros de pesquisa, a barra de pesquisa, essas coisas-->
+
+                        <i class="search-icon"><img src="../assets/search-icon.png" alt=""></i> <!--se quiser tirar o icone de lupa só apagar essa linha-->
+                        <input type="text" id="product-search" name="product-search" placeholder="Pesquisar">
+                        <label for="product-search" ></label>
+
+                    </div>
+
+                    <div class="product-filters-group">
+
+                        <label for="product-categories">Categorias</label>
+                            <select name="product-categories" id="product-categories">
+
+                                <option value="fashion">Roupas de exemplo</option>
+                                <option value="eletronics">Eletronicos</option>
+                                <option value="domestic">Coisas de casa</option>
+                                <option value="self-care">cuidado pessoal self care sei lá se ta certo</option>
+
+                            </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="product-card-grid">
+
+            <!--esse product card que eu fiz é um modelo pro que vai ser depois, um bloquinho com imagem e texto embaixo, ai -->
+
+            <article class="product-card"
+            
+                data-product-card-id="placeholder-id"           
+                data-product-card-name="placeholder-name"       
+                data-product-card-status="placeholder-status"   
+                data-product-card-stock="0"
+                data-product-card-price="0">
+
+                <!--esses datas ai são como variáveis que depois vão ser utilizadas no js
+                tipo se quiser mudar o valor do preço voce só muda o valor nesse data que já troca o texto
+                mas pra mexer com comparação valores acredito que vai precisar alterar alguma coisa aqui-->
+
+                <img src="" alt="imagem do produto" class="product-card-image">
+ 
+                <div class="product-card-info">
+                    <h3 class="product-card-name">Nome do produto</h3>
+                    <p class="product-card-status">ativo/inativo</p>
+                    <p class="product-card-stock">0</p>
+                    <h3 class="product-card-price">0.00</h3>
+                </div>    
+            </article>
+            
+        </div>
+    </main>
+</body>
+</html>

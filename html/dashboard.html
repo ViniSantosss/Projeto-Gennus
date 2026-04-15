@@ -16,7 +16,7 @@
 
         <nav class="sidebar-main">
 
-            <a href="product.html">Produtos</a>
+                <a href="product.html">Produtos</a>
             <a href="sales.html">Vendas</a>
             <a href="financial.html">Finanças</a>
             <a href="reports.html">Relatórios</a>
@@ -46,22 +46,20 @@
 
         <div class="dashboard-graphics">
 
-            <div class="dashboard-income-graphic"><!-- gráfico de lucros-->
-
-                
-                
+            <div><!-- gráfico de lucros-->
+                <canvas id="dashboard-income-graphic"></canvas>
             </div>
 
-            <div class="dashboard-expense-graphic"><!--gráfico de despesas, no documento de estruturação tá por categoria, depois eu faço isso-->
-
+            <div><!--gráfico de despesas, no documento de estruturação tá por categoria, depois eu faço isso-->
+                <canvas id="dashboard-expense-graphic"></canvas>
             </div>
 
-            <div class="dashboard-top-sold-graphic"><!--gráfico do produto mais vendido-->
-
+            <div class=><!--gráfico do produto mais vendido-->
+                <canvas id="dashboard-top-sold-graphic"></canvas>
             </div>
 
-            <div class="dashboard-monthly-comparision-graphic"><!--gráfico de comparação ao mes anterior-->
-
+            <div><!--gráfico de comparação ao mes anterior-->
+                <canvas id="dashboard-monthly-comparision-graphic"></canvas>
             </div>
 
         </div>
@@ -128,4 +126,5 @@
     </main>
     
 </body>
+    <script src="../javascript/dashboard.js"></script>
 </html>

@@ -9,7 +9,6 @@
 
 </head>
 <body>
-
     <main class="register-page">
 
         <div class="user-register-container">
@@ -20,6 +19,11 @@
                 <!-- formulario de nome -->
 
                 <div class="form-register-group">
+
+                    <!--só avisando o por que tem tanto form register group abrindo e fechando é que pra colocar margin
+                    ou padding no css fica mais fácil, não precisa ficar criando vários css igual pra dar o espaçamento em um bloco especifico,
+                    ele já vai pra todos, tem a mesma coisa no login.html-->
+
                     <label for="name">Nome completo</label>
                     <input type="text" id="name" name="name" required>
                 </div>
@@ -43,7 +47,7 @@
 
                 <div class="form-register-group">
                     <label for="phone-number">Número de telefone:</label>
-                    <input type="tel" id="phone-number" name="phone-number" required placeholder="(00) 12345-6789">
+                    <input type="tel" id="phone-number" name="phone-number" placeholder="(00) 12345-6789" required >
                 </div>
 
                 <!--formulario pra ver o tipo de pessoa, fisica ou juridica-->
@@ -57,11 +61,11 @@
                 </div>
 
                 <!-- o ideal é que quando o usuário selecionar se é pessoa fisica ou
-                    juridica apareça outros tipos de cadastro, tipo CNPJ, mas ai tem que fazer com JS-->
+                    juridica apareça outros tipos de cadastro, tipo CNPJ, mas ai tem que fazer com JS (eu acho)-->
 
                 <div class="form-register-group">
                     <label for="busines-name" id="business-name">Nome da Empresa (só pra teste):</label>
-                    <input type="text" id="business-name">
+                    <input type="text" id="business-name" required>
                 </div>
 
                 <!-- formulario dos termos de uso-->
@@ -74,25 +78,24 @@
                 <!-- formulario do captcha-->
 
                 <div class="form-register-group">
+
                     <!-- Aqui dentro vai o CAPTCHA, mas pra ele funcionar tem que ter JS-->
 
                     <input type="text" id="captcha-test" required>
                     <label for="captcha-test" id = "captcha-test">Verificar Captcha</label>
 
-                    <!--**o ideal é ou usar o recaptcha de algum jeito, que ele já vem pronto OU criar o captcha
-                    usando JS o que eu acho que não é legal**-->
+                    <!--é possivel usar o recaptcha pronto do google, mas como faz isso só deus sabe-->
+
                 </div>
 
                 <div class="form-register-group">
-                    <p id="form-register-error">Placeholder erro de cadastro precisa do backend</p>
+                    <p id="form-register-error">Placeholder erro de cadastro precisa do backend e do js</p>
                 </div>
 
                 <button type="submit">Criar Conta</button>
 
             </form>
-
     </div>
-
     </main>
 </body>
 </html>
