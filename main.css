@@ -1,0 +1,39 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: black;
+}
+
+h1 {
+  color: #fff;
+}
+/*reset da pagina ^*/
+.nav-table {
+  display: table-cell;
+  position: relative;
+  padding: 15px 0;
+}
+
+.nav-a {
+  color: #fff; /*setando a cor da letra, sempre apenas "color:"*/
+  text-transform: uppercase; /*letras maiusculas*/
+  text-decoration: none; /*tira o sublinhado do link <a>*/
+  letter-spacing: 0.15rem; /*espaço entre uma letra e outra - 1rem = 16px | 0.15 = 2.4px*/
+  display: inline-block; /* fica na linha mas aceita largura e altura */
+  padding: 15px 20px; /*padding = esquerda, direita, em cima e em baixo. Ordem dos valores: padding: top right left bottom;*/
+  position: relative;
+}
+
+.nav-a:hover::after {
+  width: 100%;
+  left: 0;
+  background-color: #00fffc;
+}
