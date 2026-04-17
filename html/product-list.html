@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Produtos - Gennus</title>
+    <title>Lista de Produtos | Gennus</title>
     <link rel="stylesheet" href="../css/css-provisório.css">
 </head>
 <body>
@@ -11,10 +11,21 @@
     <main class="product-list-page">
 
         <nav class="sidebar-main">
-            <a href="product.html">Produtos</a>
+
+            <a href="dashboard.html">Dashboard</a> <!-- talvez depois adicione um html para que possa aparecer tipo avisos, e um simbolo de aviso no dashboard-->
+            <a href="product-list.html">Produtos</a>
             <a href="sales.html">Vendas</a>
             <a href="financial.html">Finanças</a>
             <a href="reports.html">Relatórios</a>
+
+            <nav class="sidebar-user">
+
+                <h3>Perfil</h3>
+                
+                <a href="profile.html">nome do caba</a>
+                <a href="config.html">Configurações</a>
+                    
+            </nav>
         </nav>
 
         <div class="product-list-filters">
@@ -29,20 +40,21 @@
                     <div class="product-filters-group"> <!-- aqui são os filtros de pesquisa, a barra de pesquisa, essas coisas-->
 
                         <i class="search-icon"><img src="../assets/search-icon.png" alt=""></i> <!--se quiser tirar o icone de lupa só apagar essa linha-->
-                        <input type="text" id="product-search" name="product-search" placeholder="Pesquisar">
-                        <label for="product-search" ></label>
+                        <input type="text" id="product-search-filter" name="product-search-filter" placeholder="Pesquisar">
+                        <label for="product-search-filter" ></label>
 
                     </div>
 
                     <div class="product-filters-group">
 
-                        <label for="product-categories">Categorias</label>
-                            <select name="product-categories" id="product-categories">
+                        <label for="product-categories-filter">Categorias</label>
+                            <select name="product-categories-filter" id="product-categories-filter">
 
-                                <option value="fashion">Roupas de exemplo</option>
-                                <option value="eletronics">Eletronicos</option>
-                                <option value="domestic">Coisas de casa</option>
-                                <option value="self-care">cuidado pessoal self care sei lá se ta certo</option>
+                                <option value="product-category-tools">Ferramentas</option>
+                                <option value="product-category-fashion">Roupas de exemplo</option>
+                                <option value="product-category-eletronics">Eletronicos</option>
+                                <option value="product-category-domestic">Coisas de casa</option>
+                                <option value="product-category-self-care">cuidado pessoal self care sei lá se ta certo</option>
 
                             </select>
                     </div>
@@ -50,7 +62,24 @@
             </div>
         </div>
 
-        <div class="product-card-grid">
+        <div class="product-card-grid"> <!--não sei se pra mexer no css assim fica mais facil-->
+
+            <div class="product-card-grid-alert">
+                <p>Você não adicionou nenhum produto ainda</p>  <!-- isso aqui vai ser caso o usuário nao adicionou nada, ai tem que ver com o js-->
+                <a href="product-create.html" class="product-card-add-alert">
+                    <span class="product-add-icon">+</span>
+                    <p class="product-add-title">Adicionar Produto<p>
+                    <p>esse texto é pra aparecer só quando nao tiver nenhum produto cadastrado, ai a opção de criar o card fica centralizada</p>
+                </a>  
+            </div>
+            
+            <article class="product-card add-product-card">
+    
+                <a href="product-create.html" class="product-add-link">
+                    <span class="product-add-icon">+</span>
+                    <p class="product-add-title">Adicionar Produto<p>
+                </a>
+            </article>
 
             <!--esse product card que eu fiz é um modelo pro que vai ser depois, um bloquinho com imagem e texto embaixo, ai -->
 
@@ -59,24 +88,38 @@
                 data-product-card-id="placeholder-id"           
                 data-product-card-name="placeholder-name"       
                 data-product-card-status="placeholder-status"   
-                data-product-card-stock="0"
-                data-product-card-price="0">
+                data-product-card-quantity="placeholder-value-0"
+                data-product-card-price="placeholder-value-0"
+                data-product-card-category="placeholder-category">
 
                 <!--esses datas ai são como variáveis que depois vão ser utilizadas no js
                 tipo se quiser mudar o valor do preço voce só muda o valor nesse data que já troca o texto
                 mas pra mexer com comparação valores acredito que vai precisar alterar alguma coisa aqui-->
 
-                <img src="" alt="imagem do produto" class="product-card-image">
+                <img src="../assets/placeholder-image.jpg" alt="imagem do produto" class="product-card-image">
  
                 <div class="product-card-info">
                     <h3 class="product-card-name">Nome do produto</h3>
-                    <p class="product-card-status">ativo/inativo</p>
-                    <p class="product-card-stock">0</p>
-                    <h3 class="product-card-price">0.00</h3>
-                </div>    
+                    <p class="product-card-category">Categoria: banana</p>
+                    <p class="product-card-status">Ativo/Inativo</p>
+                    <p class="product-card-stock">Quantia: 0</p>
+                    <h3 class="product-card-price">Valor R$0.00</h3>
+                </div>
+                
+                <div class="product-card-functions"
+
+                    data-product-card-functions-id ="placeholder-id">
+
+                    <button class="product-card-edit">Editar</button>
+
+                    <button class="product-card-delete">Excluir</button>
+
+                    <a href="product-table.html">Visualizar</a> <!--aqui acho que vai um a href talvez mude-->
+                    
+                </div>
             </article>
-            
         </div>
+
     </main>
 </body>
 </html>

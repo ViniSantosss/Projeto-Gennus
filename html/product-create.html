@@ -3,26 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - Gennus</title>
+    <title>Produtos | Gennus</title>
 
-    <link rel="stylesheet" href=""> <!--pode fazer o arquivo css e colocar ai-->
+    <link rel="stylesheet" href="../css/css-provisório.css"> <!--pode fazer o arquivo css e colocar ai-->
 
 </head>
 <body>
     <main class="product-page">
 
         <nav class="sidebar-main">
-            <a href="product.html">Produtos</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="product-list.html">Produtos</a>
             <a href="sales.html">Vendas</a>
             <a href="financial.html">Finanças</a>
             <a href="reports.html">Relatórios</a>
+
+            <nav class="sidebar-user">
+                <h3>Perfil</h3>
+                <a href="profile.html">nome do caba</a>
+                <a href="config.html">Configurações</a>       
+            </nav>
         </nav>
 
-        <header class="product-top">
+        <div class="product-create-cards">
 
-        </header>
-
-        <div class="product-cards">
             
             <form action="/servidor-php-aqui" class="product-actions">
 
@@ -35,6 +39,18 @@
                     <label for="product-description">Descrição</label>
                     <input type="text" name ="product-description" id="product-description" placeholder="Ex: item para uso pessoal" required>
                 </div>
+
+                <div class="product-options">
+                    <label for="product-categories-options">Categoria do Produto</label>
+                        <select name="product-category-options" id="product-category-options">
+                            <option value="product-category-fashion">Moda</option>
+                            <option value="product-category-self-care">Cuidado Pessoal</option>
+                            <option value="product-category-eletronics">Eletrônicos</option>
+                            <option value="product-category-domestic">Domestico</option>
+                            <option value="product-category-tools">Ferramentas</option>
+                            <option value="product-category-other">Outros</option>
+                        </select>
+                </div>
                     
                 <div class="product-options">
                     <label for="product-price">Preço</label>
@@ -42,7 +58,7 @@
                 </div>
 
                 <div class="product-options">
-                    <label for="product-stock">Estoque</label>
+                    <label for="product-stock">Quantia</label>
                     <input type="number" name="product-stock" id="product-stock" placeholder="0" required> 
                 </div>
 
@@ -54,26 +70,20 @@
                     </select>
                 </div>
 
+                <div class="product-image-upload">
+                    <label for="product-image">Adicione sua Imagem</label>
+                    <input type="file" name="product-image" id="product-image" accept="image/*">
+                </div>
+
+            <div class="product-create-buttons">
                 <button type="submit" id="product-button-save">Adicionar Produto</button>
                 <button type="reset">Redefinir</button>
-
+            </div>
             </form>
         </div>    
         
-        <div class="sidebar-user">
-
-            <h3>Perfil</h3>
-
-            <a href="profile.html">nome do caba</a>
-            <a href="config.html">Configurações</a>
-            
-            <!--mesma coisa do dashboard, deixar o nome e perfil no canto esquerdo ali embaixo-->
-            
-        </div>
-
-        <!-- a partir daqui tem que criar a parte de barra de pesquisa, filtros etc, mas pra isso funcionar nois precisa do backend
-         pelo menos tendo informação, ou dá pra fazer isso no product list, eu acho mais organizado-->
-
     </main>
+    <script src="../javascript/main.js"></script>
+    <script src="../javascript/product.js"></script> 
 </body>
 </html>
