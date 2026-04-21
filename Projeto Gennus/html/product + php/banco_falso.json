@@ -1,0 +1,16 @@
+[
+    {
+        "nome": "RAFAEL ALVES ",
+        "descricao": "USO PESSOAL",
+        "preco": "12",
+        "estoque": "12",
+        "status": "product-ative"
+    },
+    {
+        "nome": "geladeira",
+        "descricao": "eletrodomestico",
+        "preco": "100",
+        "estoque": "12",
+        "status": "product-ative"
+    }
+]
