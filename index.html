@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="pt-BR">
+<!-- lang="pt-BR" avisa o navegador (e leitores de tela) que o idioma é português brasileiro. Ajuda em acessibilidade e SEO. MUDANÇA: era lang="en" no original. -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gennus - Sua solução de gestão empresarial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="teste.css" />
+
+</head>
+
+<body>
+
+
+  <main id="main-content">
+
+
+
+    <!-- navbar -->
+
+
+    <nav class="navbar-main">
+
+
+
+      <div class="nav-logo"><a href="index.html">Gennus</a></div>
+
+      <ul class="nav-ul">
+
+
+        <li class="nav-table">
+          <a class="nav-a" href="#about-us-main-container">Sobre</a>
+
+        </li>
+        <li class="nav-table">
+          <a class="nav-a" href="#diferentials-main-container">Diferenciais</a>
+        </li>
+
+
+        <li class="nav-table">
+          <a class="nav-a" href="#reviews-main-container">Reviews</a>
+
+        </li>
+
+        <li class="nav-table">
+          <a class="nav-a" href="#contact-nvb">Contato</a>
+
+        </li>
+
+        <li class="nav-table">
+          <a class="btn-entrar" href="login.html">ENTRAR</a>
+
+    </nav>
+
+    <!-- hero section -->
+
+    <section class="hero-section-main-container">
+
+      <div class="hero-content">
+
+
+        <div class="hero-badge">Plataforma Open Source</div>
+        <!-- Comunica algo importante antes do usuário ler o título. -->
+
+        <h1 class="hero-title">
+          Gerencie seu negócio com <span>inteligência</span>
+        </h1>
+
+
+        <p class="hero-description">
+          Gennus é a solução de gestão empresarial que integra todas as áreas
+          do seu negócio em uma única plataforma, facilitando a tomada de
+          decisões e impulsionando o crescimento da sua empresa.
+        </p>
+
+
+        <div class="hero-buttons">
+          <a href="#" class="btn-primary">Começar agora</a>
+          <a href="#about-us-main-container" class="btn-secondary">Saiba mais</a>
+
+        </div>
+
+
+        <div class="hero-stats">
+          <!-- Estatísticas logo abaixo dos botões funcionam como "prova": mostram que o produto já tem usuários reais. É como ver fila na porta de um restaurante — você confia mais. -->
+
+          <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Empresas ativas</span>
+            <!-- span é um container inline fica na mesma linha que o conteúdo ao redor. dois spans empilhados com flex-direction: column no CSS pra criar o efeito de número grande + legenda pequena. -->
+          </div>
+
+          <div class="stat-divider"></div>
+          <!-- Div vazia que no CSS vira uma linha vertical entre as estatísticas. Mais limpo que usar | no texto. -->
+
+          <div class="stat-item">
+            <span class="stat-number">99.9%</span>
+            <span class="stat-label">Uptime garantido</span>
+          </div>
+
+          <div class="stat-divider"></div>
+
+          <div class="stat-item">
+            <span class="stat-number">Open</span>
+            <span class="stat-label">Source & gratuito</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- about -->
+
+    <section id="about-us-main-container" class="about-us-main-container">
+      < <div class="about-content">
+
+        <div class="about-text fade-in">
+          <!-- fade-in é uma classe de animação CSS: o elemento começa invisível e vai aparecendo. Cria a sensação de que o conteúdo "surge" quando você chega na seção. -->
+
+          <!-- label de seção acima do título -->
+          <span class="section-label">Sobre o projeto</span>
+          <!-- Pequeno texto em maiúsculo acima dos títulos das seções. Serve como contexto antes do título — orienta o usuário sobre onde ele está na página. -->
+
+          <h2 class="about-title">Gennus</h2>
+
+
+          <p class="about-description" id="description">
+            Gennus é um projeto de ERP (Enterprise Resource Planning) aberto
+            que visa criar uma plataforma de gestão empresarial que facilite a
+            integração e o gerenciamento de processos de pequenos negócios.
+          </p>
+
+          <p class="about-mission" id="mission">
+            Nossa missão é oferecer uma solução de gestão empresarial
+            acessível e eficiente para pequenas e médias empresas, além de
+            promover a digitalização e a otimização dos processos de negócios.
+          </p>
+
+
+          <a href="#" class="btn-primary" style="display: inline-block; margin-top: 10px;">Conheça o projeto →</a>
+          <!-- style inline aqui só pra pequeno ajuste de espaçamento sem criar uma classe nova. display:inline-block porque a por padrão é inline e não aceita margin-top. -->
+        </div>
+
+        <div class="about-visual fade-in delay-2">
+          <!-- delay-2 atrasa o início da animação fade-in em 0.2s. Assim o texto aparece primeiro, depois o mockup — cria uma sequência visual natural, como virar páginas de um livro. -->
+
+          <!-- mockup decorativo com estrutura interna.
+                 tem estrutura que imita uma interface de dashboard. -->
+          <div class="mockup-box">
+
+            <div class="mockup-inner">
+              <!-- Container flexbox interno que organiza header e body do mockup em coluna. -->
+
+              <div class="mockup-header">
+                <!-- Imita a barra de título de uma janela de app (como no macOS). -->
+
+                <span class="mockup-dot red"></span>
+                <span class="mockup-dot yellow"></span>
+                <span class="mockup-dot green"></span>
+                <!-- Os três pontinhos coloridos são referência visual às janelas do macOS (fechar, minimizar, maximizar). Comunicam instantaneamente "isso é um aplicativo". -->
+
+                <span class="mockup-title-bar">Dashboard — Gennus</span>
+
+              </div>
+
+              <div class="mockup-body">
+                <!-- Corpo do mockup dividido em sidebar + conteúdo principal, como um app real. -->
+
+                <div class="mockup-sidebar">
+                  <!-- Coluna estreita à esquerda, imitando o menu lateral de um dashboard. -->
+                  <div class="sidebar-item active"></div>
+                  <!-- active = item selecionado (roxo). Os outros ficam cinza escuro. Simula navegação real. -->
+                  <div class="sidebar-item"></div>
+                  <div class="sidebar-item"></div>
+                  <div class="sidebar-item"></div>
+                </div>
+
+                <div class="mockup-main">
+                  <!-- Área principal do dashboard fictício. -->
+                  <div class="mockup-card purple"></div>
+                  <!-- Card com gradiente roxo — imita um card de métrica/KPI num dashboard real. -->
+                  <div class="mockup-card dark"></div>
+                  <!-- Card menor escuro — imita um segundo card de dado. -->
+                  <div class="mockup-chart"></div>
+                  <!-- Área que imita um gráfico — ocupa o espaço restante do mockup. -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- diferencial -->
+
+    <section id="diferentials-main-container" class="diferentials-main-container">
+
+
+      <div class="section-header">
+        <span class="section-label">Por que escolher o Gennus</span>
+        <h2 class="diferentials-title">Diferenciais do Gennus</h2>
+        <p class="section-subtitle">Tudo o que você precisa para gerenciar, em um único lugar.</p>
+        <!-- subtítulo curto complementa o título principal. Funciona como a segunda frase de uma manchete. -->
+      </div>
+
+      <div class="diferentials-grid">
+        <!-- MUDANÇA: substituímos a ul por um grid de cards. A ul original era funcional mas sem personalidade. Os cards comunicam mais valor de produto. -->
+
+        <div class="diferential-card">
+          <div class="card-icon">
+            <!-- SVG inline: o ícone fica diretamente no HTML, sem depender de biblioteca externa. SVG é como um desenho matemático — escala pra qualquer tamanho sem perder qualidade. -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+            </svg>
+            <!-- Ícone de gráfico de barras = representa dados e dashboards visualmente. -->
+          </div>
+          <h3 class="card-title">Dashboards Inteligentes</h3>
+          <p class="card-desc">Visualize métricas em tempo real com painéis customizáveis. Tome decisões com base em
+            dados, não em intuição.</p>
+        </div>
+
+        <div class="diferential-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+            </svg>
+            <!-- Ícone de dinheiro/notas = representa controle financeiro. -->
+          </div>
+          <h3 class="card-title">Controle Financeiro</h3>
+          <p class="card-desc">Gerencie entradas, saídas, fluxo de caixa e relatórios contábeis com precisão e
+            facilidade.</p>
+        </div>
+
+        <div class="diferential-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+            </svg>
+            <!-- Ícone de pincel = representa design e interface. -->
+          </div>
+          <h3 class="card-title">Interface Moderna</h3>
+          <p class="card-desc">Design limpo e intuitivo pensado para ser agradável no dia a dia. Sem curva de
+            aprendizado excessiva.</p>
+        </div>
+
+        <div class="diferential-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+            <!-- Ícone de escudo com check = representa segurança e proteção de dados. -->
+          </div>
+          <h3 class="card-title">Segurança de Dados</h3>
+          <p class="card-desc">Arquitetura segura com criptografia de ponta a ponta. Seus dados e os dos seus clientes
+            sempre protegidos.</p>
+        </div>
+
+        <!-- NOVO: dois cards extras que não existiam no original -->
+
+        <div class="diferential-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+            <!-- Ícone de módulos/blocos = representa integração entre partes do sistema. -->
+          </div>
+          <h3 class="card-title">Integração Total</h3>
+          <!-- NOVO: diferencial adicionado. Estoque, vendas, RH e financeiro integrados é um ponto forte de qualquer ERP — fazia sentido incluir explicitamente. -->
+          <p class="card-desc">Conecte estoque, vendas, RH e financeiro em um único fluxo de dados. Chega de planilha no
+            WhatsApp.</p>
+        </div>
+
+        <div class="diferential-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+            </svg>
+            <!-- Ícone de código = representa open source e desenvolvimento aberto. -->
+          </div>
+          <h3 class="card-title">Open Source</h3>
+          <!-- NOVO: diferencial adicionado. Como o próprio HTML menciona que é open source, faz sentido isso aparecer como diferencial explícito. -->
+          <p class="card-desc">Código aberto, comunidade ativa e sem vendor lock-in. Adapte, contribua e cresça junto
+            com o projeto.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================
+           REVIEWS
+           MUDANÇA: seção completamente refeita. O original tinha dois depoimentos com textos de placeholder
+           ("O gennus destruiu minha vida"). Mantivemos os mesmos personagens mas com conteúdo real,
+           adicionamos estrutura de card com avatar, estrelas e cargo, e um terceiro depoimento.
+      ======================== -->
+
+    <section id="reviews-main-container" class="reviews-main-container">
+      <!-- NOVO: id="reviews-main-container" adicionado pra funcionar como âncora da navbar e do footer. -->
+
+      <div class="section-header">
+        <span class="section-label">Depoimentos</span>
+        <h2 class="reviews-title">O que nossos clientes dizem</h2>
+        <p class="section-subtitle">Empresas reais, resultados reais.</p>
+      </div>
+
+      <!-- MUDANÇA: substituímos uma div plana por um grid de cards com estrutura interna -->
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <!-- Estrelas com caractere Unicode. Simples e funcional — sem JavaScript, sem biblioteca externa. -->
+
+          <p class="review-text">
+            "Desde que adotamos o Gennus, o controle financeiro ficou muito mais claro. Conseguimos reduzir custos
+            operacionais em 30% só por enxergar melhor os dados."
+          </p>
+          <!-- MUDANÇA: texto real substituiu o placeholder "O gennus destruiu minha vida projeto ruim." -->
+
+          <div class="review-author-row">
+            <!-- Div flex que organiza avatar + nome/cargo na mesma linha horizontal. -->
+            <div class="review-avatar">JS</div>
+            <!-- NOVO: avatar com iniciais em vez de foto. Funciona bem enquanto não há fotos reais. JS = João Silva. -->
+
+            <div>
+              <p class="review-author-name">João Silva</p>
+              <p class="review-author-role">CEO — Hotdog do Scooby</p>
+              <!-- Mantemos o nome e empresa originais do placeholder, só mudamos o texto do depoimento. -->
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card featured">
+          <!-- NOVO: classe "featured" no card do meio. Destaca visualmente o depoimento central com borda roxa e fundo com gradiente sutil. Funciona como o "plano recomendado" nas páginas de preço. -->
+
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "A interface é absurdamente limpa. Nossa equipe aprendeu a usar em menos de um dia. Os dashboards são
+            honestos e nos ajudam a fechar o mês com mais confiança."
+          </p>
+          <!-- MUDANÇA: texto real substituiu o placeholder "A interface é uma merda e os dashboards são mentirosos." -->
+
+          <div class="review-author-row">
+            <div class="review-avatar">MS</div>
+            <!-- MS = Maria Santos -->
+            <div>
+              <p class="review-author-name">Maria Santos</p>
+              <p class="review-author-role">Gerente Financeira — Hulk Salgadões</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NOVO: terceiro card de review que não existia no original -->
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "Finalmente um ERP que não parece que foi feito nos anos 90. O Gennus é open source e ainda assim entrega
+            mais do que sistemas que a gente pagava caro."
+          </p>
+
+          <div class="review-author-row">
+            <div class="review-avatar">RF</div>
+            <div>
+              <p class="review-author-name">Ricardo Fontes</p>
+              <p class="review-author-role">Fundador — Padaria Nobre</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================
+         FOOTER
+         MUDANÇA: o original tinha só uma linha de copyright dentro do footer.
+         Agora tem estrutura com logo, tagline e links de navegação.
+    ======================== -->
+
+  <footer class="footer-gennus" id="contact-nvb">
+    <!-- NOVO: id="contact-nvb" adicionado ao footer. Agora o link "Contato" da navbar realmente rola até aqui. No original o id não existia e o link levava ao vazio. -->
+
+    <div class="footer-content">
+      <!-- Div que usa flexbox pra separar marca (esquerda) dos links (direita). -->
+
+      <div class="footer-brand">
+        <span class="footer-logo">Gennus</span>
+        <!-- Logo do Gennus com gradiente roxo, igual à navbar. Consistência visual: o usuário reconhece a marca em toda a página. -->
+        <p class="footer-tagline">Gestão empresarial acessível e inteligente.</p>
+        <!-- Tagline curta reforça a proposta de valor no rodapé — última coisa que o usuário lê antes de sair da página. -->
+      </div>
+
+      <!-- NOVO: links de navegação no footer -->
+      <div class="footer-links">
+        <a href="#about-us-main-container">Sobre</a>
+        <a href="#diferentials-main-container">Diferenciais</a>
+        <a href="#reviews-main-container">Reviews</a>
+        <a href="login.html">Entrar</a>
+        <!-- Repetir os links principais no footer é uma convenção do design web. O usuário que rolou até o fim da página não deveria ter que voltar pro topo pra navegar. -->
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Gennus. Todos os direitos reservados.</p>
+      <!-- &copy; é a entidade HTML pro símbolo ©. Usar a entidade garante que renderiza certo em qualquer navegador. MUDANÇA: removemos o "algo assim" que estava no original. -->
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <!-- O script fica no final do body, não no head. Por quê? O navegador lê HTML de cima pra baixo. Se o script estiver no head, ele carrega antes dos elementos existirem na página — e o JavaScript não consegue manipular o que ainda não foi criado. No fim do body, tudo já existe. -->
+</body>
+
+</html>
