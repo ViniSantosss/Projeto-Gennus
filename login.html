@@ -12,58 +12,27 @@
  
 </head>
 <body>
+    <div class="container">
+        <!--login form-->
+        <div class="form-box login"></div>
+            <!--register form-->
+            <div class="form-box register"></div>
 
-    <main class="login-page">
+            <!--toggle box -->
+            <div class="toggle-box">
+            <!--toggle box left-->
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Welcome!</h1>
+                <p>Don't hae a account?</p>
+            </div>
 
-        <div class="user-login-container"> <!--caixa do login-->
-            <h2 class="login-title">Entrar na sua conta</h2>
-            <form action="/servidor-php-aqui">
-
-                <!-- formulario pro email-->
-
-                <div class="form-login-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <!-- formulario pra senha-->
-
-                <div class="form-login-group">
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-
-                <!--formulario pra lembrar, acho que falta alguma função pra conectar
-                no JS-->
-
-                <div class="form-login-group">
-                    <div class="remember-me-option">
-                        <label for="remember-me">Lembrar-me</label>
-                        <input type="checkbox" id="remember-me" name="remember-me">
-                    </div>
-
-                    <!-- link pra ir pra página de resetar a senha ou pegar um código pra trocar de senha ou só logar, sei lá-->
-
-                    <a href="password-reset.html" class="forgot-password-link">Esqueci minha senha</a>
-
-                </div>
-
-                <div class="form-login-group">
-                    <p id="form-login-error">Placeholder de Erro, por agora nao tem nada precisa do backend</p>
-                </div>
-                
-                <button type="submit">Logar</button>
-
-            </form>
-
-            <!-- link para a página de registro de conta-->
-
-            <p>Não possui uma conta? <a href="register.html">Cadastre-se!</a></p>
-            
-        </div>
-    </main>
-    <footer class="footer-gennus">
-        <p>&copy; 2026 Gennus. Todos os direitos reservados algo assim.</p>
-    </footer>
+            <!--toggle box right-->
+            <div class="toggle-panel toggle-right">
+                <h1>Welcome Back!</h1>
+                <p>Already have an Account?</p>
+                <button class="btn login-btn">Login</button>
+            </div>
+       </div>
+    </div>
 </body>
 </html>
