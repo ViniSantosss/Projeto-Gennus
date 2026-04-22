@@ -10,30 +10,231 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   background-color: black;
+  font-family: 'Inter', sans-serif;
+  padding-top: 70px;
 }
 
 h1 {
   color: #fff;
 }
 /*reset da pagina ^*/
+
+.navbar-main{
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  padding: 5px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+
+  background: rgba(9, 8, 8, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+
+.nav-ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  list-style: none;
+}
+
 .nav-table {
-  display: table-cell;
-  position: relative;
-  padding: 15px 0;
+  list-style: none;
+}
+
+.btn-entrar {
+  background: #9e1fff;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-left: 10px;
+  margin-right: 15px;
+  transition: 0.3s;
+}
+
+.btn-entrar:hover {
+  background: #7b16cc;
+}
+
+.nav-ul li:last-child {
+  margin-left: 20px;
 }
 
 .nav-a {
-  color: #fff; /*setando a cor da letra, sempre apenas "color:"*/
+  color: rgb(255, 255, 255); /*setando a cor da letra, sempre apenas "color:"*/
   text-transform: uppercase; /*letras maiusculas*/
   text-decoration: none; /*tira o sublinhado do link <a>*/
   letter-spacing: 0.15rem; /*espaço entre uma letra e outra - 1rem = 16px | 0.15 = 2.4px*/
   display: inline-block; /* fica na linha mas aceita largura e altura */
   padding: 15px 20px; /*padding = esquerda, direita, em cima e em baixo. Ordem dos valores: padding: top right left bottom;*/
   position: relative;
+  font-size: 13px;
+  margin: 0 20px;
+}
+
+.nav-a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #9e1FFF; /*#9E1FFF*/
+  bottom: 7px;
+  left: 0;
+  border-radius: 40px;
+  transform: scaleX(0);
+  transition: transform .4s;
+  transform-origin: right;
 }
 
 .nav-a:hover::after {
-  width: 100%;
-  left: 0;
-  background-color: #00fffc;
+  transform: scaleX(1);
+  transform-origin: left;
 }
+
+/*termina sessão de nav*/
+
+.hero-section-main-container {
+  background-color: black;
+  color: #fff;
+  padding: 120px 10%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;  /*essa estilização vai garantir centralização verticaç, tela cheia e respiro/espaçamento*/
+}
+
+.hero-content {
+  max-width: 700px; /*para não deixar o texto gigante e espalhado*/
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-title, h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.hero-title span {
+  background: linear-gradient(90deg, #7e22ce, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;  /*aqui vai começar o design de startup moderna kkkkkk*/
+  text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  font-weight: bold;
+}
+
+
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 30px;  /* um contraste suave pra uma leitura mais confortável*/
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-primary {
+  background: #a855f7;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #9333ea;
+}
+
+.btn-secondary {
+  border: 1px solid #333;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  border-color: #a855f7;
+  color: #a855f7;
+}
+
+.about-us-main-container {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.diferentials-main-container {
+  background: #111111;
+  color: #fff;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*about section*/
+.about-us-main-container {
+  padding: 100px 10%;
+  background: #0a0a0a;
+  color: white;
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+/*about text*/
+
+.about-text {
+  max-width: 600px;
+}
+
+.about-title {
+  font-size: 3.2rem;
+  margin-bottom: 20px;
+}
+
+.about-description,
+.about-mission {
+  color: #aaa;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.about-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.mockup-box {
+  width: 400px;
+  height: 250px;
+  background: linear-gradient(135deg, #1a1a1a, #0f0f0f); /*adiciona uma box de fundo para a imagem*/
+  border-radius: 12px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/*mobile section*/
+
+
