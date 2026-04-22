@@ -1,377 +1,431 @@
-/* ================================================
-   RESET GLOBAL
-   Por que resetar? Cada navegador tem seus próprios estilos padrão.
-   O Chrome coloca margin no body, o Firefox coloca de outro jeito.
-   Esse bloco zera tudo pra começarmos do zero, como uma folha em branco.
-   O seletor * significa "aplica em TODOS os elementos da página".
+/* ==========
+  PRIMEIRO: Reset Global
+  SEMPRE usar reset, pois cada navegador tem seus próprios estilos padrão.
+   O Chrome coloca margin no body, o Firefox coloca de outro jeito etc...
+   Esse bloco zera tudo pra começar do zero, como uma folha branca.
+   O seletor "*" significa "aplica em TODOS os elementos da página".
    ::before e ::after são elementos "fantasmas" que o CSS pode criar —
    também precisam ser resetados.
-================================================ */
- 
+   =========================== */
+
 *,
 *::before,
 *::after {
-  margin: 0;      /* Remove espaço externo padrão do navegador. Margem é o espaço fora do elemento, como a margem de um caderno. */
-  padding: 0;     /* Remove espaço interno padrão. Padding é o espaço dentro do elemento, entre o conteúdo e a borda. */
-  box-sizing: border-box; /* Muda como o navegador calcula o tamanho dos elementos. Por padrão, se você define width: 200px e adiciona padding: 20px, o elemento fica com 240px. Com border-box, o padding é absorvido — o elemento continua com 200px. Muito mais intuitivo. */
+  margin: 0; /* remove espaço fora do elemento. Tipo margem de caderno*/
+  padding: 0; /* remove o espaço interno do elemento. Entre o conteúdo e a borda basicamente*/
+  box-sizing: border-box; /* por padrão, se você define "width: 200px" e coloca "padding: 20px" ele fica com 240px. O border-box absorve o padding, então o elemento fica com 200px ainda, é mais preciso e intuitivo*/
 }
- 
-/* ================================================
-   BODY — configuração base de toda a página
-================================================ */
- 
+
+/* BODY - CONFIGURAÇÃO BASE DA PÁGINA TODA */
+
 body {
-  line-height: 1.5;                    /* Espaçamento entre linhas de texto. 1.5 = cada linha tem altura de 1.5x o tamanho da fonte. Imagine o espaçamento 1.5 de um editor de texto — mais fácil de ler que espaçamento simples. */
-  -webkit-font-smoothing: antialiased; /* Suaviza as bordas das letras no macOS/Chrome. Sem isso, fontes claras sobre fundo escuro ficam com bordas serrilhadas. */
-  background-color: #000;              /* Fundo preto puro. #000 é shorthand pra #000000 — hexadecimal onde 00=sem vermelho, 00=sem verde, 00=sem azul. */
-  font-family: 'Inter', sans-serif;    /* Define a fonte padrão do corpo. Inter = fonte principal. sans-serif = fallback caso Inter não carregue (usa a sans-serif do sistema). */
-  padding-top: 70px;                   /* Empurra o conteúdo 70px pra baixo. Por quê? A navbar é fixed (flutua no topo) e tem ~64px de altura. Sem esse padding, o início da página ficaria escondido atrás da navbar. */
-  color: #fff;                         /* NOVO: cor padrão do texto = branco. No original não estava definido globalmente, o que causava inconsistências. Agora todo texto herda branco por padrão, e somente trechos específicos sobrescrevem com cinza. */
+  line-height: 1.5; /* espaçamento entre linhas de texto. 1.5 = cada linha tem altura de 1.5x o tamanho da fonte. */
+  -webkit-font-smoothing: antialiased; /* suaviza as bordas das letras no macOS/Chrome. Sem isso, as fontes claras no fundo escuro ficam com bordas serrilhadas. É só um detalhezinho, nada obrigatório tambem ;-; */
+  background-color: #000;
+  font-family:
+    "Inter", sans-serif; /* define a fonte padrão do corpo. Inter = fonte principal. sans-serif = caso Inter não carregue (usa a sans-serif do sistema). */
+  padding-top: 70px; /* empurra o conteúdo 70px pra baixo. A navbar é fixed (flutua no topo) e tem ~64px de altura. Sem esse padding, o início da página ficaria escondido atrás da navbar. */
+  color: #fff; /* cor padrão do texto = branco para o corpo todo */
 }
- 
+
 /* NOVO: agrupamento global das fontes de título */
-h1, h2, h3 {
-  font-family: 'Space Grotesk', sans-serif; /* Aplica Space Grotesk em todos os títulos de uma vez. No original essa regra estava dentro de .hero-title — aqui centralizamos. Se você mudar a fonte de título, muda em um lugar só. */
+h1,
+h2,
+h3 {
+  font-family:
+    "Space Grotesk", sans-serif; /* Aplica Space Grotesk em todos os títulos de uma vez. Se você mudar a fonte de título, muda em um lugar só (aqui). */
 }
- 
-/* ================================================
-   NAVBAR
-================================================ */
- 
+
+/* SEÇÃO - NAVBAR */
+
 .navbar-main {
-  width: 100%;           /* Ocupa 100% da largura da janela. */
-  display: flex;         /* Ativa o Flexbox. Pense no Flex como um trilho: os filhos se organizam em linha ou coluna nesse trilho. */
-  align-items: center;   /* No trilho flex, centraliza os filhos verticalmente. */
-  justify-content: space-between; /* MUDANÇA: era justify-content: right. space-between coloca o primeiro filho (logo) à esquerda e o último (ul) à direita — perfeito pra navbar com logo + links. */
-  padding: 0 40px;       /* Sem padding vertical (0), padding horizontal de 40px pra cada lado — dá "respiro" nos cantos. */
-  height: 64px;          /* Altura fixa da navbar. Com display:flex e align-items:center, o conteúdo fica centralizado nessa altura. */
-  position: fixed;       /* A navbar "flutua" e fica fixada no topo mesmo ao rolar a página. É como um post-it colado na tela, não no documento. */
-  left: 0;               /* Garante que comece na borda esquerda da tela. */
-  top: 0;                /* Fixada no topo. */
-  z-index: 1000;         /* Controla qual elemento fica "na frente". Funciona como camadas de papel: quanto maior o z-index, mais na frente. 1000 garante que a navbar fica na frente de qualquer outro elemento. */
-  background: rgba(9, 8, 8, 0.7); /* Fundo preto com 70% de opacidade (0.7). rgba = red, green, blue, alpha. Alpha vai de 0 (transparente) a 1 (sólido). O 0.7 permite enxergar levemente o conteúdo atrás. */
-  backdrop-filter: blur(12px);    /* MUDANÇA: era blur(10px). Aplica desfoque no que está ATRÁS do elemento. É o efeito "vidro fosco" — o conteúdo da página fica borrado atrás da navbar. */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* NOVO: linha sutil na base da navbar. 255,255,255 = branco, 0.05 = quase transparente. Separa a navbar do conteúdo sem chamar atenção. */
+  width: 100%; /* ocupa 100% da largura da janela. Então ela fica esticada, como uma barra larga*/
+  display: flex; /* pensa no Flex como um trilho: os itens se organizam em linha ou coluna nesse trilho. */
+  align-items: center; /* no trilho do flex, centraliza os itens verticalmente. O eixo é um +, o vertical fica com align itens center e o horizontal com o justify content center */
+  justify-content: space-between; /* space-between coloca o primeiro item (logo) à esquerda e o último (ul) à direita — perfeito pra navbar com logo + links. */
+  padding: 0 40px; /* sem padding vertical (0), padding horizontal de 40px pra cada lado — dá "respiro" nos cantos. Lembrando = padding: (top, right, bottom, left); */
+  height: 64px; /* altura fixa da navbar. Com display:flex e align-items:center, o conteúdo fica centralizado nessa altura. */
+  position: fixed; /* a navbar "flutua" e fica fixada no topo mesmo ao rolar a página. */
+  left: 0; /* garante que comece na borda esquerda da tela. */
+  top: 0; /* fixada no topo. */
+  z-index: 1000; /* controla qual elemento fica "na frente". quanto maior o z-index, mais na frente. 1000 garante que a navbar fica na frente de qualquer outro elemento. */
+  background: rgba(
+    9,
+    8,
+    8,
+    0.7
+  ); /* fundo preto com 70% de opacidade (0.7). O 0.7 permite enxergar levemente o conteúdo atrás. */
+  backdrop-filter: blur(
+    12px
+  ); /* aplica desfoque no que está ATRÁS do elemento. o conteúdo da página fica borrado atrás da navbar. */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* linha sutil na base da navbar. branco, 0.05 = quase transparente. Separa a navbar do conteúdo sem chamar atenção. */
 }
- 
+
 /* NOVO: estilo do logo da navbar */
 .nav-logo {
-  font-family: 'Space Grotesk', sans-serif; /* Fonte de display pra dar personalidade ao logo. */
-  font-size: 1.3rem;     /* 1rem = 16px (tamanho padrão), então 1.3rem = ~21px. rem é relativo ao tamanho base da página — melhor que px fixo pra acessibilidade. */
-  font-weight: 700;      /* Negrito. Escala: 100 (fino) até 900 (extra-negrito). 700 = bold clássico. */
-  background: linear-gradient(90deg, #a855f7, #c084fc); /* Gradiente linear de roxo escuro pra roxo claro. 90deg = horizontal (da esquerda pra direita). */
-  -webkit-background-clip: text;      /* Recorta o gradiente no formato do texto. Sem isso, o gradiente preencheria o fundo do elemento inteiro. */
-  -webkit-text-fill-color: transparent; /* Torna o preenchimento do texto transparente. O gradiente do background aparece através dessa "janela" transparente. Resultado: texto com cor em gradiente. */
-  letter-spacing: -0.03em; /* Aperta levemente o espaço entre letras. -0.03em = 3% do tamanho da fonte mais próximo. Títulos grandes com letter-spacing negativo ficam mais elegantes e compactos. */
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.3rem; /* 1rem = 16px (tamanho padrão), então 1.3rem = 21px. rem é relativo ao tamanho base da página — melhor que px fixo pra acessibilidade. */
+  font-weight: 700; /* negrito. Escala: 100 (fino) até 900 (extra-negrito). 700 = bold clássico. */
+  background: linear-gradient(
+    90deg,
+    #a855f7,
+    #c084fc
+  ); /* Gradiente linear de roxo escuro pra roxo claro. 90deg = horizontal (da esquerda pra direita). */
+  -webkit-background-clip: text; /* recorta o gradiente no formato do texto. Sem isso, o gradiente preencheria o fundo do elemento inteiro. */
+  -webkit-text-fill-color: transparent; /* torna o preenchimento do texto transparente. O gradiente do background aparece através dessa "janela" transparente. Resultado: texto com cor em gradiente. */
+  letter-spacing: -0.03em; /* aperta levemente o espaço entre letras. -0.03em = 3% do tamanho da fonte mais próximo. UI/UX: *Títulos grandes com letter-spacing negativo ficam mais elegantes e compactos.* */
+  cursor: pointer;
+  text-decoration: none;
 }
- 
+
 .nav-ul {
-  display: flex;           /* Trilho flex pros itens do menu. */
-  align-items: center;     /* Centraliza verticalmente os itens no trilho. */
-  gap: 4px;                /* MUDANÇA: era gap: 10px. Reduzi porque o espaço entre links agora vem do padding interno de .nav-a. */
-  list-style: none;        /* Remove as bolinhas padrão de lista. */
+  display: flex; /* trilho flex pros itens do menu. */
+  align-items: center; /* centraliza verticalmente os itens no trilho. */
+  gap: 4px; /* espaço entre os links. */
+  list-style: none; /* remove as bolinhas padrão de lista. */
 }
- 
+
 .nav-table {
-  list-style: none; /* Redundante com o ul, mas garante que cada li também não mostre bullet. */
+  list-style: none; /* redundante com o ul, mas garante que cada li também não mostre bullet (bolinha das listas). */
 }
- 
+
 .nav-a {
-  color: #ccc;               /* MUDANÇA: era rgb(255,255,255) = branco. Agora é cinza claro (#ccc). No estado normal o link fica discreto; no hover fica branco. Cria contraste de interação. */
-  text-transform: uppercase; /* Transforma o texto em maiúsculas no CSS, sem alterar o HTML. Como digitar caps lock, mas só visualmente. */
-  text-decoration: none;     /* Remove o sublinhado padrão dos links <a>. */
-  letter-spacing: 0.1rem;    /* MUDANÇA: era 0.15rem. Levemente reduzido — ainda mantém o efeito de "letras espaçadas" sem ficar exagerado. */
-  display: inline-block;     /* Por padrão, <a> é inline (não aceita width/height/margin vertical). inline-block mantém o comportamento de linha mas aceita essas propriedades. */
-  padding: 10px 16px;        /* Área clicável maior que o texto. Padding = "espaço acolchoado" dentro do elemento. 10px em cima/baixo, 16px nos lados. */
-  position: relative;        /* Necessário pra posicionar o ::after (a linha embaixo) relativo ao próprio link. Pense como "estabelecer o ponto de referência" pra elementos filhos. */
-  font-size: 12px;           /* MUDANÇA: era 13px. Pequeno ajuste — 12px fica mais refinado em navbar com letter-spacing. */
-  font-weight: 500;          /* NOVO: semi-negrito. Deixa os links um pouco mais presentes sem ser bold total. */
-  transition: color 0.2s;    /* NOVO: anima a mudança de cor no hover. Sem transition, a cor muda instantaneamente (duro). Com 0.2s, a transição é suave como um fade. */
+  color: #ccc; /* cinza claro (#ccc). No estado normal o link fica discreto; no hover fica branco. Cria contraste de interação. */
+  text-transform: uppercase; /* transforma o texto em maiúsculas no CSS, sem alterar o HTML. */
+  text-decoration: none; /* remove o sublinhado padrão dos links <a>. */
+  letter-spacing: 0.1rem; /* efeito de "letras espaçadas" sem ficar exagerado = 0.1. */
+  display: inline-block; /* por padrão, <a> é inline (não aceita width/height/margin vertical). inline-block mantém o comportamento de linha mas aceita essas propriedades. */
+  padding: 10px 16px; /* area clicável maior que o texto.*/
+  position: relative; /* necessário pra posicionar o ::after (a linha embaixo) relativo ao próprio link."estabelecer o ponto de referência". */
+  font-size: 12px;
+  font-weight: 500;
+  transition: color 0.2s; /* anima a mudança de cor no hover. Sem transition, a cor muda instantaneamente, bem seco. */
 }
- 
+
 .nav-a:hover {
-  color: #fff; /* No hover, o link fica branco total. Junto com a transition de 0.2s, cria um fade suave do cinza pro branco. */
+  color: #fff; /* no hover, o link fica branco total. Junto com a transition de 0.2s cria um fade suave do cinza pro branco. */
 }
- 
+
 .nav-a::after {
-  content: '';       /* ::after cria um elemento "fantasma" após o conteúdo do .nav-a. content: '' é obrigatório — sem ele o elemento não existe. É como criar um bloco invisível no código. */
-  position: absolute; /* Posicionado em relação ao .nav-a (que tem position: relative). Saiu do fluxo normal — não empurra outros elementos. */
-  width: calc(100% - 32px); /* NOVO: calc() faz cálculo matemático no CSS. 100% - 32px = largura do link menos o padding horizontal (16px de cada lado). A linha fica exatamente sob o texto, não sob o padding. */
-  height: 2px;       /* Linha fina de 2px de altura — é o sublinhado animado. */
-  background-color: #a855f7; /* MUDANÇA: era #9E1FFF. Agora usa a mesma cor roxa do sistema de design. Consistência. */
-  bottom: 6px;       /* A linha fica 6px acima da base do elemento. */
-  left: 16px;        /* NOVO: alinhado com o início do texto (que começa após 16px de padding). */
-  border-radius: 40px; /* Arredonda as pontas da linha. 40px em algo de 2px de altura resulta em extremidades perfeitamente redondas. */
-  transform: scaleX(0);    /* Estado inicial: a linha está "encolhida" horizontalmente pra 0 (invisível). scaleX transforma na escala horizontal. */
-  transition: transform 0.35s; /* Anima a mudança do scaleX. 0.35s = 350ms de duração. A animação de "expansão" da linha acontece nesse tempo. */
-  transform-origin: right;     /* A animação começa da direita — a linha "entra" da direita pra esquerda no hover out. */
+  content: ""; /* ::after cria um elemento fantasma após o conteúdo do .nav-a. content: '' é obrigatório sem ele o elemento não existe. */
+  position: absolute; /* posicionado em relação ao .nav-a que tem position: relative. Saiu do fluxo normal,  não empurra outros elementos. */
+  width: calc(
+    100% - 32px
+  ); /* 100% - 32px = largura do link menos o padding horizontal (16px de cada lado). A linha fica exatamente sobre o texto, não sobre o padding. */
+  height: 2px; /* linha fina de 2px de altura — é o sublinhado animado. */
+  background-color: #a855f7;
+  bottom: 6px; /* a linha fica 6px acima da base do elemento. */
+  left: 16px; /* alinhado com o início do texto (que começa após 16px de padding). */
+  border-radius: 40px; /* serve para arrendondar as bordas de elementos */
+  transform: scaleX(
+    0
+  ); /* scaleX transforma na escala horizontal. Começa em 0 e depois vem na horizontal pelo lado direito = transform origin */
+  transition: transform 0.35s; /* a animação de "expansão" da linha acontece nesse tempo. */
+  transform-origin: right; /* a animação começa da direita, a linha entra da direita pra esquerda no hover out. */
 }
- 
+
 .nav-a:hover::after {
-  transform: scaleX(1);     /* No hover, expande pra 100% da largura. O scaleX vai de 0 a 1 com a transition de 0.35s. */
-  transform-origin: left;   /* No hover, a origem muda pra esquerda — a linha "entra" da esquerda pra direita no hover in. O par right/left cria o efeito de entrada e saída em direções opostas. */
+  transform: scaleX(
+    1
+  ); /* no hover, expande pra 100% da largura o scaleX vai de 0 a 1 com a transition de 0.35s. */
+  transform-origin: left; /* no hover, a origem muda pra esquerda — a linha "entra" da esquerda pra direita no hover in. O par right/left cria o efeito de entrada e saída em direções opostas. */
 }
- 
+
 .btn-entrar {
-  background: #9e1fff;     /* Roxo mais saturado pro botão de ação. Mais chamativo que os links de navegação — chama atenção. */
+  background: #9e1fff;
   color: white;
   text-decoration: none;
-  padding: 8px 20px;       /* MUDANÇA: era padding: 10px 20px. Levemente menor pra ficar proporcional com os outros links. */
-  border-radius: 6px;      /* Arredonda os cantos. 6px = arredondamento sutil, não circular. 50% seria um círculo. */
-  font-size: 12px;         /* MUDANÇA: era 13px. Alinhado com o tamanho do nav-a. */
-  font-weight: 600;        /* NOVO: semi-negrito mais forte que os links. Reforça que é um botão de ação. */
-  letter-spacing: 0.08rem; /* NOVO: leve espaçamento entre letras pra combinar com o texto uppercase dos links. */
-  margin-left: 16px;       /* MUDANÇA: era margin-left: 10px + margin-right: 15px. Simplificado. Só espaço à esquerda pra separar do último link. */
-  transition: background 0.25s, transform 0.2s; /* Anima duas propriedades: a cor de fundo (hover) e a posição (efeito de levantar). */
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  margin-left: 16px;
+  transition:
+    background 0.25s,
+    transform 0.2s; /* anima duas propriedades: a cor de fundo (hover) e a posição (efeito de levantar). */
 }
- 
+
 .btn-entrar:hover {
-  background: #7b16cc;        /* Roxo mais escuro no hover — feedback visual de que o botão foi ativado. */
-  transform: translateY(-1px); /* NOVO: sobe 1px no hover. translateY(-1px) = move -1px no eixo Y (pra cima). Cria a sensação de que o botão "levanta" ao passar o mouse. */
+  background: #7b16cc; /* Roxo mais escuro no hover — feedback visual de que o botão foi ativado. */
+  transform: translateY(
+    -1px
+  ); /* NOVO: sobe 1px no hover. translateY(-1px) = move -1px no eixo Y (pra cima). Cria a sensação de que o botão "levanta" ao passar o mouse. */
 }
- 
+
 /* ================================================
    HERO SECTION
 ================================================ */
- 
+
 .hero-section-main-container {
   background-color: #000; /* Fundo preto. A seção hero tem seu próprio background declarado — necessário caso o body mude futuramente. */
-  padding: 120px 10%;     /* 120px de respiro vertical (cima/baixo), 10% de respiro horizontal. % no padding horizontal é relativo à largura do elemento pai — em telas grandes fica mais espaçado, em telas menores comprime. */
-  min-height: 100vh;      /* Altura mínima = 100% da altura da janela visível (viewport height). vh = viewport height. 100vh = tela cheia. min-height = pode ser maior se o conteúdo precisar. */
-  display: flex;          /* Flexbox pra centralizar o hero-content. */
-  align-items: center;    /* Centraliza verticalmente no flex. Junto com min-height: 100vh, garante que o conteúdo fique no meio da tela. */
-  position: relative;     /* Necessário pra posicionar o ::before (o glow roxo) relativo a esta seção. */
-  overflow: hidden;       /* NOVO: esconde qualquer parte do ::before que ultrapasse os limites da seção. */
+  padding: 120px 10%; /* 120px de respiro vertical (cima/baixo), 10% de respiro horizontal. % no padding horizontal é relativo à largura do elemento pai — em telas grandes fica mais espaçado, em telas menores comprime. */
+  min-height: 100vh; /* Altura mínima = 100% da altura da janela visível (viewport height). vh = viewport height. 100vh = tela cheia. min-height = pode ser maior se o conteúdo precisar. */
+  display: flex; /* Flexbox pra centralizar o hero-content. */
+  align-items: center; /* Centraliza verticalmente no flex. Junto com min-height: 100vh, garante que o conteúdo fique no meio da tela. */
+  position: relative; /* Necessário pra posicionar o ::before (o glow roxo) relativo a esta seção. */
+  overflow: hidden; /* NOVO: esconde qualquer parte do ::before que ultrapasse os limites da seção. */
 }
- 
+
 /* NOVO: efeito de brilho/glow roxo no fundo do hero */
 .hero-section-main-container::before {
-  content: '';           /* Elemento fantasma obrigatório. */
-  position: absolute;    /* Saiu do fluxo, posicionado relativo ao .hero-section-main-container. */
-  top: -200px;           /* Começa 200px acima da seção — parcialmente escondido. */
-  right: -100px;         /* 100px pra fora da borda direita. Junto com overflow:hidden no pai, a parte que sai é cortada. */
-  width: 600px;          /* Círculo grande de 600px. */
+  content: ""; /* Elemento fantasma obrigatório. */
+  position: absolute; /* Saiu do fluxo, posicionado relativo ao .hero-section-main-container. */
+  top: -200px; /* Começa 200px acima da seção — parcialmente escondido. */
+  right: -100px; /* 100px pra fora da borda direita. Junto com overflow:hidden no pai, a parte que sai é cortada. */
+  width: 600px; /* Círculo grande de 600px. */
   height: 600px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%); /* Gradiente radial: começa com roxo 12% de opacidade no centro, vai ficando transparente até 70% do raio. Como um holofote fraco. */
-  pointer-events: none;  /* Garante que esse elemento decorativo não capture cliques do mouse. */
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.12) 0%,
+    transparent 70%
+  ); /* Gradiente radial: começa com roxo 12% de opacidade no centro, vai ficando transparente até 70% do raio. Como um holofote fraco. */
+  pointer-events: none; /* Garante que esse elemento decorativo não capture cliques do mouse. */
 }
- 
+
 .hero-content {
   max-width: 680px; /* MUDANÇA: era max-width: 1200px (dois valores conflitantes no original). 680px é o ideal — largo o suficiente pro texto respirar, estreito o suficiente pra não ficar espalhado demais. */
 }
- 
+
 /* NOVO: badge de destaque acima do título */
 .hero-badge {
-  display: inline-block;  /* inline-block pra aceitar padding mas ficar em linha (não ocupar a largura toda). */
-  background: rgba(168, 85, 247, 0.1); /* Fundo roxo com apenas 10% de opacidade — bem suave. */
+  display: inline-block; /* inline-block pra aceitar padding mas ficar em linha (não ocupar a largura toda). */
+  background: rgba(
+    168,
+    85,
+    247,
+    0.1
+  ); /* Fundo roxo com apenas 10% de opacidade — bem suave. */
   border: 1px solid rgba(168, 85, 247, 0.3); /* Borda roxa com 30% de opacidade. Mais visível que o fundo, cria o contorno do badge. */
-  color: #c084fc;          /* Roxo claro pro texto do badge. */
-  padding: 5px 14px;       /* Badge pequenininho: 5px vertical, 14px horizontal. */
-  border-radius: 100px;    /* 100px em algo pequeno = completamente oval/pílula. */
+  color: #c084fc; /* Roxo claro pro texto do badge. */
+  padding: 5px 14px; /* Badge pequenininho: 5px vertical, 14px horizontal. */
+  border-radius: 100px; /* 100px em algo pequeno = completamente oval/pílula. */
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.05rem;
-  margin-bottom: 20px;     /* Espaço embaixo do badge antes do título. */
+  margin-bottom: 20px; /* Espaço embaixo do badge antes do título. */
 }
- 
+
 .hero-title {
-  font-size: 3.4rem;    /* MUDANÇA: era 3.2rem. Levemente maior. rem = relativo ao font-size do html (16px). 3.4rem = ~54px. */
-  font-weight: 700;     /* Negrito máximo pra título principal. */
-  line-height: 1.15;    /* MUDANÇA: era 1.2. Linhas do título mais próximas — títulos grandes ficam mais elegantes com line-height menor. */
+  font-size: 3.4rem; /* MUDANÇA: era 3.2rem. Levemente maior. rem = relativo ao font-size do html (16px). 3.4rem = ~54px. */
+  font-weight: 700; /* Negrito máximo pra título principal. */
+  line-height: 1.15; /* MUDANÇA: era 1.2. Linhas do título mais próximas — títulos grandes ficam mais elegantes com line-height menor. */
   margin-bottom: 20px;
   letter-spacing: -0.03em; /* NOVO: aperta as letras do título. Em fontes grandes, letter-spacing negativo cria um visual mais profissional e compacto. */
   color: #fff;
 }
- 
+
 .hero-title span {
-  background: linear-gradient(90deg, #7e22ce, #a855f7); /* Gradiente no span que envolve "inteligência". */
-  -webkit-background-clip: text;       /* Recorta o gradiente no shape do texto. */
+  background: linear-gradient(
+    90deg,
+    #7e22ce,
+    #a855f7
+  ); /* Gradiente no span que envolve "inteligência". */
+  -webkit-background-clip: text; /* Recorta o gradiente no shape do texto. */
   -webkit-text-fill-color: transparent; /* Texto transparente pra revelar o gradiente. */
-  filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4)); /* MUDANÇA: substituímos text-shadow (que não funciona com text-fill-color transparente) por filter: drop-shadow. Cria um brilho roxo ao redor das letras. */
+  filter: drop-shadow(
+    0 0 20px rgba(168, 85, 247, 0.4)
+  ); /* MUDANÇA: substituímos text-shadow (que não funciona com text-fill-color transparente) por filter: drop-shadow. Cria um brilho roxo ao redor das letras. */
 }
- 
+
 .hero-description {
-  font-size: 1.05rem;   /* Levemente maior que 1rem (16px). Facilita leitura do parágrafo. */
-  color: #888;          /* MUDANÇA: era #aaa. Cinza mais escuro — maior contraste no fundo preto, mais legível. */
-  margin-bottom: 36px;  /* MUDANÇA: era 30px. Mais espaço antes dos botões. */
-  line-height: 1.7;     /* NOVO: line-height maior que o body (1.5) pra parágrafos descritivos. Mais espaço entre linhas = mais confortável pra ler blocos de texto. */
-  max-width: 560px;     /* NOVO: limita a largura do parágrafo. Linhas muito longas cansam os olhos. 560px = ~80 caracteres por linha, considerado ideal pra leitura. */
+  font-size: 1.05rem; /* Levemente maior que 1rem (16px). Facilita leitura do parágrafo. */
+  color: #888; /* MUDANÇA: era #aaa. Cinza mais escuro — maior contraste no fundo preto, mais legível. */
+  margin-bottom: 36px; /* MUDANÇA: era 30px. Mais espaço antes dos botões. */
+  line-height: 1.7; /* NOVO: line-height maior que o body (1.5) pra parágrafos descritivos. Mais espaço entre linhas = mais confortável pra ler blocos de texto. */
+  max-width: 560px; /* NOVO: limita a largura do parágrafo. Linhas muito longas cansam os olhos. 560px = ~80 caracteres por linha, considerado ideal pra leitura. */
 }
- 
+
 .hero-buttons {
-  display: flex;        /* Botões lado a lado com flexbox. */
-  gap: 12px;            /* MUDANÇA: era 15px. Espaço menor entre os botões — mais coesos. */
-  margin-bottom: 56px;  /* NOVO: espaço abaixo dos botões antes das estatísticas. */
+  display: flex; /* Botões lado a lado com flexbox. */
+  gap: 12px; /* MUDANÇA: era 15px. Espaço menor entre os botões — mais coesos. */
+  margin-bottom: 56px; /* NOVO: espaço abaixo dos botões antes das estatísticas. */
 }
- 
+
 .btn-primary {
-  background: #a855f7;    /* Roxo principal do sistema. */
+  background: #a855f7; /* Roxo principal do sistema. */
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.9rem;       /* NOVO: tamanho explícito pro botão. 0.9rem = ~14px. Botões menores que o corpo do texto evitam que "gritem". */
-  transition: background 0.25s, transform 0.2s; /* NOVO: anima cor e posição no hover. */
+  font-size: 0.9rem; /* NOVO: tamanho explícito pro botão. 0.9rem = ~14px. Botões menores que o corpo do texto evitam que "gritem". */
+  transition:
+    background 0.25s,
+    transform 0.2s; /* NOVO: anima cor e posição no hover. */
 }
- 
+
 .btn-primary:hover {
-  background: #9333ea;         /* Roxo um pouco mais escuro no hover — feedback de ativação. */
+  background: #9333ea; /* Roxo um pouco mais escuro no hover — feedback de ativação. */
   transform: translateY(-1px); /* NOVO: efeito de "levantar" no hover. */
 }
- 
+
 .btn-secondary {
   border: 1px solid #2a2a2a; /* MUDANÇA: era border: 1px solid #333. Mais escuro — borda mais sutil no fundo preto. */
-  color: #bbb;               /* NOVO: texto cinza claro em vez de branco. O botão secundário deve ser menos chamativo que o primário. */
+  color: #bbb; /* NOVO: texto cinza claro em vez de branco. O botão secundário deve ser menos chamativo que o primário. */
   padding: 12px 24px;
   border-radius: 8px;
   text-decoration: none;
   font-size: 0.9rem;
-  transition: border-color 0.25s, color 0.25s; /* Anima borda e cor de texto no hover. */
+  transition:
+    border-color 0.25s,
+    color 0.25s; /* Anima borda e cor de texto no hover. */
 }
- 
+
 .btn-secondary:hover {
   border-color: #a855f7; /* No hover, a borda fica roxa — conecta visualmente com o botão primário. */
-  color: #a855f7;        /* Texto também fica roxo. */
+  color: #a855f7; /* Texto também fica roxo. */
 }
- 
+
 /* NOVO: bloco de estatísticas do hero */
 .hero-stats {
-  display: flex;           /* Itens em linha. */
-  align-items: center;     /* Centraliza verticalmente — importante pra alinhar o stat-divider com os textos. */
-  gap: 24px;               /* Espaço entre cada stat-item e os divisores. */
-  padding-top: 32px;       /* Respiro acima das estatísticas. */
+  display: flex; /* Itens em linha. */
+  align-items: center; /* Centraliza verticalmente — importante pra alinhar o stat-divider com os textos. */
+  gap: 24px; /* Espaço entre cada stat-item e os divisores. */
+  padding-top: 32px; /* Respiro acima das estatísticas. */
   border-top: 1px solid rgba(255, 255, 255, 0.06); /* Linha sutil separando os botões das estatísticas. 6% de opacidade = quase invisível, só um detalhe. */
 }
- 
+
 .stat-item {
-  display: flex;           /* Coloca stat-number e stat-label em coluna. */
-  flex-direction: column;  /* Direção coluna = um embaixo do outro (ao contrário do padrão que é row). */
-  gap: 2px;                /* Espaço mínimo entre número e legenda. */
+  display: flex; /* Coloca stat-number e stat-label em coluna. */
+  flex-direction: column; /* Direção coluna = um embaixo do outro (ao contrário do padrão que é row). */
+  gap: 2px; /* Espaço mínimo entre número e legenda. */
 }
- 
+
 .stat-number {
-  font-family: 'Space Grotesk', sans-serif; /* Fonte de display pra os números grandes. */
-  font-size: 1.4rem;   /* Número bem maior que a legenda pra criar hierarquia visual. */
+  font-family:
+    "Space Grotesk", sans-serif; /* Fonte de display pra os números grandes. */
+  font-size: 1.4rem; /* Número bem maior que a legenda pra criar hierarquia visual. */
   font-weight: 700;
   color: #fff;
 }
- 
+
 .stat-label {
-  font-size: 0.75rem;      /* Bem menor que o número. */
-  color: #555;             /* Cinza escuro — discreto. */
+  font-size: 0.75rem; /* Bem menor que o número. */
+  color: #555; /* Cinza escuro — discreto. */
   text-transform: uppercase;
   letter-spacing: 0.06rem;
 }
- 
+
 .stat-divider {
-  width: 1px;              /* Linha vertical de 1px de largura. */
-  height: 36px;            /* Altura definida — a div vazia seria invisível sem height. */
-  background: rgba(255, 255, 255, 0.08); /* Quase transparente. Serve só como separador visual suave. */
+  width: 1px; /* Linha vertical de 1px de largura. */
+  height: 36px; /* Altura definida — a div vazia seria invisível sem height. */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.08
+  ); /* Quase transparente. Serve só como separador visual suave. */
 }
- 
+
 /* ================================================
    SEÇÃO SOBRE
 ================================================ */
- 
+
 .about-us-main-container {
-  padding: 100px 10%;   /* Mesmo ritmo de espaçamento das outras seções. */
-  background: #080808;  /* MUDANÇA: era #0a0a0a. Um poquinho mais escuro. Alternância sutil entre #000 e #080808 nas seções cria profundidade sem ser óbvio. */
+  padding: 100px 10%; /* Mesmo ritmo de espaçamento das outras seções. */
+  background: #080808; /* MUDANÇA: era #0a0a0a. Um poquinho mais escuro. Alternância sutil entre #000 e #080808 nas seções cria profundidade sem ser óbvio. */
   border-top: 1px solid rgba(255, 255, 255, 0.05); /* NOVO: linha de separação entre seções. Mais sutil que usar background muito diferente. */
 }
- 
+
 .about-content {
-  display: flex;              /* Flexbox pra colocar texto (esquerda) e mockup (direita) lado a lado. */
-  align-items: center;        /* Centraliza verticalmente os dois lados. */
+  display: flex; /* Flexbox pra colocar texto (esquerda) e mockup (direita) lado a lado. */
+  align-items: center; /* Centraliza verticalmente os dois lados. */
   justify-content: space-between; /* Empurra texto pra esquerda e mockup pra direita. */
-  gap: 60px;                  /* MUDANÇA: era 50px. Mais respiro entre as duas colunas. */
+  gap: 60px; /* MUDANÇA: era 50px. Mais respiro entre as duas colunas. */
 }
- 
+
 .about-text {
   max-width: 560px; /* MUDANÇA: era 600px. Reduzido levemente pra equilibrar melhor com o mockup. */
 }
- 
+
 /* NOVO: label de seção reutilizável */
 .section-label {
   display: inline-block;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.15rem;   /* Letras bem espaçadas — efeito "eyebrow" (sobrancelha) acima do título. */
-  color: #a855f7;             /* Roxo pra conectar visualmente com o sistema de cores. */
-  margin-bottom: 14px;       /* Espaço antes do título principal. */
+  letter-spacing: 0.15rem; /* Letras bem espaçadas — efeito "eyebrow" (sobrancelha) acima do título. */
+  color: #a855f7; /* Roxo pra conectar visualmente com o sistema de cores. */
+  margin-bottom: 14px; /* Espaço antes do título principal. */
 }
- 
+
 .about-title {
-  font-size: 3rem;       /* MUDANÇA: era 3.2rem. Levemente menor — esse é um h2, deve ser hierarquicamente menor que o h1 do hero (3.4rem). */
+  font-size: 3rem; /* MUDANÇA: era 3.2rem. Levemente menor — esse é um h2, deve ser hierarquicamente menor que o h1 do hero (3.4rem). */
   font-weight: 700;
   margin-bottom: 20px;
   letter-spacing: -0.03em; /* NOVO: mesmo aperto de letra dos outros títulos. Consistência. */
 }
- 
+
 .about-description,
 .about-mission {
-  color: #777;          /* MUDANÇA: era #aaa. Mais escuro = maior contraste. */
+  color: #777; /* MUDANÇA: era #aaa. Mais escuro = maior contraste. */
   margin-bottom: 15px;
-  line-height: 1.75;    /* NOVO: line-height maior que o padrão do body. Parágrafos de "sobre" são texto corrido — mais respiro facilita a leitura. */
-  font-size: 0.95rem;   /* NOVO: levemente menor que 1rem. Texto de suporte pode ser um pouco menor que o corpo principal. */
+  line-height: 1.75; /* NOVO: line-height maior que o padrão do body. Parágrafos de "sobre" são texto corrido — mais respiro facilita a leitura. */
+  font-size: 0.95rem; /* NOVO: levemente menor que 1rem. Texto de suporte pode ser um pouco menor que o corpo principal. */
 }
- 
+
 .about-visual {
-  flex: 1;              /* flex: 1 = ocupa todo o espaço restante do flex container depois que .about-text usou o seu. É como dividir o espaço: texto pega 560px, visual pega "o resto". */
+  flex: 1; /* flex: 1 = ocupa todo o espaço restante do flex container depois que .about-text usou o seu. É como dividir o espaço: texto pega 560px, visual pega "o resto". */
   display: flex;
   justify-content: center; /* Centraliza o mockup dentro do espaço disponível. */
 }
- 
+
 /* MUDANÇA: mockup deixou de ser uma caixa vazia e ganhou estrutura interna */
 .mockup-box {
-  width: 420px;         /* MUDANÇA: era 400px. Levemente maior pra acomodar a estrutura interna. */
-  height: 280px;        /* MUDANÇA: era 250px. Mais alto pra mostrar mais conteúdo simulado. */
-  background: #0d0d0d;  /* Fundo bem escuro pra contrastar com os elementos internos. */
-  border-radius: 14px;  /* MUDANÇA: era 12px. Cantos mais arredondados — visual mais moderno. */
+  width: 420px; /* MUDANÇA: era 400px. Levemente maior pra acomodar a estrutura interna. */
+  height: 280px; /* MUDANÇA: era 250px. Mais alto pra mostrar mais conteúdo simulado. */
+  background: #0d0d0d; /* Fundo bem escuro pra contrastar com os elementos internos. */
+  border-radius: 14px; /* MUDANÇA: era 12px. Cantos mais arredondados — visual mais moderno. */
   border: 1px solid rgba(168, 85, 247, 0.15); /* Borda roxa sutil. */
-  overflow: hidden;     /* NOVO: essencial — esconde qualquer filho que ultrapasse o border-radius. Sem isso, os cantos dos elementos internos ficariam quadrados "vazando" pra fora. */
+  overflow: hidden; /* NOVO: essencial — esconde qualquer filho que ultrapasse o border-radius. Sem isso, os cantos dos elementos internos ficariam quadrados "vazando" pra fora. */
   box-shadow: 0 0 60px rgba(168, 85, 247, 0.06); /* NOVO: sombra roxa difusa ao redor do mockup. Cria um leve "brilho" sem ser exagerado. Valores: 0 (x), 0 (y), 60px (blur), cor com 6% de opacidade. */
 }
- 
+
 .mockup-inner {
   display: flex;
   flex-direction: column; /* Header em cima, body embaixo. */
-  height: 100%;           /* Ocupa a altura total do mockup-box. */
+  height: 100%; /* Ocupa a altura total do mockup-box. */
 }
- 
+
 .mockup-header {
   display: flex;
   align-items: center;
-  gap: 6px;               /* Espaço entre os pontinhos coloridos. */
+  gap: 6px; /* Espaço entre os pontinhos coloridos. */
   padding: 10px 14px;
   background: #111;
   border-bottom: 1px solid #1a1a1a; /* Linha separando header do body do mockup. */
 }
- 
+
 .mockup-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%; /* 50% = círculo perfeito. */
 }
-.mockup-dot.red    { background: #ff5f57; } /* Cor real dos botões do macOS. */
-.mockup-dot.yellow { background: #febc2e; }
-.mockup-dot.green  { background: #28c840; }
- 
+.mockup-dot.red {
+  background: #ff5f57;
+} /* Cor real dos botões do macOS. */
+.mockup-dot.yellow {
+  background: #febc2e;
+}
+.mockup-dot.green {
+  background: #28c840;
+}
+
 .mockup-title-bar {
   font-size: 11px;
-  color: #444;           /* Cinza bem escuro — texto de interface, não de leitura. */
+  color: #444; /* Cinza bem escuro — texto de interface, não de leitura. */
   margin-left: 8px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
- 
+
 .mockup-body {
   display: flex;
-  flex: 1;               /* Ocupa todo o espaço restante após o header. */
+  flex: 1; /* Ocupa todo o espaço restante após o header. */
 }
- 
+
 .mockup-sidebar {
-  width: 50px;           /* Sidebar estreita — como nos apps de desktop. */
+  width: 50px; /* Sidebar estreita — como nos apps de desktop. */
   background: #0a0a0a;
   border-right: 1px solid #1a1a1a;
   display: flex;
@@ -380,147 +434,169 @@ h1, h2, h3 {
   padding: 14px 0;
   gap: 10px;
 }
- 
+
 .sidebar-item {
   width: 28px;
-  height: 6px;           /* Retângulo achatado simulando um item de menu. */
+  height: 6px; /* Retângulo achatado simulando um item de menu. */
   border-radius: 3px;
-  background: #222;      /* Cinza escuro = item inativo. */
+  background: #222; /* Cinza escuro = item inativo. */
 }
- 
+
 .sidebar-item.active {
-  background: #a855f7;   /* Roxo = item ativo/selecionado. */
+  background: #a855f7; /* Roxo = item ativo/selecionado. */
 }
- 
+
 .mockup-main {
-  flex: 1;               /* Ocupa o restante da largura após a sidebar. */
+  flex: 1; /* Ocupa o restante da largura após a sidebar. */
   padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
- 
+
 .mockup-card {
   height: 40px;
   border-radius: 8px;
 }
- 
+
 .mockup-card.purple {
-  background: linear-gradient(90deg, rgba(168, 85, 247, 0.25), rgba(168, 85, 247, 0.08)); /* Card com gradiente roxo. Simula um card de KPI destacado. */
+  background: linear-gradient(
+    90deg,
+    rgba(168, 85, 247, 0.25),
+    rgba(168, 85, 247, 0.08)
+  ); /* Card com gradiente roxo. Simula um card de KPI destacado. */
   border: 1px solid rgba(168, 85, 247, 0.15);
 }
- 
+
 .mockup-card.dark {
   background: #151515;
   border: 1px solid #1f1f1f;
-  width: 60%;            /* Card menor que o anterior — hierarquia visual. */
+  width: 60%; /* Card menor que o anterior — hierarquia visual. */
 }
- 
+
 .mockup-chart {
-  flex: 1;               /* Ocupa todo o espaço vertical restante — simula uma área de gráfico. */
+  flex: 1; /* Ocupa todo o espaço vertical restante — simula uma área de gráfico. */
   background: #111;
   border-radius: 8px;
   border: 1px solid #1a1a1a;
 }
- 
+
 /* ================================================
    SEÇÃO DIFERENCIAIS
    MUDANÇA: era uma ul simples. Agora é um grid de cards.
 ================================================ */
- 
+
 .diferentials-main-container {
   padding: 100px 10%;
-  background: #000;       /* Alterna com o #080808 da seção anterior. Diferença sutil cria ritmo. */
+  background: #000; /* Alterna com o #080808 da seção anterior. Diferença sutil cria ritmo. */
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
- 
+
 /* NOVO: container centralizador do cabeçalho das seções */
 .section-header {
-  text-align: center;    /* Centraliza texto. Funciona porque os filhos são inline/inline-block. */
-  margin-bottom: 60px;   /* Espaço entre o cabeçalho e o grid de cards. */
+  text-align: center; /* Centraliza texto. Funciona porque os filhos são inline/inline-block. */
+  margin-bottom: 60px; /* Espaço entre o cabeçalho e o grid de cards. */
 }
- 
+
 .diferentials-title,
 .reviews-title {
-  font-size: 2.6rem;      /* Menor que o hero (3.4rem) e o about (3rem) — hierarquia de seção. */
+  font-size: 2.6rem; /* Menor que o hero (3.4rem) e o about (3rem) — hierarquia de seção. */
   font-weight: 700;
   letter-spacing: -0.03em;
   margin-bottom: 12px;
 }
- 
+
 .section-subtitle {
-  color: #666;           /* Cinza mais escuro que o #888 dos parágrafos. Texto de suporte, menos importante. */
+  color: #666; /* Cinza mais escuro que o #888 dos parágrafos. Texto de suporte, menos importante. */
   font-size: 0.95rem;
 }
- 
+
 /* NOVO: grid de 3 colunas para os cards de diferenciais */
 .diferentials-grid {
-  display: grid;                         /* CSS Grid: sistema de layout bidimensional (linhas E colunas). Diferente do Flexbox (unidimensional). */
-  grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas de tamanho igual. repeat(3, 1fr) = repita 3x uma coluna de "1 fração" do espaço disponível. */
-  gap: 20px;                             /* Espaço entre todas as células do grid. */
+  display: grid; /* CSS Grid: sistema de layout bidimensional (linhas E colunas). Diferente do Flexbox (unidimensional). */
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* Cria 3 colunas de tamanho igual. repeat(3, 1fr) = repita 3x uma coluna de "1 fração" do espaço disponível. */
+  gap: 20px; /* Espaço entre todas as células do grid. */
 }
- 
+
 /* NOVO: card individual de diferencial */
 .diferential-card {
   background: #0a0a0a;
-  border: 1px solid #1a1a1a;   /* Borda escura quase invisível no fundo preto. */
+  border: 1px solid #1a1a1a; /* Borda escura quase invisível no fundo preto. */
   border-radius: 14px;
   padding: 28px;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Anima 3 propriedades no hover. */
+  transition:
+    border-color 0.3s,
+    transform 0.3s,
+    box-shadow 0.3s; /* Anima 3 propriedades no hover. */
 }
- 
+
 .diferential-card:hover {
-  border-color: rgba(168, 85, 247, 0.3); /* Borda fica roxa no hover — card "acende". */
-  transform: translateY(-3px);            /* Card sobe 3px — sensação de elevação/levitação. */
+  border-color: rgba(
+    168,
+    85,
+    247,
+    0.3
+  ); /* Borda fica roxa no hover — card "acende". */
+  transform: translateY(
+    -3px
+  ); /* Card sobe 3px — sensação de elevação/levitação. */
   box-shadow: 0 12px 40px rgba(168, 85, 247, 0.07); /* Sombra roxa aparece embaixo — reforça a sensação de profundidade. */
 }
- 
+
 /* NOVO: container do ícone SVG */
 .card-icon {
   width: 44px;
   height: 44px;
-  background: rgba(168, 85, 247, 0.1); /* Fundo roxo translúcido — como um badge suave atrás do ícone. */
+  background: rgba(
+    168,
+    85,
+    247,
+    0.1
+  ); /* Fundo roxo translúcido — como um badge suave atrás do ícone. */
   border-radius: 10px;
   display: flex;
-  align-items: center;     /* Centraliza o SVG verticalmente dentro do quadradinho. */
+  align-items: center; /* Centraliza o SVG verticalmente dentro do quadradinho. */
   justify-content: center; /* Centraliza horizontalmente. */
-  color: #a855f7;          /* color no container SVG define a cor do stroke="currentColor" no SVG. */
+  color: #a855f7; /* color no container SVG define a cor do stroke="currentColor" no SVG. */
   margin-bottom: 18px;
 }
- 
+
 .card-title {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 10px;
   color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
- 
+
 .card-desc {
   font-size: 0.875rem; /* 0.875rem = 14px. Texto de apoio menor que o título. */
   color: #666;
   line-height: 1.7;
 }
- 
+
 /* ================================================
    SEÇÃO REVIEWS
    MUDANÇA: era divs planas com texto de placeholder.
    Agora é um grid de cards com avatar, estrelas e depoimento estruturado.
 ================================================ */
- 
+
 .reviews-main-container {
   padding: 100px 10%;
-  background: #080808;  /* Alterna com o #000 da seção anterior. */
+  background: #080808; /* Alterna com o #000 da seção anterior. */
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
- 
+
 /* NOVO: mesmo padrão de grid dos diferenciais */
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
- 
+
 /* NOVO: card de review */
 .review-card {
   background: #0a0a0a;
@@ -529,37 +605,53 @@ h1, h2, h3 {
   padding: 28px;
   display: flex;
   flex-direction: column; /* Empilha: estrelas → texto → autor. */
-  gap: 16px;              /* Espaço uniforme entre cada parte do card. */
-  transition: border-color 0.3s, transform 0.3s;
+  gap: 16px; /* Espaço uniforme entre cada parte do card. */
+  transition:
+    border-color 0.3s,
+    transform 0.3s;
 }
- 
+
 .review-card:hover {
-  border-color: rgba(168, 85, 247, 0.25); /* Borda roxa sutil no hover — mais discreto que nos cards de diferenciais. */
-  transform: translateY(-3px);             /* Mesmo efeito de elevação. */
+  border-color: rgba(
+    168,
+    85,
+    247,
+    0.25
+  ); /* Borda roxa sutil no hover — mais discreto que nos cards de diferenciais. */
+  transform: translateY(-3px); /* Mesmo efeito de elevação. */
 }
- 
+
 /* NOVO: variante "featured" pro card do meio */
 .review-card.featured {
-  border-color: rgba(168, 85, 247, 0.3);       /* Borda roxa já visível sem precisar do hover. */
-  background: linear-gradient(160deg, #0e0a14, #0a0a0a); /* Gradiente sutil com um leve roxo escuro. 160deg = diagonal. Diferencia o card sem ser gritante. */
+  border-color: rgba(
+    168,
+    85,
+    247,
+    0.3
+  ); /* Borda roxa já visível sem precisar do hover. */
+  background: linear-gradient(
+    160deg,
+    #0e0a14,
+    #0a0a0a
+  ); /* Gradiente sutil com um leve roxo escuro. 160deg = diagonal. Diferencia o card sem ser gritante. */
   box-shadow: 0 0 40px rgba(168, 85, 247, 0.07); /* Brilho suave ao redor — destaque visual. */
 }
- 
+
 /* NOVO: estrelas de avaliação */
 .review-stars {
-  color: #a855f7;       /* Estrelas roxas — coerente com o sistema de cores. */
+  color: #a855f7; /* Estrelas roxas — coerente com o sistema de cores. */
   font-size: 0.9rem;
-  letter-spacing: 2px;  /* Espaço entre as estrelas pra elas não ficarem grudadas. */
+  letter-spacing: 2px; /* Espaço entre as estrelas pra elas não ficarem grudadas. */
 }
- 
+
 .review-text {
-  color: #999;          /* Cinza médio — texto de depoimento, menos importante que o autor. */
+  color: #999; /* Cinza médio — texto de depoimento, menos importante que o autor. */
   font-size: 0.9rem;
   line-height: 1.75;
-  font-style: italic;   /* Texto em itálico = convenção visual pra indicar citação/depoimento. */
-  flex: 1;              /* flex: 1 faz este parágrafo "crescer" pra preencher o espaço disponível no card. Garante que o autor sempre fique na base, mesmo com textos de tamanhos diferentes. */
+  font-style: italic; /* Texto em itálico = convenção visual pra indicar citação/depoimento. */
+  flex: 1; /* flex: 1 faz este parágrafo "crescer" pra preencher o espaço disponível no card. Garante que o autor sempre fique na base, mesmo com textos de tamanhos diferentes. */
 }
- 
+
 /* NOVO: linha horizontal com avatar + nome + cargo */
 .review-author-row {
   display: flex;
@@ -568,13 +660,17 @@ h1, h2, h3 {
   padding-top: 8px;
   border-top: 1px solid #1a1a1a; /* Linha separando o depoimento do autor. */
 }
- 
+
 /* NOVO: avatar circular com iniciais */
 .review-avatar {
   width: 38px;
   height: 38px;
-  border-radius: 50%;  /* 50% = círculo. */
-  background: linear-gradient(135deg, #7e22ce, #a855f7); /* Gradiente roxo pra cada avatar. */
+  border-radius: 50%; /* 50% = círculo. */
+  background: linear-gradient(
+    135deg,
+    #7e22ce,
+    #a855f7
+  ); /* Gradiente roxo pra cada avatar. */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -583,30 +679,30 @@ h1, h2, h3 {
   color: #fff;
   flex-shrink: 0; /* IMPORTANTE: flex-shrink: 0 impede o avatar de encolher se o texto do autor for longo. Por padrão, itens flex podem encolher — isso desativa pra este elemento. */
 }
- 
+
 .review-author-name {
   font-size: 0.875rem;
   font-weight: 600;
   color: #ddd; /* Mais claro que o texto do depoimento — hierarquia: nome > texto. */
 }
- 
+
 .review-author-role {
   font-size: 0.75rem;
   color: #555; /* Mais escuro que o nome — cargo é info secundária. */
 }
- 
+
 /* ================================================
    FOOTER
    MUDANÇA: era só uma linha de copyright.
    Agora tem logo, tagline, links e linha de copyright separada.
 ================================================ */
- 
+
 .footer-gennus {
   background: #000;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding: 48px 10% 28px; /* Mais padding em cima (48px) que embaixo (28px) — o conteúdo principal do footer merece mais espaço. */
 }
- 
+
 /* NOVO: divide footer em logo/tagline (esquerda) e links (direita) */
 .footer-content {
   display: flex;
@@ -614,119 +710,144 @@ h1, h2, h3 {
   align-items: flex-start; /* Alinha pelo topo — evita que links fiquem centralizados verticalmente em relação ao logo+tagline. */
   margin-bottom: 36px;
 }
- 
+
 .footer-logo {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #a855f7, #c084fc); /* Mesma cor do logo da navbar — consistência. */
+  background: linear-gradient(
+    90deg,
+    #a855f7,
+    #c084fc
+  ); /* Mesma cor do logo da navbar — consistência. */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
- 
+
 .footer-tagline {
   font-size: 0.8rem;
-  color: #444;        /* Bem discreto. */
+  color: #444; /* Bem discreto. */
   margin-top: 6px;
 }
- 
+
 /* NOVO: links de navegação no rodapé */
 .footer-links {
   display: flex;
   gap: 28px; /* Espaçamento generoso entre links. */
 }
- 
+
 .footer-links a {
-  color: #555;          /* Links discretos no footer — não concorrem com o conteúdo principal. */
+  color: #555; /* Links discretos no footer — não concorrem com o conteúdo principal. */
   text-decoration: none;
   font-size: 0.85rem;
   transition: color 0.2s;
 }
- 
+
 .footer-links a:hover {
   color: #a855f7; /* Roxo no hover — coerente com o sistema. */
 }
- 
+
 /* NOVO: linha de copyright separada na base do footer */
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.04); /* Linha super sutil separando links do copyright. */
   padding-top: 20px;
 }
- 
+
 .footer-bottom p {
   color: #333; /* Quase invisível — copyright é informação legal, não de navegação. */
   font-size: 0.78rem;
 }
- 
+
 /* ================================================
    ANIMAÇÕES
 ================================================ */
- 
+
 /* A classe fade-in já existia no original, mas o keyframe estava incompleto */
 .fade-in {
-  opacity: 0;              /* Começa invisível. opacity: 0 = 0% de visibilidade. */
+  opacity: 0; /* Começa invisível. opacity: 0 = 0% de visibilidade. */
   transform: translateY(20px); /* Começa 20px abaixo da posição final. */
   animation: fadeInUp 0.6s ease forwards; /* Executa a animação fadeInUp por 0.6s com aceleração ease, e mantém o estado final (forwards). */
 }
- 
+
 .delay-2 {
   animation-delay: 0.2s; /* Atrasa o início da animação em 0.2s. O elemento aparece depois do primeiro — sequência visual. */
 }
- 
+
 @keyframes fadeInUp {
   /* Define os "fotogramas" da animação. "to" = estado final. "from" = estado inicial (herdado das propriedades do .fade-in). */
   to {
-    opacity: 1;           /* Termina completamente visível. */
-    transform: translateY(0); /* Termina na posição original (sem deslocamento). */
+    opacity: 1; /* Termina completamente visível. */
+    transform: translateY(
+      0
+    ); /* Termina na posição original (sem deslocamento). */
   }
 }
- 
+
 /* ================================================
    RESPONSIVIDADE
    NOVO: o original não tinha media queries.
    Media queries são como "IFs" do CSS: "se a tela for menor que X, aplique estes estilos".
 ================================================ */
- 
+
 @media (max-width: 900px) {
   /* Tablets e telas médias */
- 
+
   .diferentials-grid,
   .reviews-grid {
-    grid-template-columns: repeat(2, 1fr); /* 3 colunas viram 2. Cards não ficam minúsculos em telas médias. */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 3 colunas viram 2. Cards não ficam minúsculos em telas médias. */
   }
- 
+
   .about-content {
     flex-direction: column; /* Texto e mockup param de ficar lado a lado e vão pra coluna (um embaixo do outro). */
   }
- 
+
   .mockup-box {
     width: 100%; /* Em coluna, o mockup ocupa a largura total disponível. */
   }
- 
+
   .hero-title {
     font-size: 2.4rem; /* Título menor em tela menor — proporcionalidade. */
   }
 }
- 
+
 @media (max-width: 600px) {
   /* Celulares */
- 
+
   .diferentials-grid,
   .reviews-grid {
     grid-template-columns: 1fr; /* Coluna única em mobile. Um card por vez. */
   }
- 
+
   .nav-a {
     display: none; /* Esconde os links de texto da navbar em mobile. Em produção, substituiríamos por um menu hambúrguer com JavaScript. */
   }
- 
+
   .hero-stats {
     flex-direction: column; /* Stats viram coluna em mobile. */
     align-items: flex-start;
     gap: 16px;
   }
- 
+
   .stat-divider {
     display: none; /* Os divisores verticais não fazem sentido em layout de coluna. */
   }
+}
+
+/* animação da pagina */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-a.active {
+  color: #a855f7;
 }
