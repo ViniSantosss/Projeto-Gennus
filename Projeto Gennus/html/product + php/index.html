@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Gennus</title>
+
+    <link rel="stylesheet" href=""> <!--pode fazer o arquivo css e colocar ai-->
+
+</head>
+<body>
+    <main class="product-page">
+
+        <nav class="sidebar-main">
+            <a href="product.html">Produtos</a>
+            <a href="sales.html">Vendas</a>
+            <a href="financial.html">Finanças</a>
+            <a href="reports.html">Relatórios</a>
+        </nav>
+
+        <header class="product-top">
+
+        </header>
+
+        <div class="product-cards">
+            
+            <form id="form-produto" class="product-actions">            
+
+                <div class="product-options">
+                    <label for="product-name">Nome do Produto</label>
+                    <input type="text" name="product-name" id="product-name" placeholder="Ex: Fones de Ouvido" required>  
+                </div>
+
+                <div class="product-options">
+                    <label for="product-description">Descrição</label>
+                    <input type="text" name ="product-description" id="product-description" placeholder="Ex: item para uso pessoal" required>
+                </div>
+                    
+                <div class="product-options">
+                    <label for="product-price">Preço</label>
+                    <input type="number" name="product-price" id="product-price" placeholder="R$ 0.00" step="0.01" required>
+                </div>
+
+                <div class="product-options">
+                    <label for="product-stock">Estoque</label>
+                    <input type="number" name="product-stock" id="product-stock" placeholder="0" required> 
+                </div>
+
+                <div class="product-options">
+                    <label for="product-status">Status do Produto</label>
+                    <select name="product-status" id="product-status">
+                        <option value="product-ative" selected>Ativo</option>
+                        <option value="product-inactive">Inativo</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="product-button-save">Adicionar Produto</button>
+                <button type="reset">Redefinir</button>
+
+            </form>
+        </div>    
+        
+        <div class="sidebar-user">
+
+            <h3>Perfil</h3>
+
+            <a href="profile.html">nome do caba</a>
+            <a href="config.html">Configurações</a>
+            
+            <!--mesma coisa do dashboard, deixar o nome e perfil no canto esquerdo ali embaixo-->
+            
+        </div>
+
+        <!-- a partir daqui tem que criar a parte de barra de pesquisa, filtros etc, mas pra isso funcionar nois precisa do backend
+         pelo menos tendo informação-->
+
+            <script src="produtos.js"></script>
+    </main>
+</body>
+</html>
