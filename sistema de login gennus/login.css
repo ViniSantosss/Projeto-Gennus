@@ -1,0 +1,439 @@
+/* ================================================
+   IMPORTAÇÃO DE FONTES
+   @import carrega as fontes do Google diretamente no CSS.
+   Mesmas fontes da landing: Space Grotesk pra títulos,
+   Inter pro corpo — consistência entre as páginas.
+================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+ 
+/* ================================================
+   RESET GLOBAL
+   Zera as diferenças entre navegadores antes de começar.
+   É como nivelar o chão antes de construir — sem isso,
+   cada navegador traz seus próprios "entulhos" de espaçamento.
+================================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* O padding não infla o elemento. O tamanho que você define É o tamanho final. */
+}
+ 
+/* ================================================
+   VARIÁVEIS GLOBAIS
+   Pense nelas como constantes de um programa:
+   você define o valor uma vez e referencia em qualquer lugar.
+   Se o roxo mudar, muda só aqui — o resto atualiza sozinho.
+================================================ */
+:root {
+  --bg:              #000000;           /* Fundo principal — preto puro */
+  --bg-input:        #0d0d0d;           /* Fundo dos campos — levemente diferente do preto pra criar contraste */
+  --bg-input-focus:  #111111;           /* Fundo dos campos quando em foco */
+  --roxo:            #a855f7;           /* Roxo principal do sistema — mesmo da landing */
+  --roxo-escuro:     #7e22ce;           /* Roxo mais escuro pro gradiente e hover */
+  --roxo-hover:      #9333ea;           /* Hover do botão */
+  --roxo-borda:      rgba(168, 85, 247, 0.2);  /* Borda sutil dos inputs */
+  --roxo-borda-foco: rgba(168, 85, 247, 0.7);  /* Borda mais intensa no foco */
+  --texto:           #ffffff;           /* Texto principal */
+  --texto-muted:     #888888;           /* Texto secundário — placeholders, legendas */
+  --texto-label:     #cccccc;           /* Labels dos inputs */
+  --borda-divisor:   rgba(255,255,255,0.06); /* Linhas divisórias sutis */
+}
+ 
+/* ================================================
+   BODY
+   Define a fonte padrão de toda a página.
+   -webkit-font-smoothing suaviza as bordas das letras —
+   especialmente importante em texto claro sobre fundo escuro.
+================================================ */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--texto);
+  -webkit-font-smoothing: antialiased;
+}
+ 
+/* ================================================
+   LOGIN PAGE — o container que ocupa a tela inteira
+   A lógica de centralização: o PAI usa flexbox.
+   O FILHO (login-form-wrapper) se posiciona no centro
+   do palco que o pai criou.
+================================================ */
+.login-page {
+  width: 100%;
+  min-height: 100vh;       /* 100vh = 100% da altura da janela. Independente do body. */
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente. */
+  align-items: center;     /* Centraliza verticalmente. */
+  position: relative;      /* Contexto de posicionamento pro .bg-glow. */
+  overflow: hidden;        /* Esconde o glow que ultrapassa as bordas. */
+}
+ 
+/* ================================================
+   GLOW DE FUNDO
+   Div vazia que vira um holofote roxo difuso no topo da tela.
+   Mesma técnica do hero da landing — cria atmosfera
+   sem pesar a página com imagens.
+================================================ */
+.bg-glow {
+  position: absolute;      /* Saiu do fluxo — não empurra outros elementos. */
+  top: -180px;             /* Começa acima da tela, parcialmente escondido. */
+  left: 50%;               /* Move pra metade da tela... */
+  transform: translateX(-50%); /* ...e recua metade da própria largura pra ficar centralizado. */
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.13) 0%,   /* Roxo suave no centro */
+    rgba(126, 34, 206, 0.05) 40%,  /* Roxo escuro, quase transparente */
+    transparent 70%                 /* Completamente transparente nas bordas */
+  );
+  pointer-events: none;    /* Elemento decorativo não captura cliques ou hover. */
+  z-index: 0;              /* Fica atrás do formulário. */
+}
+ 
+/* ================================================
+   WRAPPER DO FORMULÁRIO
+   Container principal do conteúdo de login.
+   Define largura máxima e organiza filhos em coluna.
+================================================ */
+.login-form-wrapper {
+  position: relative;      /* z-index só funciona em elementos com position definido. */
+  z-index: 1;              /* Fica na frente do .bg-glow. */
+  width: 100%;
+  max-width: 400px;        /* Largura máxima — o form não fica espalhado em telas grandes. */
+  padding: 24px 20px;      /* Respiro nas bordas pra telas pequenas. */
+  display: flex;
+  flex-direction: column;  /* Empilha: logo → header → form → footer em coluna. */
+  align-items: center;     /* Centraliza cada filho horizontalmente. */
+  gap: 28px;               /* Espaço uniforme entre cada bloco. */
+}
+ 
+/* ================================================
+   ANIMAÇÃO DE ENTRADA
+   Igual à da landing — o wrapper começa invisível
+   e desliza pra cima ao carregar.
+================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px); /* Começa 24px abaixo da posição final. */
+  animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* cubic-bezier(0.22,1,0.36,1) = "ease out expo": começa rápido, desacelera no final.
+     Mais expressivo que o ease padrão. forwards = mantém o estado final. */
+}
+ 
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Termina na posição original. */
+  }
+}
+ 
+/* ================================================
+   LOGO
+   Link clicável que volta pra landing.
+   Mesmo gradiente do logo da navbar — o usuário
+   reconhece a marca instantaneamente.
+================================================ */
+.login-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;     /* Letras comprimidas — visual mais elegante em tamanhos grandes. */
+  background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo)); /* Gradiente horizontal roxo. */
+  -webkit-background-clip: text;        /* Recorta o gradiente no shape das letras. */
+  -webkit-text-fill-color: transparent; /* Texto transparente revela o gradiente por baixo. */
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+ 
+.login-logo:hover {
+  opacity: 0.8; /* Escurece levemente no hover — feedback sutil de que é clicável. */
+}
+ 
+/* ================================================
+   CABEÇALHO DO FORMULÁRIO
+================================================ */
+.login-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.login-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.03em; /* Mesmo aperto de letra dos títulos da landing. */
+  color: var(--texto);
+}
+ 
+.login-subtitle {
+  font-size: 0.875rem;
+  color: var(--texto-muted); /* Cinza discreto — informação de suporte, não principal. */
+  font-weight: 400;
+}
+ 
+/* ================================================
+   FORMULÁRIO
+   O form em si organiza seus campos em coluna.
+   width: 100% garante que ele ocupe toda a largura do wrapper.
+================================================ */
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Espaço entre cada .input-group. Mais generoso que margin-bottom em cada campo. */
+}
+ 
+/* ================================================
+   GRUPO DE INPUT — label + campo juntos
+   Agrupa o label e o input como uma unidade.
+   Facilita estilizar e espaçar cada par de forma independente.
+================================================ */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; /* Espaço pequeno entre o label e o campo. */
+}
+ 
+/* Linha com label à esquerda e "esqueceu a senha?" à direita */
+.input-label-row {
+  display: flex;
+  justify-content: space-between; /* Empurra label pra esquerda e link pra direita. */
+  align-items: center;
+}
+ 
+.input-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--texto-label); /* Cinza claro — visível mas não compete com o conteúdo do campo. */
+  letter-spacing: 0.01em;
+}
+ 
+/* ================================================
+   WRAPPER DO INPUT — posiciona o ícone dentro do campo
+   position: relative aqui é o "contexto de referência"
+   pro ícone que tem position: absolute.
+   É como dizer: "o ícone se posiciona relativo a esta div".
+================================================ */
+.input-wrapper {
+  position: relative;
+}
+ 
+/* Ícone SVG flutuando dentro do campo */
+.input-icon {
+  position: absolute;   /* Saiu do fluxo — não empurra o input. */
+  left: 14px;           /* 14px da borda esquerda do .input-wrapper. */
+  top: 50%;             /* Move pro meio vertical... */
+  transform: translateY(-50%); /* ...e sobe metade da própria altura pra ficar centralizado. */
+  color: #444;          /* Cinza escuro — ícone discreto. */
+  pointer-events: none; /* Clique no ícone passa através pro input. */
+  transition: color 0.2s;
+}
+ 
+/* Quando o campo está em foco, o ícone fica roxo também */
+.input-wrapper:focus-within .input-icon {
+  /* :focus-within = "algum filho desta div está em foco".
+     Sem isso, teríamos que usar JavaScript pra detectar o foco. */
+  color: var(--roxo);
+}
+ 
+/* ================================================
+   INPUT FIELD
+   Inputs não herdam a fonte do body — precisa declarar.
+   outline: none remove o contorno azul padrão do navegador
+   no foco — vamos criar o nosso próprio com border.
+================================================ */
+.input-field {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--roxo-borda);  /* border precisa existir antes de border-color funcionar.
+                                            Declaramos os dois juntos aqui. */
+  border-radius: 10px;
+  padding: 13px 16px 13px 42px; /* Padding à esquerda (42px) deixa espaço pro ícone SVG. */
+  color: var(--texto);
+  font-family: 'Inter', sans-serif; /* Inputs NÃO herdam fontes do body. Declarar aqui é obrigatório. */
+  font-size: 0.9rem;
+  outline: none; /* Remove o anel azul padrão do navegador. Criamos o nosso com border no :focus. */
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; /* Anima as três propriedades no foco. */
+}
+ 
+.input-field::placeholder {
+  color: #3a3a3a; /* Placeholder bem discreto — serve só de guia, não deve chamar atenção. */
+}
+ 
+/* Estado de foco: quando o usuário clica no campo */
+.input-field:focus {
+  border-color: var(--roxo-borda-foco); /* Borda fica mais intensa em roxo. */
+  background: var(--bg-input-focus);    /* Fundo levemente mais claro — segundo feedback visual. */
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.08); /* Anel externo suave — terceiro feedback.
+                                                       box-shadow com blur 0 e spread 3px = borda extra.
+                                                       8% de opacidade = quase imperceptível, mas elegante. */
+}
+ 
+/* ================================================
+   CHECKBOX CUSTOMIZADO
+   O input[type=checkbox] nativo é difícil de estilizar.
+   Estratégia: escondemos o nativo e criamos um visual
+   com um <span> que reage ao estado checked via CSS.
+================================================ */
+.label-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--texto-muted);
+  cursor: pointer; /* Mãozinha no hover — sinaliza que é clicável. */
+  user-select: none; /* Impede que o texto seja selecionado ao clicar. */
+}
+ 
+/* Esconde o checkbox nativo — mas ele ainda existe e funciona */
+.input-check {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+ 
+/* Quadradinho visual que substitui o checkbox nativo */
+.check-custom {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;         /* min-width evita que encolha em layouts flex. */
+  border: 1px solid var(--roxo-borda);
+  border-radius: 5px;
+  background: var(--bg-input);
+  transition: background 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+/* Quando o checkbox nativo (invisível) está marcado,
+   estiliza o .check-custom que vem logo depois dele */
+.input-check:checked + .check-custom {
+  /* + é o "adjacent sibling selector" = seleciona o irmão imediatamente seguinte.
+     Sem JavaScript: quando o nativo muda de estado, o CSS reage. */
+  background: var(--roxo);
+  border-color: var(--roxo);
+}
+ 
+/* A marca de check (✓) feita só com CSS */
+.input-check:checked + .check-custom::after {
+  content: '';
+  width: 4px;
+  height: 8px;
+  border: 2px solid white;
+  border-top: none;   /* Sem borda em cima e à esquerda... */
+  border-left: none;
+  transform: rotate(45deg) translateY(-1px); /* ...vira um "✓" rotacionado. */
+  display: block;
+}
+ 
+/* ================================================
+   LINK "ESQUECEU A SENHA?"
+================================================ */
+.link-forgot {
+  font-size: 0.78rem;
+  color: var(--texto-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+ 
+.link-forgot:hover {
+  color: var(--roxo); /* Roxo no hover — coerente com o sistema. */
+}
+ 
+/* ================================================
+   BOTÃO DE ENTRAR
+   Ocupa 100% da largura — igual ao botão do TOTVS.
+   A seta (→) no final anima pra direita no hover —
+   microinteração que comunica "ir em frente".
+================================================ */
+.btn-entrar {
+  width: 100%;
+  background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo)); /* Gradiente diagonal no botão. */
+  color: #fff;
+  border: none;         /* Botões têm borda padrão do navegador. Remove. */
+  border-radius: 10px;
+  padding: 14px;
+  font-family: 'Space Grotesk', sans-serif; /* Fonte de display pro botão — mais impacto. */
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;             /* Espaço entre o texto "Entrar" e a seta →. */
+  position: relative;
+  overflow: hidden;     /* Esconde o brilho que vamos criar com ::before. */
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 4px;
+}
+ 
+/* Efeito de brilho que passa pelo botão no hover */
+.btn-entrar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;          /* Começa 100% pra fora da esquerda — invisível. */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08), /* Brilho branco suave no meio. */
+    transparent
+  );
+  transition: left 0.4s ease; /* Anima a posição horizontal. */
+}
+ 
+.btn-entrar:hover::before {
+  left: 100%; /* No hover, o brilho desliza da esquerda pra direita — efeito "shine". */
+}
+ 
+.btn-entrar:hover {
+  transform: translateY(-2px); /* Sobe 2px — sensação de elevação. */
+  box-shadow:
+    0 8px 25px rgba(168, 85, 247, 0.3),  /* Sombra roxa principal embaixo. */
+    0 0 0 1px rgba(168, 85, 247, 0.1);   /* Borda extra sutil ao redor. */
+}
+ 
+.btn-entrar:active {
+  transform: translateY(0); /* Ao clicar, volta pra posição original — simula pressionar. */
+  box-shadow: none;
+}
+ 
+/* Seta animada dentro do botão */
+.btn-arrow {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); /* Mesmo easing da animação de entrada. */
+  display: inline-block; /* inline-block aceita transform. inline puro não aceita. */
+}
+ 
+.btn-entrar:hover .btn-arrow {
+  transform: translateX(4px); /* A seta desliza 4px pra direita no hover — comunica "avançar". */
+}
+ 
+/* ================================================
+   RODAPÉ DO FORMULÁRIO
+================================================ */
+.login-footer-text {
+  font-size: 0.82rem;
+  color: var(--texto-muted);
+  text-align: center;
+}
+ 
+.link-register {
+  color: var(--roxo);          /* Roxo — link de destaque, mais importante que o "esqueceu a senha?". */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+ 
+.link-register:hover {
+  color: #c084fc; /* Roxo mais claro no hover — feedback de ativação. */
+  text-decoration: underline;
+}

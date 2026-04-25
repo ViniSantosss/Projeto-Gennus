@@ -1,0 +1,511 @@
+/* ================================================
+   REGISTER.CSS
+   Complementa o login.css sem repetir nada.
+   Contém: layout do cadastro, modal de termos,
+   botão de olho e todos os ajustes específicos.
+================================================ */
+ 
+/* ================================================
+   WRAPPER — maior que o login pra acomodar mais campos
+================================================ */
+.register-wrapper {
+  max-width: 520px;
+}
+ 
+/* ================================================
+   LABEL DE SEÇÃO
+   Separador visual entre grupos de campos.
+   Mesma família das .section-label da landing page.
+================================================ */
+.form-section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--roxo);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--borda-divisor);
+  width: 100%;
+  margin-top: 4px;
+}
+ 
+/* ================================================
+   GRID DE DUAS COLUNAS
+   Nome + sobrenome, senha + confirmação lado a lado.
+================================================ */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+ 
+/* ================================================
+   TELEFONE — select de DDI + input lado a lado
+================================================ */
+.phone-wrapper {
+  display: flex;
+}
+ 
+.input-ddi {
+  background: var(--bg-input);
+  border: 1px solid var(--roxo-borda);
+  border-right: none;           /* Une visualmente com o input de número. */
+  border-radius: 10px 0 0 10px; /* Arredonda só os cantos da esquerda. */
+  color: var(--texto);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  padding: 13px 10px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+ 
+.input-ddi:focus {
+  border-color: var(--roxo-borda-foco);
+  background: var(--bg-input-focus);
+}
+ 
+.input-phone {
+  border-radius: 0 10px 10px 0; /* Arredonda só os cantos da direita. */
+  border-left: none;
+  padding-left: 14px;           /* Sem ícone — remove o padding extra. */
+}
+ 
+.phone-wrapper:focus-within .input-ddi,
+.phone-wrapper:focus-within .input-phone {
+  /* :focus-within = "algum filho desta div está em foco".
+     Colore os dois elementos ao mesmo tempo pra parecer um campo único focado. */
+  border-color: var(--roxo-borda-foco);
+  background: var(--bg-input-focus);
+}
+ 
+/* ================================================
+   SELECT ESTILIZADO
+================================================ */
+.select-wrapper {
+  position: relative;
+}
+ 
+.input-select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 40px; /* Espaço pra seta customizada. */
+}
+ 
+.select-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #444;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+ 
+.select-wrapper:focus-within .select-arrow {
+  color: var(--roxo);
+}
+ 
+/* ================================================
+   BOTÃO DE OLHO — toggle de visibilidade da senha
+ 
+   Funciona assim: o botão fica posicionado absolutamente
+   dentro do .input-wrapper (que tem position: relative).
+   O JS alterna o type do input entre "password" e "text"
+   e troca qual SVG está visível.
+================================================ */
+.btn-eye {
+  position: absolute;
+  right: 12px;              /* 12px da borda direita do input-wrapper. */
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;         /* Sem fundo — integra ao campo. */
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #444;              /* Cinza discreto no estado normal. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.15s;
+}
+ 
+.btn-eye:hover {
+  color: var(--roxo);                  /* Roxo no hover. */
+  background: rgba(168, 85, 247, 0.08); /* Fundo roxo translúcido — destaque sutil. */
+}
+ 
+/* Quando o campo de senha está em foco, o ícone de olho já fica roxo */
+.input-wrapper:focus-within .btn-eye {
+  color: #666;
+}
+ 
+/* Os campos de senha precisam de padding-right extra pra o texto não ficar atrás do botão */
+.input-password-field {
+  padding-right: 42px; /* Mesmo tamanho que o botão de olho (32px) + margem (10px). */
+}
+ 
+.eye-icon {
+  transition: opacity 0.15s; /* Fade suave ao trocar de ícone. */
+}
+ 
+/* ================================================
+   BOTÃO DE LINK (TERMOS)
+   Parece um link, mas é um <button type="button">.
+   Por quê button e não <a>? Porque aciona uma ação
+   (abrir modal) em vez de navegar pra outro endereço.
+   Semanticamente mais correto e acessível.
+================================================ */
+.btn-link-terms {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--roxo);
+  font-family: 'Inter', sans-serif;
+  font-size: inherit;       /* Herda o tamanho do .label-check. */
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px; /* Afasta o sublinhado do texto — mais elegante. */
+  transition: color 0.2s;
+}
+ 
+.btn-link-terms:hover {
+  color: #c084fc; /* Roxo mais claro no hover. */
+}
+ 
+/* ================================================
+   MENSAGEM DE ERRO
+================================================ */
+.form-error {
+  font-size: 0.8rem;
+  color: #f87171;
+  text-align: center;
+  display: none; /* O JS exibe quando há erro. */
+}
+ 
+/* ================================================
+   MODAL DE TERMOS DE USO
+ 
+   Estrutura de camadas:
+   1. .modal-overlay — fundo escuro que cobre toda a tela
+   2. .modal-box     — o card branco (escuro) com o conteúdo
+   3. .modal-header  — título + botão fechar
+   4. .modal-body    — área com scroll (onde ficam os termos)
+   5. .modal-footer  — barra de progresso + botões
+================================================ */
+ 
+/* Camada 1: sobreposição escura */
+.modal-overlay {
+  position: fixed;   /* fixed = fica colado na tela mesmo ao rolar a página. */
+  inset: 0;          /* inset: 0 = top:0, right:0, bottom:0, left:0 de uma vez. Ocupa tela inteira. */
+  background: rgba(0, 0, 0, 0.75); /* Fundo semitransparente — deixa ver o formulário atrás. */
+  backdrop-filter: blur(6px);      /* Desfoca o que está atrás — efeito vidro fosco elegante. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;     /* Na frente de absolutamente tudo. */
+  padding: 20px;     /* Respiro em telas pequenas. */
+ 
+  /* Estado inicial: invisível e inacessível */
+  opacity: 0;
+  pointer-events: none; /* Sem pointer-events, cliques passam através — o modal não "existe" pro mouse. */
+  transition: opacity 0.25s ease;
+}
+ 
+/* Estado ativo: o JS adiciona a classe .modal-open ao overlay */
+.modal-overlay.modal-open {
+  opacity: 1;
+  pointer-events: all; /* Agora captura cliques normalmente. */
+}
+ 
+/* Camada 2: o card do modal */
+.modal-box {
+  background: #0a0a0a;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;  /* Nunca ultrapassa 85% da altura da tela — sempre cabe sem cortar. */
+  display: flex;
+  flex-direction: column; /* Header + body + footer empilhados. */
+  overflow: hidden;       /* O border-radius funciona nos filhos graças a isso. */
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.6),         /* Sombra principal profunda. */
+    0 0 0 1px rgba(168, 85, 247, 0.1),       /* Borda extra sutilíssima. */
+    0 0 80px rgba(168, 85, 247, 0.06);       /* Brilho roxo difuso. */
+ 
+  /* Começa levemente abaixo e sobe ao aparecer — animação de entrada */
+  transform: translateY(12px);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+ 
+.modal-overlay.modal-open .modal-box {
+  transform: translateY(0); /* Sobe pra posição final. */
+}
+ 
+/* Animação de fade no modal-box — complementa o translateY */
+.fade-in-modal {
+  opacity: 0;
+  animation: none; /* Controlado pelo JS via .modal-open, não por @keyframes aqui. */
+}
+ 
+/* Camada 3: cabeçalho */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0; /* flex-shrink: 0 impede o header de encolher quando o body cresce. */
+}
+ 
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+ 
+/* Ícone decorativo no header do modal */
+.modal-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--roxo);
+  flex-shrink: 0;
+}
+ 
+.modal-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+ 
+/* Botão X de fechar */
+.modal-close {
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+ 
+.modal-close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+ 
+/* Camada 4: corpo com scroll */
+.modal-body {
+  flex: 1;           /* Ocupa todo o espaço vertical entre header e footer. */
+  overflow-y: auto;  /* Scroll vertical quando o conteúdo não cabe. */
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+ 
+  /* Scroll customizado — sem a barra cinza padrão do sistema */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+}
+ 
+/* Scroll customizado pra Chrome/Safari */
+.modal-body::-webkit-scrollbar {
+  width: 4px;
+}
+ 
+.modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+ 
+.modal-body::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3); /* Scrollbar roxinha. */
+  border-radius: 2px;
+}
+ 
+.modal-updated {
+  font-size: 0.75rem;
+  color: #444;
+  font-style: italic;
+}
+ 
+/* Cada bloco de texto dos termos */
+.terms-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+ 
+.terms-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ddd;
+  letter-spacing: -0.01em;
+}
+ 
+.terms-text {
+  font-size: 0.82rem;
+  color: #666;
+  line-height: 1.75;
+}
+ 
+.terms-highlight {
+  color: var(--roxo);
+  font-weight: 500;
+}
+ 
+/* Camada 5: rodapé do modal */
+.modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0; /* Nunca encolhe — sempre visível na base do modal. */
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+ 
+/* Barra de progresso de leitura */
+.read-progress-container {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05); /* Trilho cinza escuro. */
+}
+ 
+.read-progress-bar {
+  height: 100%;
+  width: 0%;             /* Começa em 0% — cresce conforme o scroll do .modal-body. */
+  background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo));
+  border-radius: 1px;
+  transition: width 0.15s ease; /* Animação suave ao crescer. */
+}
+ 
+.modal-footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  gap: 12px;
+}
+ 
+.read-hint {
+  font-size: 0.75rem;
+  color: #444;
+  white-space: nowrap; /* Não quebra linha — ocupa só o espaço necessário. */
+}
+ 
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+ 
+/* Botão "Recusar" — menos chamativo que o aceitar */
+.btn-modal-recusar {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #666;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+ 
+.btn-modal-recusar:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #999;
+}
+ 
+/* Botão "Aceitar" — mesmo estilo do btn-entrar, mas menor */
+.btn-modal-aceitar {
+  background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo));
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+ 
+/* Estado desabilitado — enquanto o usuário não terminou de ler */
+.btn-modal-aceitar:disabled {
+  opacity: 0.35;          /* Aparência de "inativo". */
+  cursor: not-allowed;    /* Cursor de proibido — feedback visual de que não pode clicar. */
+  transform: none;
+}
+ 
+.btn-modal-aceitar:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+}
+ 
+/* Brilho que passa pelo botão ao ser habilitado */
+.btn-modal-aceitar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transition: left 0.4s ease;
+}
+ 
+.btn-modal-aceitar:not(:disabled):hover::before {
+  left: 100%;
+}
+ 
+/* ================================================
+   RESPONSIVIDADE
+================================================ */
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr; /* Uma coluna em mobile. */
+  }
+ 
+  .register-wrapper {
+    max-width: 100%;
+  }
+ 
+  .modal-footer-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+ 
+  .modal-buttons {
+    flex-direction: column;
+  }
+ 
+  .btn-modal-recusar,
+  .btn-modal-aceitar {
+    width: 100%;
+    justify-content: center;
+  }
+}
