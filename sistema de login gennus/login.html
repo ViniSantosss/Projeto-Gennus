@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gennus — Login</title>
+ 
+    <!-- Mesmas fontes da landing page. O navegador já tem em cache se o usuário
+         veio da landing — carrega de graça, zero delay. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+ 
+    <link rel="stylesheet" href="login.css" />
+  </head>
+ 
+  <body>
+ 
+    <!-- .login-page é o "palco" — ocupa a tela inteira e centraliza tudo dentro dele -->
+    <section class="login-page">
+ 
+      <!-- Glow decorativo de fundo — div vazia estilizada no CSS -->
+      <div class="bg-glow"></div>
+ 
+      <!-- .login-form-wrapper limita a largura e empilha os elementos em coluna -->
+      <div class="login-form-wrapper fade-in">
+ 
+        <!-- Logo com link de volta pra landing -->
+        <a href="index.html" class="login-logo">Gennus</a>
+ 
+        <!-- Cabeçalho do formulário -->
+        <div class="login-header">
+          <h1 class="login-title">Bem-vindo de volta</h1>
+          <p class="login-subtitle">Entre com sua conta para continuar</p>
+        </div>
+ 
+        <!-- Formulário principal -->
+        <form class="login-form" action="#" method="post">
+ 
+          <!-- Grupo de input: label + campo juntos.
+               label for="email" + input id="email" = clicar no label foca o campo.
+               Acessibilidade e UX ao mesmo tempo. -->
+          <div class="input-group">
+            <label for="email" class="input-label">E-mail</label>
+            <div class="input-wrapper">
+              <!-- Ícone SVG dentro do campo — posicionado com CSS, não com JavaScript -->
+              <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="seu@email.com"
+                class="input-field"
+                autocomplete="email"
+              />
+            </div>
+          </div>
+ 
+          <div class="input-group">
+            <div class="input-label-row">
+              <label for="password" class="input-label">Senha</label>
+              <!-- Link no mesmo nível do label — alinhado à direita via flex no CSS -->
+              <a href="#" class="link-forgot">Esqueceu a senha?</a>
+            </div>
+            <div class="input-wrapper">
+              <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                class="input-field"
+                autocomplete="current-password"
+              />
+            </div>
+          </div>
+ 
+          <!-- Checkbox "lembre-se de mim" -->
+          <label class="label-check">
+            <input type="checkbox" class="input-check" />
+            <span class="check-custom"></span>
+            Lembre-se de mim
+          </label>
+ 
+          <!-- Botão de submit -->
+          <button type="submit" class="btn-entrar">
+            Entrar
+            <!-- Seta animada no botão — elemento span estilizado no CSS -->
+            <span class="btn-arrow">→</span>
+          </button>
+ 
+        </form>
+ 
+        <!-- Rodapé do formulário -->
+        <p class="login-footer-text">
+          Não tem uma conta? <a href="register.html" class="link-register">Fale com a gente</a>
+        </p>
+ 
+      </div>
+    </section>
+ 
+  </body>
+</html>
