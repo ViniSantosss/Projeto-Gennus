@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+ 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* O padding não infla o elemento. O tamanho que você define É o tamanho final. */
+}
+ 
+:root {
+  --bg:              #000000;           /* Fundo principal — preto puro */
+  --bg-input:        #0d0d0d;           /* Fundo dos campos — levemente diferente do preto pra criar contraste */
+  --bg-input-focus:  #111111;           /* Fundo dos campos quando em foco */
+  --roxo:            #a855f7;           /* Roxo principal do sistema — mesmo da landing */
+  --roxo-escuro:     #7e22ce;           /* Roxo mais escuro pro gradiente e hover */
+  --roxo-hover:      #9333ea;           /* Hover do botão */
+  --roxo-borda:      rgba(168, 85, 247, 0.2);  /* Borda sutil dos inputs */
+  --roxo-borda-foco: rgba(168, 85, 247, 0.7);  /* Borda mais intensa no foco */
+  --texto:           #ffffff;           /* Texto principal */
+  --texto-muted:     #888888;           /* Texto secundário — placeholders, legendas */
+  --texto-label:     #cccccc;           /* Labels dos inputs */
+  --borda-divisor:   rgba(255,255,255,0.06); /* Linhas divisórias sutis */
+}
+
+.dashboard-page {
+  padding-left: 460px;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  padding-right: 20px;
+  min-height: 100vh;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  background-color: var(--bg);
+}
+
+.sidebar-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0d0d0d, #080808)/* cor escura do projeto */;
+  border-right: solid 1px var(--bg-input-focus)/* borda sutil */;
+  padding: 40px 30px 0 30px/* respiro interno */;
+  display: flex;
+  flex-direction: column;
+  gap: 30px/* espaço entre itens */;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+.bg-glow {
+  position: absolute;      /* Saiu do fluxo — não empurra outros elementos. */
+  top: -180px;             /* Começa acima da tela, parcialmente escondido. */
+  left: 50%;               /* Move pra metade da tela... */
+  transform: translateX(-50%); /* ...e recua metade da própria largura pra ficar centralizado. */
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.13) 0%,   /* Roxo suave no centro */
+    rgba(126, 34, 206, 0.05) 40%,  /* Roxo escuro, quase transparente */
+    transparent 70%                 /* Completamente transparente nas bordas */
+  );
+  pointer-events: none;    /* Elemento decorativo não captura cliques ou hover. */
+  z-index: 0;              /* Fica atrás do formulário. */
+}
+
+.sidebar-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;     /* Letras comprimidas — visual mais elegante em tamanhos grandes. */
+  background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo)); /* Gradiente horizontal roxo. */
+  -webkit-background-clip: text;        /* Recorta o gradiente no shape das letras. */
+  -webkit-text-fill-color: transparent; /* Texto transparente revela o gradiente por baixo. */
+  text-decoration: none;
+  transition: opacity 0.2s;
+  margin-bottom: 100px;
+  letter-spacing: 3px;
+}
+
+.sidebar-logo:hover {
+  opacity: 0.8; /* Escurece levemente no hover — feedback sutil de que é clicável. */
+  cursor: pointer;
+}
+
+
+
+summary {
+  color: var(--texto-label);
+  padding: 12px 18px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  list-style: none;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+summary:hover {
+  color: var(--roxo);
+  transform: translateX(4px);
+}
+
+details a {
+  display: block;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-left: 30px;
+  font-size: 15px;
+  color: #666;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+details a:hover {
+  color: var(--roxo);
+  transform: translateX(2px);
+}
+
+details a::before {
+  content: "→";
+  padding-right: 6px;
+  font-size: 13px;
+  color: var(--roxo);
+}
+
+.config-details {
+  border-top: solid 1px;
+  color: #111111;
+  padding-top: 25px;
+}
+
+.sidebar-user {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 170px 16px;
+  padding-left: 30px;
+}
+
+.sidebar-user span {
+   background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo)); /* Gradiente horizontal roxo. */
+  -webkit-background-clip: text;        /* Recorta o gradiente no shape das letras. */
+  -webkit-text-fill-color: transparent; /* Texto transparente revela o gradiente por baixo. */
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+  
+}
+
+.sidebar-user a {
+  text-decoration: none;
+  color: var(--texto-muted);
+  transition: all 0.2s ease;
+}
+
+.sidebar-user a:hover {
+  color: var(--roxo);
+  transform: translateX(4px);
+}
+
+.perfil-border {
+  padding-bottom: 30px;
+  border-top: solid 1px #111111;
+}
+
