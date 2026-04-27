@@ -1,0 +1,264 @@
+/* ================================================
+   IMPORTAÇÃO DE FONTES & RESET GLOBAL
+================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+}
+
+/* ================================================
+   LAYOUT PRINCIPAL
+================================================ */
+/* O main abraça tudo. Como não temos um wrapper pro conteúdo principal, 
+   vamos empurrar tudo 280px para a direita para dar espaço pra sidebar fixa. */
+.dashboard-page {
+  padding-left: 280px; 
+  padding-top: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Espaçamento entre os blocos (cards, gráficos, alertas) */
+}
+
+/* ================================================
+   SIDEBAR (Menu Lateral Superior)
+================================================ */
+.sidebar-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: calc(100vh - 120px); /* Ocupa a tela inteira menos o espaço do perfil */
+  background: #080808;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.sidebar-main a {
+  color: #888;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-main a:hover {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  transform: translateX(4px); /* Animação sutil arrastando pra direita */
+}
+
+/* ================================================
+   SIDEBAR USER (Perfil no Canto Inferior)
+================================================ */
+.sidebar-user {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 240px;
+  height: 120px;
+  background: #050505;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+}
+
+.sidebar-user h3 {
+  font-size: 0.75rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 4px;
+}
+
+.sidebar-user a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.sidebar-user a:hover {
+  color: #c084fc;
+}
+
+/* ================================================
+   CABEÇALHO & VALORES (KPIs)
+================================================ */
+.dashboard-cards h1 {
+  font-size: 2.2rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 30px;
+}
+
+/* Tratando os h3 e spans "soltos" como uma grade */
+.dashboard-values {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Duas colunas: Título | Valor */
+  row-gap: 20px;
+  align-items: center;
+  box-shadow: 0 4px 30px rgba(168, 85, 247, 0.03);
+}
+
+.dashboard-values h3 {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.dashboard-values span {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: right; /* Joga os valores para a direita */
+}
+
+/* ================================================
+   ÁREA DE GRÁFICOS (Placeholders por enquanto)
+================================================ */
+.dashboard-graphics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 gráficos por linha */
+  gap: 20px;
+}
+
+.dashboard-graphics > div {
+  background: linear-gradient(145deg, #0d0d0d, #080808);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333; /* Texto discreto caso você escreva algo dentro */
+  font-size: 0.8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brilho roxo falso nos gráficos só pra não ficar um buraco negro */
+.dashboard-graphics > div::after {
+  content: "Área do Gráfico";
+  color: #222;
+}
+.dashboard-graphics > div::before {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+}
+
+/* ================================================
+   RESUMO FINANCEIRO & ATIVIDADES
+================================================ */
+.dashboard-resume-cards, 
+.dashboard-recent-activities, 
+.dashboard-alerts {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.dashboard-resume-cards > h3, 
+.dashboard-recent-activities > h3, 
+.dashboard-alerts > h3 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 10px;
+}
+
+/* Container de flex para os resumos soltos dentro da div */
+.dashboard-resume-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-balance h3,
+.dashboard-percentage-growth h3 {
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.dashboard-balance p,
+.dashboard-percentage-growth p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #c084fc; /* Roxo clarinho pros destaques */
+}
+
+/* ================================================
+   ALERTAS
+================================================ */
+.dashboard-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dashboard-drop-in-sales-alert, 
+.dashboard-low-stock {
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+/* Alerta Vermelho/Laranja (Queda em Vendas) */
+.dashboard-drop-in-sales-alert {
+  background: rgba(255, 95, 87, 0.1);
+  border: 1px solid rgba(255, 95, 87, 0.2);
+  color: #ff5f57;
+}
+
+/* Alerta Amarelo (Estoque Baixo) */
+.dashboard-low-stock {
+  background: rgba(254, 188, 46, 0.1);
+  border: 1px solid rgba(254, 188, 46, 0.2);
+  color: #febc2e;
+}
