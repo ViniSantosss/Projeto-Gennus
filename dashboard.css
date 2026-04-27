@@ -1,264 +1,171 @@
-/* ================================================
-   IMPORTAÇÃO DE FONTES & RESET GLOBAL
-================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+ 
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* O padding não infla o elemento. O tamanho que você define É o tamanho final. */
+}
+ 
+:root {
+  --bg:              #000000;           /* Fundo principal — preto puro */
+  --bg-input:        #0d0d0d;           /* Fundo dos campos — levemente diferente do preto pra criar contraste */
+  --bg-input-focus:  #111111;           /* Fundo dos campos quando em foco */
+  --roxo:            #a855f7;           /* Roxo principal do sistema — mesmo da landing */
+  --roxo-escuro:     #7e22ce;           /* Roxo mais escuro pro gradiente e hover */
+  --roxo-hover:      #9333ea;           /* Hover do botão */
+  --roxo-borda:      rgba(168, 85, 247, 0.2);  /* Borda sutil dos inputs */
+  --roxo-borda-foco: rgba(168, 85, 247, 0.7);  /* Borda mais intensa no foco */
+  --texto:           #ffffff;           /* Texto principal */
+  --texto-muted:     #888888;           /* Texto secundário — placeholders, legendas */
+  --texto-label:     #cccccc;           /* Labels dos inputs */
+  --borda-divisor:   rgba(255,255,255,0.06); /* Linhas divisórias sutis */
 }
 
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  background-color: #000;
-  font-family: "Inter", sans-serif;
-  color: #fff;
-}
-
-h1, h2, h3, h4 {
-  font-family: "Space Grotesk", sans-serif;
-  font-weight: 700;
-}
-
-/* ================================================
-   LAYOUT PRINCIPAL
-================================================ */
-/* O main abraça tudo. Como não temos um wrapper pro conteúdo principal, 
-   vamos empurrar tudo 280px para a direita para dar espaço pra sidebar fixa. */
 .dashboard-page {
-  padding-left: 280px; 
-  padding-top: 40px;
-  padding-right: 40px;
-  padding-bottom: 40px;
+  padding-left: 460px;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  padding-right: 20px;
   min-height: 100vh;
   display: flex;
+  gap: 10px;
   flex-direction: column;
-  gap: 30px; /* Espaçamento entre os blocos (cards, gráficos, alertas) */
+  background-color: var(--bg);
 }
 
-/* ================================================
-   SIDEBAR (Menu Lateral Superior)
-================================================ */
 .sidebar-main {
   position: fixed;
   top: 0;
   left: 0;
-  width: 240px;
-  height: calc(100vh - 120px); /* Ocupa a tela inteira menos o espaço do perfil */
-  background: #080808;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 40px 20px;
+  width: 400px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0d0d0d, #080808)/* cor escura do projeto */;
+  border-right: solid 1px var(--bg-input-focus)/* borda sutil */;
+  padding: 40px 30px 0 30px/* respiro interno */;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  z-index: 100;
+  gap: 30px/* espaço entre itens */;
+  color: white;
+  font-family: "Inter", sans-serif;
 }
 
-.sidebar-main a {
-  color: #888;
+.bg-glow {
+  position: absolute;      /* Saiu do fluxo — não empurra outros elementos. */
+  top: -180px;             /* Começa acima da tela, parcialmente escondido. */
+  left: 50%;               /* Move pra metade da tela... */
+  transform: translateX(-50%); /* ...e recua metade da própria largura pra ficar centralizado. */
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.13) 0%,   /* Roxo suave no centro */
+    rgba(126, 34, 206, 0.05) 40%,  /* Roxo escuro, quase transparente */
+    transparent 70%                 /* Completamente transparente nas bordas */
+  );
+  pointer-events: none;    /* Elemento decorativo não captura cliques ou hover. */
+  z-index: 0;              /* Fica atrás do formulário. */
+}
+
+.sidebar-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;     /* Letras comprimidas — visual mais elegante em tamanhos grandes. */
+  background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo)); /* Gradiente horizontal roxo. */
+  -webkit-background-clip: text;        /* Recorta o gradiente no shape das letras. */
+  -webkit-text-fill-color: transparent; /* Texto transparente revela o gradiente por baixo. */
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  padding: 12px 16px;
+  transition: opacity 0.2s;
+  margin-bottom: 100px;
+  letter-spacing: 3px;
+}
+
+.sidebar-logo:hover {
+  opacity: 0.8; /* Escurece levemente no hover — feedback sutil de que é clicável. */
+  cursor: pointer;
+}
+
+
+
+summary {
+  color: var(--texto-label);
+  padding: 12px 18px;
   border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  list-style: none;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+summary:hover {
+  color: var(--roxo);
+  transform: translateX(4px);
+}
+
+details a {
+  display: block;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-left: 30px;
+  font-size: 15px;
+  color: #666;
+  padding-top: 10px;
+  padding-bottom: 10px;
   transition: all 0.2s ease;
 }
 
-.sidebar-main a:hover {
-  background: rgba(168, 85, 247, 0.1);
-  color: #a855f7;
-  transform: translateX(4px); /* Animação sutil arrastando pra direita */
+details a:hover {
+  color: var(--roxo);
+  transform: translateX(2px);
 }
 
-/* ================================================
-   SIDEBAR USER (Perfil no Canto Inferior)
-================================================ */
+details a::before {
+  content: "→";
+  padding-right: 6px;
+  font-size: 13px;
+  color: var(--roxo);
+}
+
+.config-details {
+  border-top: solid 1px;
+  color: #111111;
+  padding-top: 25px;
+}
+
 .sidebar-user {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 240px;
-  height: 120px;
-  background: #050505;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  z-index: 100;
+  gap: 10px;
+  padding: 170px 16px;
+  padding-left: 30px;
 }
 
-.sidebar-user h3 {
-  font-size: 0.75rem;
-  color: #555;
+.sidebar-user span {
+   background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo)); /* Gradiente horizontal roxo. */
+  -webkit-background-clip: text;        /* Recorta o gradiente no shape das letras. */
+  -webkit-text-fill-color: transparent; /* Texto transparente revela o gradiente por baixo. */
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  margin-bottom: 4px;
+  
 }
 
 .sidebar-user a {
-  color: #ccc;
   text-decoration: none;
-  font-size: 0.85rem;
-  transition: color 0.2s;
+  color: var(--texto-muted);
+  transition: all 0.2s ease;
 }
 
 .sidebar-user a:hover {
-  color: #c084fc;
+  color: var(--roxo);
+  transform: translateX(4px);
 }
 
-/* ================================================
-   CABEÇALHO & VALORES (KPIs)
-================================================ */
-.dashboard-cards h1 {
-  font-size: 2.2rem;
-  letter-spacing: -0.03em;
-  margin-bottom: 30px;
+.perfil-border {
+  padding-bottom: 30px;
+  border-top: solid 1px #111111;
 }
 
-/* Tratando os h3 e spans "soltos" como uma grade */
-.dashboard-values {
-  background: #0a0a0a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 30px;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Duas colunas: Título | Valor */
-  row-gap: 20px;
-  align-items: center;
-  box-shadow: 0 4px 30px rgba(168, 85, 247, 0.03);
-}
-
-.dashboard-values h3 {
-  font-family: "Inter", sans-serif;
-  font-size: 0.9rem;
-  color: #888;
-  font-weight: 500;
-}
-
-.dashboard-values span {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #fff;
-  text-align: right; /* Joga os valores para a direita */
-}
-
-/* ================================================
-   ÁREA DE GRÁFICOS (Placeholders por enquanto)
-================================================ */
-.dashboard-graphics {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 gráficos por linha */
-  gap: 20px;
-}
-
-.dashboard-graphics > div {
-  background: linear-gradient(145deg, #0d0d0d, #080808);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 14px;
-  min-height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #333; /* Texto discreto caso você escreva algo dentro */
-  font-size: 0.8rem;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Brilho roxo falso nos gráficos só pra não ficar um buraco negro */
-.dashboard-graphics > div::after {
-  content: "Área do Gráfico";
-  color: #222;
-}
-.dashboard-graphics > div::before {
-  content: "";
-  position: absolute;
-  bottom: -50px;
-  right: -50px;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
-}
-
-/* ================================================
-   RESUMO FINANCEIRO & ATIVIDADES
-================================================ */
-.dashboard-resume-cards, 
-.dashboard-recent-activities, 
-.dashboard-alerts {
-  background: #0a0a0a;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 14px;
-  padding: 30px;
-}
-
-.dashboard-resume-cards > h3, 
-.dashboard-recent-activities > h3, 
-.dashboard-alerts > h3 {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding-bottom: 10px;
-}
-
-/* Container de flex para os resumos soltos dentro da div */
-.dashboard-resume-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.dashboard-balance h3,
-.dashboard-percentage-growth h3 {
-  font-family: "Inter", sans-serif;
-  font-size: 0.85rem;
-  color: #777;
-}
-
-.dashboard-balance p,
-.dashboard-percentage-growth p {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #c084fc; /* Roxo clarinho pros destaques */
-}
-
-/* ================================================
-   ALERTAS
-================================================ */
-.dashboard-alerts {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.dashboard-drop-in-sales-alert, 
-.dashboard-low-stock {
-  padding: 16px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-}
-
-/* Alerta Vermelho/Laranja (Queda em Vendas) */
-.dashboard-drop-in-sales-alert {
-  background: rgba(255, 95, 87, 0.1);
-  border: 1px solid rgba(255, 95, 87, 0.2);
-  color: #ff5f57;
-}
-
-/* Alerta Amarelo (Estoque Baixo) */
-.dashboard-low-stock {
-  background: rgba(254, 188, 46, 0.1);
-  border: 1px solid rgba(254, 188, 46, 0.2);
-  color: #febc2e;
-}
