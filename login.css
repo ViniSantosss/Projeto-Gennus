@@ -146,6 +146,7 @@ body {
   -webkit-text-fill-color: transparent; /* Texto transparente revela o gradiente por baixo. */
   text-decoration: none;
   transition: opacity 0.2s;
+  text-transform: uppercase;
 }
  
 .login-logo:hover {

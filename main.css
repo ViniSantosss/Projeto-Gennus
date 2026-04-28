@@ -78,6 +78,11 @@ h3 {
   text-decoration: none;
 }
 
+.nav-logo a {
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
 .nav-ul {
   display: flex; /* trilho flex pros itens do menu. */
   align-items: center; /* centraliza verticalmente os itens no trilho. */
