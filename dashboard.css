@@ -10,6 +10,8 @@
  
 :root {
   --bg:              #000000;           /* Fundo principal — preto puro */
+  --bg-surface: #080808; 
+  --bg-surface-2: #0f0f0f;
   --bg-input:        #0d0d0d;           /* Fundo dos campos — levemente diferente do preto pra criar contraste */
   --bg-input-focus:  #111111;           /* Fundo dos campos quando em foco */
   --roxo:            #a855f7;           /* Roxo principal do sistema — mesmo da landing */
@@ -17,20 +19,30 @@
   --roxo-hover:      #9333ea;           /* Hover do botão */
   --roxo-borda:      rgba(168, 85, 247, 0.2);  /* Borda sutil dos inputs */
   --roxo-borda-foco: rgba(168, 85, 247, 0.7);  /* Borda mais intensa no foco */
+  --verde:           #22c55e;        /* NOVO: cor de positivo (receita, crescimento) */
+  --vermelho:        #f87171;        /* NOVO: cor de negativo (despesas, alertas) */
+  --amarelo:         #fbbf24;        /* NOVO: cor de atenção (alertas moderados) */
   --texto:           #ffffff;           /* Texto principal */
   --texto-muted:     #888888;           /* Texto secundário — placeholders, legendas */
   --texto-label:     #cccccc;           /* Labels dos inputs */
   --borda-divisor:   rgba(255,255,255,0.06); /* Linhas divisórias sutis */
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--texto);
+  -webkit-font-smoothing: antialiased;
+}
+
 .dashboard-page {
-  padding-left: 460px;
-  padding-top: 80px;
-  padding-bottom: 50px;
-  padding-right: 20px;
+  padding-left: 432px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  padding-right: 40px;
   min-height: 100vh;
   display: flex;
-  gap: 10px;
+  gap: 24px;
   flex-direction: column;
   background-color: var(--bg);
 }
@@ -46,10 +58,14 @@
   padding: 40px 30px 0 30px/* respiro interno */;
   display: flex;
   flex-direction: column;
-  gap: 30px/* espaço entre itens */;
+  gap: 4px/* espaço entre itens */;
   color: white;
   font-family: "Inter", sans-serif;
+  overflow-y: auto; /* NOVO: scroll na sidebar se o conteúdo não couber na tela. */
+  z-index: 100;
 }
+
+.sidebar-main::-webkit-scrollbar { width: 0; } /*scroll invisivel*/
 
 .bg-glow {
   position: absolute;      /* Saiu do fluxo — não empurra outros elementos. */
@@ -70,16 +86,21 @@
 
 .sidebar-logo {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.9rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  letter-spacing: -0.04em;     /* Letras comprimidas — visual mais elegante em tamanhos grandes. */
+  letter-spacing: 4px;     /* Letras comprimidas — visual mais elegante em tamanhos grandes. */
   background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo)); /* Gradiente horizontal roxo. */
   -webkit-background-clip: text;        /* Recorta o gradiente no shape das letras. */
   -webkit-text-fill-color: transparent; /* Texto transparente revela o gradiente por baixo. */
   text-decoration: none;
   transition: opacity 0.2s;
-  margin-bottom: 100px;
-  letter-spacing: 3px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-logo a {
+  text-decoration: none;
 }
 
 .sidebar-logo:hover {
@@ -87,34 +108,45 @@
   cursor: pointer;
 }
 
-
+details {
+  position: relative;
+  z-index: 1;
+}
 
 summary {
   color: var(--texto-label);
-  padding: 12px 18px;
+  padding: 10px 14px;
   border-radius: 8px;
   transition: all 0.2s ease;
   cursor: pointer;
   list-style: none;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
 }
+
+summary::-webkit-details-marker { display: none; }
 
 summary:hover {
   color: var(--roxo);
   transform: translateX(4px);
+  
+}
+
+details[open] > summary {
+  color: var(--roxo); /* quando summary ta aberto os details fcam roxos*/
 }
 
 details a {
   display: block;
   text-transform: uppercase;
   text-decoration: none;
-  padding-left: 30px;
-  font-size: 15px;
-  color: #666;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 8px 14px 8px 32px;
+  font-size: 0.72rem;
+  color: #555;
   transition: all 0.2s ease;
+  border-radius: 6px;
 }
 
 details a:hover {
@@ -124,23 +156,26 @@ details a:hover {
 
 details a::before {
   content: "→";
-  padding-right: 6px;
-  font-size: 13px;
+  padding-right: 8px;
+  font-size: 11px;
   color: var(--roxo);
+  opacity: 0.6;
 }
 
 .config-details {
-  border-top: solid 1px;
-  color: #111111;
-  padding-top: 25px;
+  margin-top: 16px;
+  border-top: solid 1px rgba(255, 255, 255, 0.06);
+  padding-top: 20px;
 }
 
 .sidebar-user {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 170px 16px;
-  padding-left: 30px;
+  gap: 6px;
+  margin-top: auto;
+  padding: 20px 16px 32px 16px;
+  position: relative;
+  z-index: 1;
 }
 
 .sidebar-user span {
@@ -148,15 +183,17 @@ details a::before {
   -webkit-background-clip: text;        /* Recorta o gradiente no shape das letras. */
   -webkit-text-fill-color: transparent; /* Texto transparente revela o gradiente por baixo. */
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 15px;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  
+  font-weight: 700;
+  letter-spacing: 0.1rem;
 }
 
 .sidebar-user a {
   text-decoration: none;
   color: var(--texto-muted);
   transition: all 0.2s ease;
+  font-size: 0.82rem;
 }
 
 .sidebar-user a:hover {
@@ -165,7 +202,387 @@ details a::before {
 }
 
 .perfil-border {
-  padding-bottom: 30px;
+  margin-bottom: 16px;
   border-top: solid 1px #111111;
 }
 
+/* CABEÇALHO DASHBOAD */
+
+.dashboard-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Título "Dashboard — nome do usuário" */
+.dashboard-cards h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--texto);
+}
+
+/* ================================================
+   CARDS DE MÉTRICAS PRINCIPAIS
+   Usa CSS Grid pra criar 4 colunas iguais automaticamente.
+================================================ */
+.dashboard-values {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais. repeat(4, 1fr) = "repita 4x uma fração". */
+  gap: 16px;
+}
+
+/* Cada par h3 + span vira um card via CSS.
+   Como o HTML alterna h3 e span diretamente (sem wrapper div),
+   nth-child pra estilizar cada dois filhos como grupo. */
+ 
+/* Estilo base de todos os h3 dentro de .dashboard-values */
+.dashboard-values h3 {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 14px 14px 0 0;  /* Arredonda só o topo — conecta com o span abaixo. */
+  padding: 18px 20px 8px 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+  border-bottom: none;           /* Remove borda de baixo — o span vai encostado. */
+}
+
+/* Estilo base de todos os span dentro de .dashboard-values */
+.dashboard-values span {
+  display: block;
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 0 0 14px 14px;  /* Arredonda só o fundo — conecta com o h3 acima. */
+  padding: 4px 20px 20px 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--texto);
+  border-top: none;              /* Remove borda de cima — conecta com o h3. */
+  letter-spacing: -0.02em;
+  transition: background 0.2s;
+}
+
+/* Hover no span levanta o card visualmente */
+.dashboard-values span:hover {
+  background: var(--bg-surface-2);
+}
+ 
+/* Receita = verde */
+#dashboard-monthly-income  { color: var(--verde); }
+ 
+/* Despesas = vermelho */
+#dashboard-monthly-expenses { color: var(--vermelho); }
+ 
+/* Lucro = roxo do sistema */
+#dashboard-net-profit { color: var(--roxo); }
+
+/* Clientes = branco (neutro) — já é o padrão */
+ 
+/* ================================================
+   LINHA INFERIOR: RESUMO + ATIVIDADES + ALERTAS
+   NOVO: layout de três colunas pra organizar as seções
+   do meio e da direita lado a lado.
+================================================ */
+.dashboard-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 1fr; /* Resumo | Atividades (maior) | Alertas */
+  gap: 16px;
+  align-items: start; /* Alinha pelo topo — cards com alturas diferentes não ficam esticados. */
+}
+
+/* ================================================
+   ESTILO BASE DE CARD
+   NOVO: classe reutilizável que todos os cards da linha
+   inferior herdam. Evita repetir as mesmas propriedades.
+================================================ */
+.card-base {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.25s;
+}
+
+.card-base:hover {
+  border-color: var(--roxo-borda); /* Borda roxa suave no hover — feedback de interatividade. */
+}
+
+/* Título de cada card */
+.card-base h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+}
+
+/* ================================================
+   RESUMO FINANCEIRO
+   NOVO: estiliza .dashboard-resume-cards e seus filhos.
+================================================ */
+.dashboard-resume-cards {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.25s;
+}
+ 
+.dashboard-resume-cards:hover {
+  border-color: var(--roxo-borda);
+}
+ 
+/* Título da seção resumo */
+.dashboard-resume-cards > h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--borda); /* Linha separando o título dos sub-cards. */
+}
+ 
+/* Sub-cards: saldo e crescimento */
+.dashboard-balance,
+.dashboard-percentage-growth {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s;
+}
+ 
+.dashboard-balance:hover,
+.dashboard-percentage-growth:hover {
+  border-color: var(--roxo-borda);
+}
+ 
+.dashboard-balance h3,
+.dashboard-percentage-growth h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: #555;
+}
+ 
+/* Valor do saldo */
+.dashboard-balance p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--verde);   /* Verde = saldo positivo. */
+  letter-spacing: -0.02em;
+}
+ 
+/* Valor do crescimento percentual */
+.dashboard-percentage-growth p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--roxo);
+  letter-spacing: -0.02em;
+}
+ 
+/* ================================================
+   ATIVIDADES RECENTES
+   NOVO: estiliza .dashboard-recent-activities.
+   A lista de atividades será populada pelo JS/backend —
+   aqui preparamos o container e um estilo de item.
+================================================ */
+.dashboard-recent-activities {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.25s;
+}
+ 
+.dashboard-recent-activities:hover {
+  border-color: var(--roxo-borda);
+}
+ 
+.dashboard-recent-activities h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--borda);
+}
+ 
+/* NOVO: estado vazio — aparece quando não há atividades.
+   O JS pode mostrar/esconder isso dependendo se há dados. */
+.dashboard-recent-activities::after {
+  content: 'Nenhuma atividade recente.';
+  /* ::after cria um elemento fictício após o conteúdo.
+     Usamos aqui como placeholder visual até o backend popular a lista. */
+  font-size: 0.8rem;
+  color: #333;
+  text-align: center;
+  padding: 20px 0;
+}
+ 
+/* NOVO: estilo de cada linha de atividade (pra quando o backend popular) */
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--borda);
+  font-size: 0.82rem;
+  color: var(--texto-muted);
+}
+ 
+.activity-item:last-child {
+  border-bottom: none; /* Último item não tem linha embaixo. */
+}
+ 
+/* Bolinha colorida antes de cada atividade */
+.activity-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  background: var(--roxo);
+}
+ 
+/* ================================================
+   ALERTAS
+   NOVO: estiliza .dashboard-alerts e os dois tipos
+   de alerta (queda de vendas e estoque baixo).
+================================================ */
+.dashboard-alerts {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.25s;
+}
+ 
+.dashboard-alerts:hover {
+  border-color: rgba(251, 191, 36, 0.2); /* Borda amarelada no hover — alerta é atenção. */
+}
+ 
+.dashboard-alerts h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--borda);
+}
+ 
+/* Estilo base compartilhado entre os dois tipos de alerta */
+.dashboard-drop-in-sales-alert,
+.dashboard-low-stock {
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: opacity 0.2s;
+}
+ 
+/* Ícone de alerta antes de cada mensagem — feito com ::before */
+.dashboard-drop-in-sales-alert::before,
+.dashboard-low-stock::before {
+  content: '!';
+  /* Exclamação como ícone de alerta. Em produção, substituir por SVG. */
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 1px;
+}
+ 
+/* Alerta de queda nas vendas = vermelho */
+.dashboard-drop-in-sales-alert {
+  background: rgba(248, 113, 113, 0.06);
+  border: 1px solid rgba(248, 113, 113, 0.15);
+  color: #fca5a5;
+}
+ 
+.dashboard-drop-in-sales-alert::before {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--vermelho);
+}
+ 
+/* Alerta de estoque baixo = amarelo */
+.dashboard-low-stock {
+  background: rgba(251, 191, 36, 0.05);
+  border: 1px solid rgba(251, 191, 36, 0.15);
+  color: #fde68a;
+}
+ 
+.dashboard-low-stock::before {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--amarelo);
+}
+ 
+/* ================================================
+   RESPONSIVIDADE
+   Em telas menores a sidebar some e o conteúdo
+   ocupa a largura toda. Dashboard em mobile é
+   geralmente acessado num app nativo — mas isso
+   garante que ao menos não quebre.
+================================================ */
+@media (max-width: 900px) {
+  .sidebar-main {
+    display: none; /* Em telas pequenas, sidebar some. Num projeto real teria um menu hambúrguer. */
+  }
+ 
+  .dashboard-page {
+    padding-left: 20px;
+  }
+ 
+  .dashboard-values {
+    grid-template-columns: repeat(2, 1fr); /* 4 cards viram 2 colunas. */
+  }
+ 
+  .dashboard-bottom-row {
+    grid-template-columns: 1fr; /* Tudo em coluna única. */
+  }
+}
+ 
+@media (max-width: 560px) {
+  .dashboard-values {
+    grid-template-columns: 1fr; /* 1 card por linha em celular. */
+  }
+}
