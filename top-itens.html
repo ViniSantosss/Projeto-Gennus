@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Itens — Gennus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="top-itens.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- ================================================
+       SIDEBAR
+  ================================================ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">G</div>
+      <span class="logo-text">Gen<span>nus</span></span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+
+      <a href="#" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
+        Resumo do Período
+      </a>
+
+      <span class="nav-section-label">Vendas</span>
+
+      <a href="#" class="sidebar-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+        Top Itens
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        Clientes
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        Relatórios
+      </a>
+
+      <span class="nav-section-label">Gestão</span>
+
+      <a href="#" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        Estoque
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Financeiro
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 105 19.07"/><path d="M21 12a9 9 0 00-9-9"/></svg>
+        Configurações
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="user-avatar">JL</div>
+        <div class="user-info">
+          <div class="user-name">João Lima</div>
+          <div class="user-role">Administrador</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================================================
+       MAIN
+  ================================================ -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-breadcrumb">
+        <span>Vendas</span>
+        <span class="sep">›</span>
+        <strong>Top Itens</strong>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn-icon" title="Notificações">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </button>
+        <button class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Exportar
+        </button>
+      </div>
+    </header>
+
+    <!-- Conteúdo -->
+    <main class="page-content">
+
+      <!-- Cabeçalho -->
+      <div class="page-header">
+        <div class="page-header-left">
+          <span class="page-eyebrow">Análise de Vendas</span>
+          <h1 class="page-title">Top Itens</h1>
+          <p class="page-subtitle">Produtos mais e menos vendidos do período — vinculação com estoque disponível</p>
+        </div>
+        <div class="page-header-right">
+          <div class="search-wrap">
+            <span class="search-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+            <input class="search-input" id="searchInput" type="text" placeholder="Buscar produto…" />
+          </div>
+          <div class="period-filter">
+            <button class="period-btn" data-period="7d">7D</button>
+            <button class="period-btn active" data-period="30d">30D</button>
+            <button class="period-btn" data-period="90d">90D</button>
+            <button class="period-btn" data-period="12m">12M</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpis-row">
+        <div class="kpi-card kpi-c1">
+          <span class="kpi-label">SKUs ativos</span>
+          <span class="kpi-value" id="kpiSkus">248</span>
+          <span class="kpi-delta pos">↑ 12 novos este mês</span>
+          <span class="kpi-sub">vs 236 no período anterior</span>
+        </div>
+        <div class="kpi-card kpi-c2">
+          <span class="kpi-label">Mais vendido</span>
+          <span class="kpi-value" style="font-size:1.1rem" id="kpiBest">Tênis Runner Pro</span>
+          <span class="kpi-delta pos">↑ 847 unidades</span>
+          <span class="kpi-sub">R$ 84.623 em receita</span>
+        </div>
+        <div class="kpi-card kpi-c3">
+          <span class="kpi-label">Menor giro</span>
+          <span class="kpi-value" style="font-size:1.1rem" id="kpiWorst">Bolsa Couro V2</span>
+          <span class="kpi-delta neg">↓ 3 unidades</span>
+          <span class="kpi-sub">Estoque: 142 unid.</span>
+        </div>
+        <div class="kpi-card kpi-c4">
+          <span class="kpi-label">Cobertura média</span>
+          <span class="kpi-value" id="kpiCover">34d</span>
+          <span class="kpi-delta neg">↓ 6d vs período ant.</span>
+          <span class="kpi-sub">Itens críticos: 8</span>
+        </div>
+      </div>
+
+      <!-- Linha principal: gráfico + ranking -->
+      <div class="main-row">
+
+        <!-- Gráfico -->
+        <div class="g-card">
+          <div class="g-card-header">
+            <div>
+              <p class="g-card-title">Desempenho por produto</p>
+              <p class="g-card-subtitle">Unidades vendidas no período selecionado</p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div class="tabs-row" id="chartTabs">
+                <button class="tab-btn active-top" data-tab="top">Top 10</button>
+                <button class="tab-btn" data-tab="bot">Piores 10</button>
+              </div>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Ranking lateral -->
+        <div class="g-card">
+          <div class="g-card-header">
+            <div>
+              <p class="g-card-title" id="rankTitle">Mais vendidos</p>
+              <p class="g-card-subtitle" id="rankSub">Top 5 em unidades</p>
+            </div>
+            <span class="g-badge badge-ok" id="rankBadge">↑ Alta</span>
+          </div>
+          <ul class="ranking-list" id="rankingList">
+            <!-- Preenchido via JS -->
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom row: tabela + alertas -->
+      <div class="bottom-row">
+
+        <!-- Tabela completa -->
+        <div class="g-card">
+          <div class="g-card-header">
+            <div>
+              <p class="g-card-title">Todos os itens</p>
+              <p class="g-card-subtitle">Ordenado por vendas · clique no cabeçalho para reordenar</p>
+            </div>
+            <div class="table-controls">
+              <div class="table-toggle">
+                <button class="toggle-btn active" data-view="todos">Todos</button>
+                <button class="toggle-btn" data-view="top">Top</button>
+                <button class="toggle-btn" data-view="baixo">Baixo giro</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="table-count">Exibindo <strong id="tableCount">15</strong> de <strong>248</strong> itens</span>
+          </div>
+
+          <div class="g-table-wrap">
+            <table class="g-table" id="prodTable">
+              <thead>
+                <tr>
+                  <th data-col="nome">Produto <span class="sort-icon">↕</span></th>
+                  <th data-col="cat">Categ. <span class="sort-icon">↕</span></th>
+                  <th data-col="vendas" class="sorted">Vendas <span class="sort-icon">↓</span></th>
+                  <th data-col="receita">Receita <span class="sort-icon">↕</span></th>
+                  <th data-col="variacao">Var. <span class="sort-icon">↕</span></th>
+                  <th data-col="estoque">Estoque <span class="sort-icon">↕</span></th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Alertas de estoque -->
+        <div class="g-card">
+          <div class="g-card-header">
+            <div>
+              <p class="g-card-title">Alertas de estoque</p>
+              <p class="g-card-subtitle">Vinculado ao módulo de estoque</p>
+            </div>
+            <span class="alert-tag">Ao vivo</span>
+          </div>
+
+          <ul class="alert-list">
+            <li class="alert-item neg">
+              <span class="alert-icon">🔴</span>
+              <span class="alert-texto"><strong>Tênis Runner Pro</strong> está com estoque crítico: apenas <strong>12 unidades</strong> restantes. Vendendo 28/dia.</span>
+            </li>
+            <li class="alert-item warn">
+              <span class="alert-icon">🟡</span>
+              <span class="alert-texto"><strong>Mochila Urbana XL</strong> tem cobertura de apenas <strong>4 dias</strong>. Reposição sugerida: 200 unid.</span>
+            </li>
+            <li class="alert-item warn">
+              <span class="alert-icon">🟡</span>
+              <span class="alert-texto"><strong>Camiseta Basic (M)</strong> saindo acima da média — <strong>+67% vs mês anterior</strong>. Estoque para 9 dias.</span>
+            </li>
+            <li class="alert-item info">
+              <span class="alert-icon">🔵</span>
+              <span class="alert-texto"><strong>Bolsa Couro V2</strong> com giro muito baixo. <strong>142 unidades</strong> paradas há 45+ dias. Considere promoção.</span>
+            </li>
+            <li class="alert-item pos">
+              <span class="alert-icon">🟢</span>
+              <span class="alert-texto"><strong>Palmilha Gel Pro</strong> atingiu <strong>R$ 32k</strong> com margem de 68%. Melhor ROI do período.</span>
+            </li>
+            <li class="alert-item neg">
+              <span class="alert-icon">🔴</span>
+              <span class="alert-texto"><strong>Bota Trail (38-40)</strong> com ruptura em 3 tamanhos. Pedidos represados: <strong>47 unidades</strong>.</span>
+            </li>
+          </ul>
+
+          <div class="estoque-link">
+            <a href="estoque.html" class="estoque-link-btn">
+              <span>Abrir módulo de Estoque</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script src="top-itens.js"></script>
+</body>
+</html>

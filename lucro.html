@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucro — Gennus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="lucro.css">
+</head>
+
+<body>
+  <main class="dashboard-page">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar-main">
+      <div class="bg-glow"></div>
+      <div class="sidebar-logo">GENNUS</div>
+
+      <details>
+        <summary>Produtos</summary>
+        <a href="#">Lista de Produtos</a>
+        <a href="#">Adicionar Produto</a>
+        <a href="#">Editar / Excluir</a>
+      </details>
+
+      <details>
+        <summary>Vendas</summary>
+        <a href="resumo.html">Resumo do Período</a>
+        <a href="renda.html">Renda Bruta / Líquida</a>
+        <a href="#">Top Itens</a>
+      </details>
+
+      <details open>
+        <summary>Finanças</summary>
+        <a href="receita.html">Receita</a>
+        <a href="despesas.html">Despesas</a>
+        <a href="lucro.html" class="sidebar-link-active">Lucro</a>
+        <a href="#">IA Feedback</a>
+      </details>
+
+      <details>
+        <summary>Relatórios</summary>
+        <a href="charts.html">Gráficos</a>
+        <a href="#">Relatório</a>
+      </details>
+
+      <details class="config-details">
+        <summary>Configurações</summary>
+        <a href="#">Período de Fechamento</a>
+        <a href="#">Personalizar</a>
+        <a href="#">Dados da Empresa</a>
+      </details>
+
+      <div class="sidebar-user">
+        <div class="perfil-border"></div>
+        <span>Perfil</span>
+        <a href="profile.html">Nome do Usuário</a>
+        <a href="#">Logout</a>
+      </div>
+    </nav>
+
+    <!-- CABEÇALHO -->
+    <div class="luc-header">
+      <div class="luc-header-left">
+        <span class="luc-eyebrow">Finanças</span>
+        <h1 class="luc-title">Lucro Líquido</h1>
+        <p class="luc-subtitle">Resultado final após dedução de todas as despesas</p>
+      </div>
+
+      <div class="luc-header-right">
+        <div class="luc-score" id="luc-score">
+          <span class="luc-score-label">Margem Líquida</span>
+          <span class="luc-score-valor" id="luc-score-valor">—</span>
+          <span class="luc-score-desc" id="luc-score-desc">calculando...</span>
+        </div>
+        <div class="period-filter" id="period-filter">
+          <button class="period-btn active" data-period="7d">7 dias</button>
+          <button class="period-btn" data-period="30d">30 dias</button>
+          <button class="period-btn" data-period="90d">3 meses</button>
+          <button class="period-btn" data-period="1y">1 ano</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EQUAÇÃO GRANDE: Receita − Despesas = Lucro -->
+    <div class="luc-equacao" id="luc-equacao">
+      <div class="eq-bloco eq-receita">
+        <span class="eq-label">Receita Bruta</span>
+        <span class="eq-valor" id="eq-receita">—</span>
+      </div>
+      <div class="eq-op">−</div>
+      <div class="eq-bloco eq-despesas">
+        <span class="eq-label">Despesas Totais</span>
+        <span class="eq-valor" id="eq-despesas">—</span>
+      </div>
+      <div class="eq-op">=</div>
+      <div class="eq-bloco eq-lucro">
+        <span class="eq-label">Lucro Líquido</span>
+        <span class="eq-valor" id="eq-lucro">—</span>
+      </div>
+    </div>
+
+    <!-- KPIs secundários -->
+    <div class="luc-kpis" id="luc-kpis">
+      <div class="kpi-card kpi-bruto">
+        <span class="kpi-label">Lucro Bruto</span>
+        <span class="kpi-value" id="kpi-bruto">—</span>
+        <span class="kpi-delta" id="kpi-bruto-delta"></span>
+      </div>
+      <div class="kpi-card kpi-ebitda">
+        <span class="kpi-label">EBITDA Estimado</span>
+        <span class="kpi-value" id="kpi-ebitda">—</span>
+        <span class="kpi-sub">antes juros/amort.</span>
+      </div>
+      <div class="kpi-card kpi-margem">
+        <span class="kpi-label">Margem Bruta</span>
+        <span class="kpi-value" id="kpi-margem">—</span>
+        <span class="kpi-sub">sobre receita</span>
+      </div>
+      <div class="kpi-card kpi-breakeven">
+        <span class="kpi-label">Break-even</span>
+        <span class="kpi-value" id="kpi-breakeven">—</span>
+        <span class="kpi-sub" id="kpi-breakeven-sub">dias para cobrir fixos</span>
+      </div>
+    </div>
+
+    <!-- WATERFALL: cascata de despesas reduzindo a receita -->
+    <div class="luc-waterfall-row">
+
+      <!-- CARD: Cascata de Despesas -->
+      <div class="resumo-card card-waterfall">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Cascata de Resultado</h3>
+            <p class="resumo-card-subtitle">Como cada despesa reduz a receita até o lucro líquido</p>
+          </div>
+          <span class="resumo-badge badge-ok" id="badge-lucro-status">—</span>
+        </div>
+
+        <div class="wf-container" id="wf-container">
+          <!-- Gerado pelo JS -->
+        </div>
+      </div>
+
+      <!-- CARD: Resumo dos Impactos -->
+      <div class="resumo-card card-impactos">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Impacto por Categoria</h3>
+            <p class="resumo-card-subtitle">Quanto cada despesa consome da receita bruta</p>
+          </div>
+        </div>
+
+        <div class="impactos-list" id="impactos-list">
+          <!-- Gerado pelo JS -->
+        </div>
+
+        <!-- Régua final -->
+        <div class="impactos-ruler" id="impactos-ruler">
+          <!-- Gerado pelo JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LINHA INFERIOR: evolução trimestral + análise de margens -->
+    <div class="luc-bottom-row">
+
+      <!-- CARD: Evolução do Lucro (últimos períodos) -->
+      <div class="resumo-card card-evolucao-lucro">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Evolução do Lucro</h3>
+            <p class="resumo-card-subtitle">Comparativo trimestral — resultado vs despesa</p>
+          </div>
+        </div>
+
+        <div class="evol-chart" id="evol-chart">
+          <!-- Gerado pelo JS -->
+        </div>
+        <div class="evol-labels" id="evol-labels">
+          <!-- Gerado pelo JS -->
+        </div>
+        <div class="evol-legend">
+          <span class="evol-leg-item" style="--c:var(--amarelo)">Receita</span>
+          <span class="evol-leg-item" style="--c:var(--vermelho)">Despesas</span>
+          <span class="evol-leg-item" style="--c:var(--verde)">Lucro Líquido</span>
+        </div>
+      </div>
+
+      <!-- CARD: Análise de Margens -->
+      <div class="resumo-card card-margens">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Análise de Margens</h3>
+            <p class="resumo-card-subtitle">Rentabilidade detalhada por camada</p>
+          </div>
+        </div>
+
+        <ul class="margens-list" id="margens-list">
+          <!-- Gerado pelo JS -->
+        </ul>
+
+        <!-- Termômetro de saúde financeira -->
+        <div class="saude-card">
+          <div class="saude-header">
+            <span class="saude-label">Saúde Financeira</span>
+            <span class="saude-status" id="saude-status">—</span>
+          </div>
+          <div class="saude-track">
+            <div class="saude-bar" id="saude-bar" style="width:0%">
+              <div class="saude-bar-shine"></div>
+            </div>
+          </div>
+          <div class="saude-desc" id="saude-desc">—</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="lucro.js"></script>
+</body>
+</html>

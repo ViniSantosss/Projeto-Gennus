@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receita — Gennus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="receita.css">
+</head>
+
+<body>
+  <main class="dashboard-page">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar-main">
+      <div class="bg-glow"></div>
+      <div class="sidebar-logo">GENNUS</div>
+
+      <details>
+        <summary>Produtos</summary>
+        <a href="#">Lista de Produtos</a>
+        <a href="#">Adicionar Produto</a>
+        <a href="#">Editar / Excluir</a>
+      </details>
+
+      <details>
+        <summary>Vendas</summary>
+        <a href="resumo.html">Resumo do Período</a>
+        <a href="renda.html">Renda Bruta / Líquida</a>
+        <a href="#">Top Itens</a>
+      </details>
+
+      <details open>
+        <summary>Finanças</summary>
+        <a href="receita.html" class="sidebar-link-active">Receita</a>
+        <a href="despesas.html">Despesas</a>
+        <a href="lucro.html">Lucro</a>
+        <a href="#">IA Feedback</a>
+      </details>
+
+      <details>
+        <summary>Relatórios</summary>
+        <a href="charts.html">Gráficos</a>
+        <a href="#">Relatório</a>
+      </details>
+
+      <details class="config-details">
+        <summary>Configurações</summary>
+        <a href="#">Período de Fechamento</a>
+        <a href="#">Personalizar</a>
+        <a href="#">Dados da Empresa</a>
+      </details>
+
+      <div class="sidebar-user">
+        <div class="perfil-border"></div>
+        <span>Perfil</span>
+        <a href="profile.html">Nome do Usuário</a>
+        <a href="#">Logout</a>
+      </div>
+    </nav>
+
+    <!-- CABEÇALHO -->
+    <div class="rec-header">
+      <div class="rec-header-left">
+        <span class="rec-eyebrow">Finanças</span>
+        <h1 class="rec-title">Receita</h1>
+        <p class="rec-subtitle">Visão completa das entradas financeiras da empresa</p>
+      </div>
+
+      <div class="rec-header-right">
+        <div class="rec-total-destaque" id="rec-total-destaque">
+          <span class="rec-total-label">Receita Total</span>
+          <span class="rec-total-valor" id="rec-total-valor">—</span>
+          <span class="rec-total-periodo">último período</span>
+        </div>
+
+        <div class="period-filter" id="period-filter">
+          <button class="period-btn active" data-period="7d">7 dias</button>
+          <button class="period-btn" data-period="30d">30 dias</button>
+          <button class="period-btn" data-period="90d">3 meses</button>
+          <button class="period-btn" data-period="1y">1 ano</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="rec-kpis" id="rec-kpis">
+      <div class="kpi-card kpi-bruta">
+        <span class="kpi-label">Receita Bruta</span>
+        <span class="kpi-value" id="kpi-bruta">—</span>
+        <span class="kpi-delta" id="kpi-bruta-delta"></span>
+      </div>
+      <div class="kpi-card kpi-recorrente">
+        <span class="kpi-label">Receita Recorrente (MRR)</span>
+        <span class="kpi-value" id="kpi-mrr">—</span>
+        <span class="kpi-delta" id="kpi-mrr-delta"></span>
+      </div>
+      <div class="kpi-card kpi-media">
+        <span class="kpi-label">Média Mensal</span>
+        <span class="kpi-value" id="kpi-media">—</span>
+        <span class="kpi-sub">no período</span>
+      </div>
+      <div class="kpi-card kpi-crescimento">
+        <span class="kpi-label">Crescimento</span>
+        <span class="kpi-value" id="kpi-crescimento">—</span>
+        <span class="kpi-sub">vs. período anterior</span>
+      </div>
+    </div>
+
+    <!-- LINHA PRINCIPAL: gráfico de barras + composição -->
+    <div class="rec-main-row">
+
+      <!-- CARD: Evolução da Receita (barras CSS) -->
+      <div class="resumo-card card-evolucao">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Evolução da Receita</h3>
+            <p class="resumo-card-subtitle">Comparativo mês a mês</p>
+          </div>
+          <div class="evolucao-legend">
+            <span class="leg-dot" style="background:var(--verde)"></span>
+            <span class="leg-txt">Atual</span>
+            <span class="leg-dot" style="background:rgba(255,255,255,0.12)"></span>
+            <span class="leg-txt">Anterior</span>
+          </div>
+        </div>
+
+        <div class="bar-chart-area" id="bar-chart-area">
+          <!-- Gerado pelo JS -->
+        </div>
+
+        <div class="bar-chart-labels" id="bar-chart-labels">
+          <!-- Gerado pelo JS -->
+        </div>
+      </div>
+
+      <!-- CARD: Composição da Receita -->
+      <div class="resumo-card card-composicao">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Composição</h3>
+            <p class="resumo-card-subtitle">Receita por categoria de produto</p>
+          </div>
+        </div>
+
+        <ul class="comp-list" id="comp-list">
+          <!-- Gerado pelo JS -->
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- LINHA INFERIOR: formas de pagamento + histórico de entradas -->
+    <div class="rec-bottom-row">
+
+      <!-- CARD: Formas de Pagamento -->
+      <div class="resumo-card card-pagamento">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Formas de Pagamento</h3>
+            <p class="resumo-card-subtitle">Como os clientes estão pagando</p>
+          </div>
+        </div>
+
+        <div class="pag-donut-wrap">
+          <div class="pag-donut" id="pag-donut">
+            <!-- SVG gerado pelo JS -->
+          </div>
+          <ul class="pag-legend" id="pag-legend">
+            <!-- Gerado pelo JS -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- CARD: Últimas Entradas -->
+      <div class="resumo-card card-entradas">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Últimas Entradas</h3>
+            <p class="resumo-card-subtitle">Receitas registradas recentemente</p>
+          </div>
+          <span class="resumo-badge badge-ok" id="badge-entradas">ao vivo</span>
+        </div>
+
+        <ul class="entradas-list" id="entradas-list">
+          <!-- Gerado pelo JS -->
+        </ul>
+      </div>
+
+      <!-- CARD: Comparativo Anual -->
+      <div class="resumo-card card-comparativo">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Comparativo Anual</h3>
+            <p class="resumo-card-subtitle">Desempenho acumulado por trimestre</p>
+          </div>
+        </div>
+
+        <div class="comp-anual-grid" id="comp-anual-grid">
+          <!-- Gerado pelo JS -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="receita.js"></script>
+</body>
+</html>

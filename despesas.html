@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Despesas — Gennus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="despesas.css">
+</head>
+
+<body>
+  <main class="dashboard-page">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar-main">
+      <div class="bg-glow"></div>
+      <div class="sidebar-logo">GENNUS</div>
+
+      <details>
+        <summary>Produtos</summary>
+        <a href="#">Lista de Produtos</a>
+        <a href="#">Adicionar Produto</a>
+        <a href="#">Editar / Excluir</a>
+      </details>
+
+      <details>
+        <summary>Vendas</summary>
+        <a href="resumo.html">Resumo do Período</a>
+        <a href="renda.html">Renda Bruta / Líquida</a>
+        <a href="#">Top Itens</a>
+      </details>
+
+      <details open>
+        <summary>Finanças</summary>
+        <a href="receita.html">Receita</a>
+        <a href="despesas.html" class="sidebar-link-active">Despesas</a>
+        <a href="lucro.html">Lucro</a>
+        <a href="#">IA Feedback</a>
+      </details>
+
+      <details>
+        <summary>Relatórios</summary>
+        <a href="charts.html">Gráficos</a>
+        <a href="#">Relatório</a>
+      </details>
+
+      <details class="config-details">
+        <summary>Configurações</summary>
+        <a href="#">Período de Fechamento</a>
+        <a href="#">Personalizar</a>
+        <a href="#">Dados da Empresa</a>
+      </details>
+
+      <div class="sidebar-user">
+        <div class="perfil-border"></div>
+        <span>Perfil</span>
+        <a href="profile.html">Nome do Usuário</a>
+        <a href="#">Logout</a>
+      </div>
+    </nav>
+
+    <!-- CABEÇALHO -->
+    <div class="desp-header">
+      <div class="desp-header-left">
+        <span class="desp-eyebrow">Finanças</span>
+        <h1 class="desp-title">Despesas</h1>
+        <p class="desp-subtitle">Controle completo dos custos operacionais da empresa</p>
+      </div>
+
+      <div class="desp-header-right">
+        <div class="desp-alerta" id="desp-alerta">
+          <span class="desp-alerta-label">Custo / Receita</span>
+          <span class="desp-alerta-valor" id="desp-alerta-valor">—</span>
+          <span class="desp-alerta-desc" id="desp-alerta-desc">calculando...</span>
+        </div>
+
+        <div class="period-filter" id="period-filter">
+          <button class="period-btn active" data-period="7d">7 dias</button>
+          <button class="period-btn" data-period="30d">30 dias</button>
+          <button class="period-btn" data-period="90d">3 meses</button>
+          <button class="period-btn" data-period="1y">1 ano</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="desp-kpis" id="desp-kpis">
+      <div class="kpi-card kpi-total">
+        <span class="kpi-label">Total de Despesas</span>
+        <span class="kpi-value" id="kpi-total">—</span>
+        <span class="kpi-delta" id="kpi-total-delta"></span>
+      </div>
+      <div class="kpi-card kpi-folha">
+        <span class="kpi-label">Folha de Pagamento</span>
+        <span class="kpi-value" id="kpi-folha">—</span>
+        <span class="kpi-sub" id="kpi-folha-sub">do total</span>
+      </div>
+      <div class="kpi-card kpi-fixo">
+        <span class="kpi-label">Custos Fixos</span>
+        <span class="kpi-value" id="kpi-fixo">—</span>
+        <span class="kpi-sub">recorrentes</span>
+      </div>
+      <div class="kpi-card kpi-variavel">
+        <span class="kpi-label">Custos Variáveis</span>
+        <span class="kpi-value" id="kpi-variavel">—</span>
+        <span class="kpi-sub">operacionais</span>
+      </div>
+    </div>
+
+    <!-- LINHA PRINCIPAL: categorias + funcionários -->
+    <div class="desp-main-row">
+
+      <!-- CARD: Categorias de Despesa -->
+      <div class="resumo-card card-categorias">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Categorias de Despesa</h3>
+            <p class="resumo-card-subtitle">Distribuição dos custos por área</p>
+          </div>
+          <span class="resumo-badge" id="badge-status">—</span>
+        </div>
+
+        <ul class="cat-list" id="cat-list">
+          <!-- Gerado pelo JS -->
+        </ul>
+      </div>
+
+      <!-- CARD: Funcionários & Mão de Obra -->
+      <div class="resumo-card card-funcionarios">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Funcionários & Mão de Obra</h3>
+            <p class="resumo-card-subtitle">Custo detalhado por colaborador / cargo</p>
+          </div>
+          <span class="func-total-badge" id="func-total-badge">—</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="func-tabs">
+          <button class="func-tab active" data-tab="clt">CLT</button>
+          <button class="func-tab" data-tab="pj">PJ / Freelance</button>
+          <button class="func-tab" data-tab="terceiros">Terceiros</button>
+        </div>
+
+        <ul class="func-list" id="func-list">
+          <!-- Gerado pelo JS -->
+        </ul>
+
+        <div class="func-rodape" id="func-rodape">
+          <!-- Total do grupo -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CARD: Heatmap de despesas por semana -->
+    <div class="resumo-card card-desp-timeline">
+      <div class="resumo-card-header">
+        <div>
+          <h3 class="resumo-card-title">Fluxo de Despesas</h3>
+          <p class="resumo-card-subtitle">Saídas acumuladas por semana no período</p>
+        </div>
+        <div class="tl-legenda">
+          <span class="tl-leg-item" style="--c:var(--vermelho)">Acima da média</span>
+          <span class="tl-leg-item" style="--c:#fb923c">Na média</span>
+          <span class="tl-leg-item" style="--c:#60a5fa">Abaixo</span>
+        </div>
+      </div>
+
+      <div class="tl-grid" id="tl-grid">
+        <!-- Gerado pelo JS -->
+      </div>
+    </div>
+
+    <!-- LINHA INFERIOR: últimas saídas + projeção -->
+    <div class="desp-bottom-row">
+
+      <!-- CARD: Últimas Saídas -->
+      <div class="resumo-card card-saidas">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Últimas Saídas</h3>
+            <p class="resumo-card-subtitle">Despesas registradas recentemente</p>
+          </div>
+        </div>
+
+        <ul class="saidas-list" id="saidas-list">
+          <!-- Gerado pelo JS -->
+        </ul>
+      </div>
+
+      <!-- CARD: Projeção de Despesas -->
+      <div class="resumo-card card-projecao">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Projeção</h3>
+            <p class="resumo-card-subtitle">Estimativa de despesas no próximo período</p>
+          </div>
+          <span class="resumo-badge badge-atencao">estimado</span>
+        </div>
+
+        <div class="proj-principal" id="proj-principal">
+          <!-- Gerado pelo JS -->
+        </div>
+
+        <ul class="proj-items" id="proj-items">
+          <!-- Gerado pelo JS -->
+        </ul>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="despesas.js"></script>
+</body>
+</html>
