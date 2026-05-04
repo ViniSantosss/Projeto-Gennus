@@ -1,0 +1,842 @@
+/* ================================================
+   resumo.css — Resumo do Período — Gennus
+   Complementa dashboard.css.
+================================================ */
+
+:root {
+  --borda: rgba(255,255,255,0.07);
+}
+
+/* ------------------------------------------------
+   SIDEBAR: link ativo
+------------------------------------------------ */
+.sidebar-link-active {
+  color: var(--roxo) !important;
+  background: rgba(168, 85, 247, 0.08);
+  border-radius: 6px;
+}
+.sidebar-link-active::before { opacity: 1 !important; }
+
+/* ------------------------------------------------
+   ANIMAÇÕES BASE
+------------------------------------------------ */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* ------------------------------------------------
+   CABEÇALHO
+------------------------------------------------ */
+.resumo-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--borda);
+  animation: fadeSlideDown 0.45s ease both;
+}
+
+.resumo-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resumo-eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--roxo);
+  opacity: 0.8;
+}
+
+.resumo-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--texto);
+  line-height: 1;
+}
+
+.resumo-subtitle {
+  font-size: 0.82rem;
+  color: var(--texto-muted);
+  margin-top: 2px;
+}
+
+.resumo-header-right {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------
+   SCORE DO PERÍODO
+   Card compacto no cabeçalho com nota geral
+------------------------------------------------ */
+.periodo-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 10px 18px;
+  min-width: 96px;
+  transition: border-color 0.25s;
+}
+
+.periodo-score:hover { border-color: var(--roxo-borda); }
+
+.score-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  color: #444;
+}
+
+.score-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.score-value.score-s  { color: #a855f7; text-shadow: 0 0 20px rgba(168,85,247,0.5); }
+.score-value.score-a  { color: #22c55e; }
+.score-value.score-b  { color: #60a5fa; }
+.score-value.score-c  { color: #fbbf24; }
+.score-value.score-d  { color: #f87171; }
+
+.score-desc {
+  font-size: 0.62rem;
+  color: #444;
+  font-family: 'Space Grotesk', sans-serif;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------
+   FILTRO DE PERÍODO
+------------------------------------------------ */
+.period-filter {
+  display: flex;
+  gap: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.period-btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  padding: 7px 16px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--texto-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.period-btn:hover  { color: var(--texto); background: var(--bg-surface-2); }
+.period-btn.active { background: var(--roxo); color: #fff; box-shadow: 0 0 14px rgba(168,85,247,0.35); }
+
+/* ------------------------------------------------
+   FAIXA DE KPIs (5 cards)
+------------------------------------------------ */
+.resumo-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  animation: fadeSlideUp 0.5s ease both;
+  animation-delay: 0.05s;
+}
+
+.kpi-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Faixa colorida no topo */
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: 14px 14px 0 0;
+  opacity: 0.8;
+}
+
+.kpi-vendas::before   { background: var(--verde); }
+.kpi-ticket::before   { background: var(--roxo); }
+.kpi-conversao::before{ background: #60a5fa; }
+.kpi-clientes::before { background: #fb923c; }
+.kpi-pedidos::before  { background: var(--amarelo); }
+
+.kpi-card:hover {
+  border-color: rgba(168,85,247,0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+}
+
+.kpi-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+}
+
+.kpi-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.kpi-vendas   .kpi-value { color: var(--verde); }
+.kpi-ticket   .kpi-value { color: var(--roxo); }
+.kpi-conversao .kpi-value{ color: #60a5fa; }
+.kpi-clientes .kpi-value { color: #fb923c; }
+.kpi-pedidos  .kpi-value { color: var(--amarelo); }
+
+.kpi-delta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.73rem;
+  font-weight: 600;
+}
+.kpi-delta.pos { color: var(--verde); }
+.kpi-delta.neg { color: var(--vermelho); }
+.kpi-sub { font-size: 0.7rem; color: #444; }
+
+/* ------------------------------------------------
+   CARD BASE
+------------------------------------------------ */
+.resumo-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color 0.25s ease;
+}
+.resumo-card:hover { border-color: var(--roxo-borda); }
+
+.resumo-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.resumo-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+  margin: 0;
+}
+
+.resumo-card-subtitle {
+  font-size: 0.75rem;
+  color: #444;
+  margin-top: 3px;
+}
+
+.resumo-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06rem;
+  border-radius: 6px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.resumo-badge.badge-ok      { color: var(--verde);    background: rgba(34,197,94,0.1);  border: 1px solid rgba(34,197,94,0.2); }
+.resumo-badge.badge-atencao { color: var(--amarelo);  background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.2); }
+.resumo-badge.badge-critico { color: var(--vermelho); background: rgba(248,113,113,0.1);border: 1px solid rgba(248,113,113,0.2); }
+
+/* ------------------------------------------------
+   LINHA PRINCIPAL (meta + destaques + canais)
+------------------------------------------------ */
+.resumo-main-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1.2fr 1fr;
+  gap: 16px;
+  align-items: start;
+  animation: fadeSlideUp 0.5s ease both;
+  animation-delay: 0.08s;
+}
+
+/* ------------------------------------------------
+   META DO PERÍODO
+------------------------------------------------ */
+.meta-principal {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.meta-valores {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.meta-realizado {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--verde);
+  letter-spacing: -0.02em;
+}
+
+.meta-separador {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.meta-alvo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+  letter-spacing: -0.01em;
+}
+
+.meta-pct {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--texto-muted);
+}
+
+/* Barra de progresso da meta */
+.meta-bar-track {
+  height: 10px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.meta-bar {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo), var(--verde));
+  background-size: 200% 100%;
+  transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brilho animado na barra */
+.meta-bar-shine {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 40px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shine 2.4s ease-in-out infinite;
+}
+
+@keyframes shine {
+  from { left: -40px; }
+  to   { left: 110%; }
+}
+
+.meta-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.62rem;
+  color: #333;
+  margin-top: -4px;
+}
+
+/* Sub-metas (ex: novos clientes, pedidos) */
+.sub-metas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sub-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sub-meta-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sub-meta-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  color: var(--texto-muted);
+}
+
+.sub-meta-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.sub-meta-track {
+  height: 4px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.sub-meta-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------
+   DESTAQUES DO PERÍODO
+   Grid 2x2 de células com ícone + info
+------------------------------------------------ */
+.destaques-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.destaque-item {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+
+.destaque-item:hover {
+  border-color: var(--roxo-borda);
+  background: rgba(168,85,247,0.04);
+}
+
+.destaque-icone {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.destaque-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07rem;
+  color: #444;
+}
+
+.destaque-valor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--texto);
+  line-height: 1.2;
+}
+
+.destaque-sub {
+  font-size: 0.68rem;
+  color: #555;
+}
+
+/* ------------------------------------------------
+   CANAL DE VENDAS
+   Lista com barras proporcionais
+------------------------------------------------ */
+.canais-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.canal-item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.canal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.canal-nome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--texto-muted);
+}
+
+.canal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.canal-vals {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.canal-pct {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--texto);
+  min-width: 36px;
+  text-align: right;
+}
+
+.canal-valor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  color: #444;
+  white-space: nowrap;
+}
+
+.canal-track {
+  height: 5px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.canal-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------
+   HEATMAP (Pulso do Período)
+------------------------------------------------ */
+.card-heatmap {
+  animation: fadeSlideUp 0.5s ease both;
+  animation-delay: 0.12s;
+}
+
+.heatmap-legenda {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.heatmap-leg-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.62rem;
+  color: #333;
+}
+
+.heatmap-leg-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* Grid de células */
+.heatmap-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.heatmap-cell {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  background: rgba(168,85,247,0.06);
+  cursor: default;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.25);
+  z-index: 10;
+  box-shadow: 0 0 0 1px rgba(168,85,247,0.4);
+}
+
+/* Tooltip do heatmap */
+.heatmap-cell::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #ccc;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 20;
+}
+
+.heatmap-cell:hover::after { opacity: 1; }
+
+/* Intensidade via classe */
+.hm-0 { background: rgba(168,85,247,0.05); }
+.hm-1 { background: rgba(168,85,247,0.18); }
+.hm-2 { background: rgba(168,85,247,0.35); }
+.hm-3 { background: rgba(168,85,247,0.55); }
+.hm-4 { background: rgba(168,85,247,0.80); }
+.hm-5 { background: #a855f7; box-shadow: 0 0 8px rgba(168,85,247,0.5); }
+
+/* ------------------------------------------------
+   LINHA INFERIOR (ranking + insights)
+------------------------------------------------ */
+.resumo-bottom-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  align-items: start;
+  animation: fadeSlideUp 0.5s ease both;
+  animation-delay: 0.16s;
+}
+
+/* ------------------------------------------------
+   RANKING DE PRODUTOS
+------------------------------------------------ */
+.ranking-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  counter-reset: ranking;
+}
+
+.ranking-item {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.ranking-item:hover {
+  border-color: var(--roxo-borda);
+  background: rgba(168,85,247,0.04);
+  transform: translateX(3px);
+}
+
+/* Número da posição */
+.ranking-pos {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+}
+
+/* Posição 1 em dourado */
+.ranking-item:first-child .ranking-pos { color: #fbbf24; }
+.ranking-item:nth-child(2) .ranking-pos { color: #9ca3af; }
+.ranking-item:nth-child(3) .ranking-pos { color: #b45309; }
+
+.ranking-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ranking-nome {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+/* Barra proporcional abaixo do nome */
+.ranking-bar-track {
+  height: 3px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.ranking-bar {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo));
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ranking-vals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.ranking-valor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+.ranking-qtd {
+  font-size: 0.68rem;
+  color: #444;
+}
+
+/* ------------------------------------------------
+   INSIGHTS AUTOMÁTICOS
+------------------------------------------------ */
+.insight-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--roxo);
+  background: rgba(168,85,247,0.1);
+  border: 1px solid rgba(168,85,247,0.2);
+  border-radius: 5px;
+  padding: 3px 8px;
+  /* Pisca suavemente pra indicar dado dinâmico */
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.insights-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.insight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.insight-item:hover { background: var(--bg-surface-2); border-color: var(--borda); }
+
+/* Tipo de insight muda a cor da borda esquerda */
+.insight-item.pos  { border-left: 2px solid var(--verde);    color: var(--texto-muted); }
+.insight-item.neg  { border-left: 2px solid var(--vermelho); color: var(--texto-muted); }
+.insight-item.info { border-left: 2px solid #60a5fa;          color: var(--texto-muted); }
+.insight-item.warn { border-left: 2px solid var(--amarelo);   color: var(--texto-muted); }
+
+.insight-icone {
+  font-size: 0.9rem;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.insight-texto strong {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+/* ------------------------------------------------
+   RESPONSIVIDADE
+------------------------------------------------ */
+@media (max-width: 1200px) {
+  .resumo-main-row { grid-template-columns: 1fr 1fr; }
+  .card-canais { grid-column: 1 / -1; }
+  .resumo-kpis { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .resumo-main-row   { grid-template-columns: 1fr; }
+  .resumo-bottom-row { grid-template-columns: 1fr; }
+  .resumo-kpis { grid-template-columns: repeat(2, 1fr); }
+  .resumo-header { flex-direction: column; align-items: flex-start; }
+  .resumo-header-right { width: 100%; justify-content: space-between; }
+  .destaques-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .resumo-kpis  { grid-template-columns: 1fr; }
+  .destaques-grid { grid-template-columns: 1fr; }
+  .period-btn { padding: 7px 8px; font-size: 0.65rem; }
+  .heatmap-cell { width: 22px; height: 22px; }
+}

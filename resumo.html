@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumo do Período — Gennus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="resumo.css">
+</head>
+
+<body>
+
+  <main class="dashboard-page">
+
+    <!-- ================================================
+         SIDEBAR
+    ================================================ -->
+    <nav class="sidebar-main">
+      <div class="bg-glow"></div>
+      <div class="sidebar-logo">GENNUS</div>
+
+      <details>
+        <summary>Produtos</summary>
+        <a href="#">Lista de Produtos</a>
+        <a href="#">Adicionar Produto</a>
+        <a href="#">Editar / Excluir</a>
+      </details>
+
+      <details open>
+        <summary>Vendas</summary>
+        <a href="resumo.html" class="sidebar-link-active">Resumo do Período</a>
+        <a href="renda.html">Renda Bruta / Líquida</a>
+        <a href="#">Top Itens</a>
+      </details>
+
+      <details>
+        <summary>Finanças</summary>
+        <a href="#">Receita</a>
+        <a href="#">Despesas</a>
+        <a href="#">Lucro</a>
+        <a href="#">IA Feedback</a>
+      </details>
+
+      <details>
+        <summary>Relatórios</summary>
+        <a href="charts.html">Gráficos</a>
+        <a href="#">Relatório</a>
+      </details>
+
+      <details class="config-details">
+        <summary>Configurações</summary>
+        <a href="#">Período de Fechamento</a>
+        <a href="#">Personalizar</a>
+        <a href="#">Dados da Empresa</a>
+      </details>
+
+      <div class="sidebar-user">
+        <div class="perfil-border"></div>
+        <span>Perfil</span>
+        <a href="profile.html">Nome do Usuário</a>
+        <a href="#">Logout</a>
+      </div>
+    </nav>
+
+    <!-- ================================================
+         CABEÇALHO
+    ================================================ -->
+    <div class="resumo-header">
+      <div class="resumo-header-left">
+        <span class="resumo-eyebrow">Vendas</span>
+        <h1 class="resumo-title">Resumo do Período</h1>
+        <p class="resumo-subtitle">Visão consolidada da performance de vendas</p>
+      </div>
+
+      <div class="resumo-header-right">
+        <!-- Score do período — gerado pelo JS -->
+        <div class="periodo-score" id="periodo-score">
+          <span class="score-label">Score do Período</span>
+          <span class="score-value" id="score-value">—</span>
+          <span class="score-desc"  id="score-desc">calculando...</span>
+        </div>
+
+        <!-- Filtro de período -->
+        <div class="period-filter" id="period-filter">
+          <button class="period-btn active" data-period="7d">7 dias</button>
+          <button class="period-btn" data-period="30d">30 dias</button>
+          <button class="period-btn" data-period="90d">3 meses</button>
+          <button class="period-btn" data-period="1y">1 ano</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================
+         KPIs PRINCIPAIS
+    ================================================ -->
+    <div class="resumo-kpis" id="resumo-kpis">
+
+      <div class="kpi-card kpi-vendas">
+        <span class="kpi-label">Total de Vendas</span>
+        <span class="kpi-value" id="kpi-vendas">—</span>
+        <span class="kpi-delta" id="kpi-vendas-delta"></span>
+      </div>
+
+      <div class="kpi-card kpi-ticket">
+        <span class="kpi-label">Ticket Médio</span>
+        <span class="kpi-value" id="kpi-ticket">—</span>
+        <span class="kpi-delta" id="kpi-ticket-delta"></span>
+      </div>
+
+      <div class="kpi-card kpi-conversao">
+        <span class="kpi-label">Taxa de Conversão</span>
+        <span class="kpi-value" id="kpi-conversao">—</span>
+        <span class="kpi-sub">leads → clientes</span>
+      </div>
+
+      <div class="kpi-card kpi-clientes">
+        <span class="kpi-label">Clientes Ativos</span>
+        <span class="kpi-value" id="kpi-clientes">—</span>
+        <span class="kpi-delta" id="kpi-clientes-delta"></span>
+      </div>
+
+      <div class="kpi-card kpi-pedidos">
+        <span class="kpi-label">Pedidos</span>
+        <span class="kpi-value" id="kpi-pedidos">—</span>
+        <span class="kpi-sub" id="kpi-pedidos-sub">no período</span>
+      </div>
+
+    </div>
+
+    <!-- ================================================
+         LINHA PRINCIPAL: META + DESTAQUES + CANAIS
+    ================================================ -->
+    <div class="resumo-main-row">
+
+      <!-- CARD: Meta do Período -->
+      <div class="resumo-card card-meta">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Meta do Período</h3>
+            <p class="resumo-card-subtitle">Progresso em relação ao objetivo</p>
+          </div>
+          <span class="resumo-badge" id="badge-meta-status">—</span>
+        </div>
+
+        <!-- Meta principal -->
+        <div class="meta-principal">
+          <div class="meta-valores">
+            <span class="meta-realizado" id="meta-realizado">—</span>
+            <span class="meta-separador">/</span>
+            <span class="meta-alvo"     id="meta-alvo">—</span>
+          </div>
+          <span class="meta-pct" id="meta-pct">—</span>
+        </div>
+
+        <!-- Barra de progresso da meta -->
+        <div class="meta-bar-track">
+          <div class="meta-bar" id="meta-bar" style="width:0%">
+            <div class="meta-bar-shine"></div>
+          </div>
+          <div class="meta-bar-marker" id="meta-bar-marker"></div>
+        </div>
+        <div class="meta-bar-labels">
+          <span>0%</span>
+          <span id="meta-bar-label-pct">—</span>
+          <span>100%</span>
+        </div>
+
+        <!-- Sub-metas -->
+        <div class="sub-metas" id="sub-metas">
+          <!-- Populadas pelo JS -->
+        </div>
+      </div>
+
+      <!-- CARD: Destaques do Período -->
+      <div class="resumo-card card-destaques">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Destaques</h3>
+            <p class="resumo-card-subtitle">Os melhores momentos do período</p>
+          </div>
+        </div>
+
+        <div class="destaques-grid" id="destaques-grid">
+          <!-- Populado pelo JS: melhor dia, pior dia, melhor produto, pico de hora -->
+        </div>
+      </div>
+
+      <!-- CARD: Canal de Vendas -->
+      <div class="resumo-card card-canais">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Canal de Vendas</h3>
+            <p class="resumo-card-subtitle">Distribuição por origem</p>
+          </div>
+        </div>
+
+        <ul class="canais-list" id="canais-list">
+          <!-- Populada pelo JS -->
+        </ul>
+      </div>
+
+    </div>
+    <!-- fim .resumo-main-row -->
+
+    <!-- ================================================
+         HEATMAP DE ATIVIDADE
+         Grid visual de intensidade de vendas por dia
+    ================================================ -->
+    <div class="resumo-card card-heatmap">
+      <div class="resumo-card-header">
+        <div>
+          <h3 class="resumo-card-title">Pulso do Período</h3>
+          <p class="resumo-card-subtitle">Intensidade de vendas — cada célula é um dia</p>
+        </div>
+        <div class="heatmap-legenda">
+          <span class="heatmap-leg-label">Menos</span>
+          <span class="heatmap-leg-dot" style="background:rgba(168,85,247,0.08)"></span>
+          <span class="heatmap-leg-dot" style="background:rgba(168,85,247,0.25)"></span>
+          <span class="heatmap-leg-dot" style="background:rgba(168,85,247,0.50)"></span>
+          <span class="heatmap-leg-dot" style="background:rgba(168,85,247,0.75)"></span>
+          <span class="heatmap-leg-dot" style="background:#a855f7"></span>
+          <span class="heatmap-leg-label">Mais</span>
+        </div>
+      </div>
+
+      <div class="heatmap-grid" id="heatmap-grid">
+        <!-- Células geradas pelo JS -->
+      </div>
+    </div>
+
+    <!-- ================================================
+         LINHA INFERIOR: RANKING + INSIGHTS
+    ================================================ -->
+    <div class="resumo-bottom-row">
+
+      <!-- CARD: Ranking de Produtos -->
+      <div class="resumo-card card-ranking">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Ranking de Produtos</h3>
+            <p class="resumo-card-subtitle">Top 5 em volume de vendas</p>
+          </div>
+        </div>
+
+        <ol class="ranking-list" id="ranking-list">
+          <!-- Populada pelo JS -->
+        </ol>
+      </div>
+
+      <!-- CARD: Insights Automáticos -->
+      <div class="resumo-card card-insights">
+        <div class="resumo-card-header">
+          <div>
+            <h3 class="resumo-card-title">Insights do Período</h3>
+            <p class="resumo-card-subtitle">Observações geradas automaticamente</p>
+          </div>
+          <span class="insight-tag">auto</span>
+        </div>
+
+        <ul class="insights-list" id="insights-list">
+          <!-- Populada pelo JS com observações dinâmicas -->
+        </ul>
+      </div>
+
+    </div>
+    <!-- fim .resumo-bottom-row -->
+
+  </main>
+
+  <script src="resumo.js"></script>
+
+</body>
+</html>
