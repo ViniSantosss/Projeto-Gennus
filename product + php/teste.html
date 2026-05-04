@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista com LocalStorage</title>
+</head>
+<body>
+
+  <input id="inp" placeholder="Digite algo">
+  <button onclick="add()">Adicionar</button>
+
+  <div id="out"></div>
+
+  <script>
+    let lista = JSON.parse(localStorage.getItem('lista') || '[]')
+
+    function render() {
+      out.innerHTML = lista.join('<br>')
+    }
+
+    function add() {
+      if (inp.value.trim() === '') return
+      lista.push(inp.value)
+      localStorage.setItem('lista', JSON.stringify(lista))
+      render()
+      inp.value = ''
+    }
+
+    render()
+  </script>
+
+</body>
+</html>

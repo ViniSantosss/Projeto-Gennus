@@ -1,9 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* O padding não infla o elemento. O tamanho que você define É o tamanho final. */
+}
+
+
 /* ================================================
    REGISTER.CSS
    Complementa o login.css sem repetir nada.
    Contém: layout do cadastro, modal de termos,
    botão de olho e todos os ajustes específicos.
 ================================================ */
+
+:root {
+  --bg:              #000000;           /* Fundo principal — preto puro */
+  --bg-input:        #0d0d0d;           /* Fundo dos campos — levemente diferente do preto pra criar contraste */
+  --bg-input-focus:  #111111;           /* Fundo dos campos quando em foco */
+  --roxo:            #a855f7;           /* Roxo principal do sistema — mesmo da landing */
+  --roxo-escuro:     #7e22ce;           /* Roxo mais escuro pro gradiente e hover */
+  --roxo-hover:      #9333ea;           /* Hover do botão */
+  --roxo-borda:      rgba(168, 85, 247, 0.2);  /* Borda sutil dos inputs */
+  --roxo-borda-foco: rgba(168, 85, 247, 0.7);  /* Borda mais intensa no foco */
+  --texto:           #ffffff;           /* Texto principal */
+  --texto-muted:     #888888;           /* Texto secundário — placeholders, legendas */
+  --texto-label:     #cccccc;           /* Labels dos inputs */
+  --borda-divisor:   rgba(255,255,255,0.06); /* Linhas divisórias sutis */
+}
+ 
  
 /* ================================================
    WRAPPER — maior que o login pra acomodar mais campos
@@ -27,6 +55,10 @@
   border-bottom: 1px solid var(--borda-divisor);
   width: 100%;
   margin-top: 4px;
+}
+
+.login-logo {
+  text-transform: uppercase;
 }
  
 /* ================================================

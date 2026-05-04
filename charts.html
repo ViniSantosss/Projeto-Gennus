@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráficos — Gennus</title>
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+ 
+  <!-- Chart.js via CDN — biblioteca de gráficos mais popular do ecossistema web.
+       Funciona com <canvas> HTML: o JS desenha os gráficos dentro de uma área de pixels.
+       Versão 4.x — compatível com todos os browsers modernos. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+ 
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="charts.css">
+</head>
+ 
+<body>
+ 
+  <main class="dashboard-page">
+ 
+    <!-- ================================================
+         SIDEBAR — idêntica ao dashboard.html
+         Em produção, isso viraria um componente reutilizável
+         (include PHP, partial EJS, componente React, etc.)
+         pra não repetir o mesmo HTML em toda página.
+    ================================================ -->
+    <nav class="sidebar-main">
+      <div class="bg-glow"></div>
+      <div class="sidebar-logo"><a href="dashboard.html">GENNUS</a></div>
+ 
+      <details>
+        <summary>Produtos</summary>
+        <a href="#">Lista de Produtos</a>
+        <a href="#">Adicionar Produto</a>
+        <a href="#">Editar / Excluir</a>
+      </details>
+      <details>
+        <summary>Vendas</summary>
+        <a href="#">Resumo do Período</a>
+        <a href="#">Renda Bruta / Líquida</a>
+        <a href="#">Top Itens</a>
+      </details>
+      <details>
+        <summary>Finanças</summary>
+        <a href="#">Receita</a>
+        <a href="#">Despesas</a>
+        <a href="#">Lucro</a>
+        <a href="#">IA Feedback</a>
+      </details>
+ 
+      <!-- AJUSTE: Relatórios aberto por padrão — estamos nesta seção -->
+      <details open>
+        <summary>Relatórios</summary>
+        <a href="charts.html" class="sidebar-link-active">Gráficos</a>
+        <!-- sidebar-link-active = estilo especial no charts.css pra indicar "você está aqui" -->
+        <a href="#">Relatório</a>
+      </details>
+ 
+      <details class="config-details">
+        <summary>Configurações</summary>
+        <a href="#">Período de Fechamento</a>
+        <a href="#">Personalizar</a>
+        <a href="#">Dados da Empresa</a>
+      </details>
+ 
+      <div class="sidebar-user">
+        <div class="perfil-border"></div>
+        <span>Perfil</span>
+        <a href="profile.html">Nome do Usuário</a>
+        <a href="#">Logout</a>
+      </div>
+    </nav>
+ 
+    <!-- ================================================
+         CONTEÚDO PRINCIPAL
+    ================================================ -->
+ 
+    <!-- Cabeçalho da página -->
+    <div class="charts-header">
+      <div class="charts-header-left">
+        <span class="charts-eyebrow">Relatórios</span>
+        <!-- eyebrow = label pequeno acima do título, como nas seções da landing -->
+        <h1 class="charts-title">Gráficos</h1>
+        <p class="charts-subtitle">Visão completa da performance do negócio</p>
+      </div>
+ 
+      <!-- Filtro de período — botões que trocam os dados de todos os gráficos -->
+      <div class="period-filter" id="period-filter">
+        <!-- data-period é lido pelo JS pra saber qual conjunto de dados carregar.
+             É um "atributo personalizado" — o HTML aceita qualquer atributo que comece com data-. -->
+        <button class="period-btn active" data-period="7d">7 dias</button>
+        <button class="period-btn" data-period="30d">30 dias</button>
+        <button class="period-btn" data-period="90d">3 meses</button>
+        <button class="period-btn" data-period="1y">1 ano</button>
+      </div>
+    </div>
+ 
+    <!-- ================================================
+         GRID DE GRÁFICOS
+         Layout:
+         [ Receita x Despesas (linha) ] [ Lucro Acumulado (área) ]
+         [ Vendas por Período (barras) ] [ Crescimento de Clientes (linha) ]
+         [          Top Produtos (donut) — centralizado            ]
+    ================================================ -->
+    <div class="charts-grid">
+ 
+      <!-- CARD 1: Receita x Despesas -->
+      <div class="chart-card" id="card-receita-despesas">
+        <div class="chart-card-header">
+          <div>
+            <h3 class="chart-card-title">Receita × Despesas</h3>
+            <p class="chart-card-subtitle">Comparativo mensal</p>
+          </div>
+          <!-- Legenda inline -->
+          <div class="chart-legend">
+            <span class="legend-dot green"></span><span>Receita</span>
+            <span class="legend-dot red"></span><span>Despesas</span>
+          </div>
+        </div>
+        <!-- <canvas> é onde o Chart.js desenha. width/height são proporções —
+             o CSS cuida do tamanho real. -->
+        <div class="chart-canvas-wrapper">
+          <canvas id="chart-receita-despesas"></canvas>
+        </div>
+      </div>
+ 
+      <!-- CARD 2: Lucro Acumulado -->
+      <div class="chart-card" id="card-lucro">
+        <div class="chart-card-header">
+          <div>
+            <h3 class="chart-card-title">Lucro Acumulado</h3>
+            <p class="chart-card-subtitle">Evolução ao longo do período</p>
+          </div>
+          <div class="chart-legend">
+            <span class="legend-dot purple"></span><span>Lucro</span>
+          </div>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas id="chart-lucro"></canvas>
+        </div>
+      </div>
+ 
+      <!-- CARD 3: Vendas por Período -->
+      <div class="chart-card" id="card-vendas">
+        <div class="chart-card-header">
+          <div>
+            <h3 class="chart-card-title">Vendas por Período</h3>
+            <p class="chart-card-subtitle">Volume de transações</p>
+          </div>
+          <div class="chart-legend">
+            <span class="legend-dot purple-light"></span><span>Vendas</span>
+          </div>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas id="chart-vendas"></canvas>
+        </div>
+      </div>
+ 
+      <!-- CARD 4: Crescimento de Clientes -->
+      <div class="chart-card" id="card-clientes">
+        <div class="chart-card-header">
+          <div>
+            <h3 class="chart-card-title">Crescimento de Clientes</h3>
+            <p class="chart-card-subtitle">Novos clientes por período</p>
+          </div>
+          <div class="chart-legend">
+            <span class="legend-dot blue"></span><span>Clientes</span>
+          </div>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas id="chart-clientes"></canvas>
+        </div>
+      </div>
+ 
+      <!-- CARD 5: Top Produtos — ocupa as duas colunas -->
+      <div class="chart-card chart-card-wide" id="card-produtos">
+        <div class="chart-card-header">
+          <div>
+            <h3 class="chart-card-title">Top Produtos</h3>
+            <p class="chart-card-subtitle">Participação nas vendas totais</p>
+          </div>
+        </div>
+        <div class="chart-donut-wrapper">
+          <!-- Donut centralizado com stats ao lado -->
+          <div class="chart-canvas-wrapper chart-canvas-donut">
+            <canvas id="chart-produtos"></canvas>
+          </div>
+          <!-- Lista de itens com porcentagem — atualizada pelo JS -->
+          <ul class="donut-legend" id="donut-legend"></ul>
+        </div>
+      </div>
+ 
+    </div>
+    <!-- fim .charts-grid -->
+ 
+  </main>
+ 
+  <script src="charts.js"></script>
+  <!-- Script no final do body — os elementos <canvas> já existem quando o JS roda.
+       Se estivesse no <head>, getElementById retornaria null. -->
+</body>
+</html>
