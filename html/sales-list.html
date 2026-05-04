@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Vendas | Gennus</title>
+    
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sales.css">
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/gennus-favicon-A.svg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../assets/gennus-favicon-A.svg">
+</head>
+<body>
+
+    <main class="dashboard-page">
+        <div class="bg-glow"></div>
+
+        <nav class="sidebar-main">
+            <div class="bg-glow"></div>
+            <div class="sidebar-logo"><a href="dashboard.html">GENNUS</a></div>
+
+            <details>
+                <summary>PRODUTOS</summary>
+                <a href="product-list.html">Lista de Produtos</a>
+                <a href="product-create.html">Adicionar Produto</a>
+            </details>
+            <details open>
+                <summary>VENDAS</summary>
+                <a href="sales-list.html" class="active">Lista de Vendas</a>
+                <a href="sales-create.html">Nova Venda</a>
+                <a href="sales-period.html">Resumo do Período</a>
+                <a href="#">Renda Bruta / Líquida</a>
+                <a href="#">Top Itens</a>
+            </details>
+            <details>
+                <summary>FINANÇAS</summary>
+                <a href="#">Receita</a>
+                <a href="#">Despesas</a>
+                <a href="#">Lucro</a>
+                <a href="#">IA Feedback</a>
+            </details>
+            <details>
+                <summary>RELATÓRIOS</summary>
+                <a href="charts.html">Gráficos</a>
+                <a href="#">Relatório Geral</a>
+            </details>
+            <details class="config-details">
+                <summary>CONFIGURAÇÕES</summary>
+                <a href="#">Período de Fechamento</a>
+                <a href="#">Personalizar</a>
+                <a href="#">Dados da Empresa</a>
+                <a href="config.html">Preferências</a>
+            </details>
+
+            <div class="sidebar-user">
+                <div class="perfil-border"></div>
+                <span>Perfil</span>
+                <a href="profile.html">Nome do Usuário</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </nav>
+
+        <section class="sales-container fade-in" style="max-width: 1200px;">
+            <div class="sales-header">
+                <h1>Gerenciar Vendas</h1>
+                <p>Visualize, filtre e gerencie todas as transações realizadas na plataforma.</p>
+            </div>
+
+            <div class="sales-table-card">
+                <div class="sales-table-actions-row">
+                    <div class="sales-filters">
+                        <div class="input-wrapper" style="width: 300px;">
+                            <input type="text" id="sales-search-filter" placeholder="Pesquisar cliente ou produto..." class="input-field" style="padding-left: 16px;">
+                        </div>
+                        <div class="input-wrapper select-wrapper" style="width: 200px;">
+                            <select id="filter-sale-status" class="select-field" style="padding-left: 16px;">
+                                <option value="all">Todos os Status</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="concluida">Concluída</option>
+                                <option value="cancelada">Cancelada</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="sales-table-actions">
+                        <a href="sales-create.html" class="btn-primary" style="text-decoration: none;">+ Nova Venda</a>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="sales-table-info">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Produto</th>
+                                <th>Qtd</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Data</th>
+                                <th style="text-align: center;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sales-table-data">
+                            <!-- Inserido via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../javascript/sales.js"></script>
+    <script src="../javascript/main.js"></script>
+</body>
+</html>

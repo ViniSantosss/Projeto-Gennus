@@ -1,0 +1,445 @@
+@import url('variables.css');
+
+/* ================================================
+   SALES-PERIOD.CSS
+   Resumo do Período — segue o design system Gennus.
+   Depende de dashboard.css (variáveis e sidebar).
+================================================ */
+
+/* ── Fade-in da seção ────────────────────────────────────── */
+.fade-in {
+    animation: fadeIn 0.45s ease both;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Container principal ─────────────────────────────────── */
+.period-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* ── Cabeçalho da página ─────────────────────────────────── */
+.period-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.period-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--texto);
+}
+
+.period-header p {
+    font-size: 0.9rem;
+    color: var(--texto-muted);
+}
+
+/* ── Cards de resumo mensal ──────────────────────────────── */
+.month-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.summary-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--borda-divisor);
+    border-radius: 14px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.25s;
+}
+
+.summary-card:hover {
+    border-color: var(--roxo-borda);
+}
+
+.summary-card .label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: var(--texto-muted);
+}
+
+.summary-card .value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--texto);
+    line-height: 1.1;
+}
+
+.summary-card .value.purple {
+    color: var(--roxo);
+}
+
+/* ── Navegação de mês ────────────────────────────────────── */
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.calendar-nav h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: var(--texto-label);
+    min-width: 160px;
+    text-align: center;
+}
+
+.calendar-nav button {
+    background: var(--bg-surface);
+    border: 1px solid var(--borda-divisor);
+    color: var(--texto-muted);
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.calendar-nav button:hover {
+    border-color: var(--roxo-borda-foco);
+    color: var(--roxo);
+    background: var(--bg-surface-2);
+}
+
+/* ── Layout: calendário + painel lateral ─────────────────── */
+.period-content {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 16px;
+    align-items: start;
+}
+
+/* ── Card do calendário ──────────────────────────────────── */
+.calendar-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--borda-divisor);
+    border-radius: 16px;
+    padding: 22px;
+    transition: border-color 0.25s;
+}
+
+.calendar-card:hover {
+    border-color: var(--roxo-borda);
+}
+
+/* Cabeçalho dos dias da semana */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.calendar-weekdays span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
+    color: var(--texto-muted);
+    text-align: center;
+    padding: 4px 0;
+}
+
+/* Grid de dias */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+/* Célula de dia */
+.calendar-day {
+    aspect-ratio: 1;
+    min-height: 64px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 8px 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    transition: background 0.15s, border-color 0.15s;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-day.empty {
+    cursor: default;
+    pointer-events: none;
+}
+
+.calendar-day:not(.empty):hover {
+    background: var(--bg-surface-2);
+    border-color: var(--borda-divisor);
+}
+
+/* Dia com vendas */
+.calendar-day.has-sales {
+    background: rgba(168, 85, 247, 0.05);
+    border-color: var(--roxo-borda);
+}
+
+.calendar-day.has-sales:hover {
+    background: rgba(168, 85, 247, 0.09);
+    border-color: rgba(168, 85, 247, 0.35);
+}
+
+/* Hoje */
+.calendar-day.today .day-number {
+    background: var(--roxo);
+    color: #fff;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+/* Selecionado */
+.calendar-day.selected {
+    background: rgba(168, 85, 247, 0.08);
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.3);
+}
+
+/* Número do dia */
+.day-number {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--texto-muted);
+    line-height: 1;
+}
+
+.calendar-day.has-sales .day-number,
+.calendar-day.selected .day-number {
+    color: var(--texto-label);
+}
+
+/* Ponto de venda */
+.day-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--roxo);
+    flex-shrink: 0;
+}
+
+/* Total do dia */
+.day-total {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--roxo);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* ── Painel de detalhes do dia ───────────────────────────── */
+.day-detail-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--borda-divisor);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: sticky;
+    top: 20px;
+    transition: border-color 0.25s;
+}
+
+.day-detail-card:hover {
+    border-color: var(--roxo-borda);
+}
+
+.day-detail-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: var(--texto-muted);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--borda-divisor);
+}
+
+/* Mensagem vazia */
+.day-detail-empty {
+    font-size: 0.8rem;
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
+    line-height: 1.5;
+}
+
+/* Scroll nos cards de venda */
+#detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 460px;
+    overflow-y: auto;
+    padding-right: 2px;
+}
+
+#detail-content::-webkit-scrollbar { width: 3px; }
+#detail-content::-webkit-scrollbar-track { background: transparent; }
+#detail-content::-webkit-scrollbar-thumb {
+    background: var(--roxo-borda);
+    border-radius: 4px;
+}
+
+/* Card de venda individual */
+.day-sale-item {
+    background: var(--bg-surface-2);
+    border: 1px solid var(--borda-divisor);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: border-color 0.2s;
+}
+
+.day-sale-item:hover {
+    border-color: var(--roxo-borda);
+}
+
+.sale-client {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--texto);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sale-product {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--texto-muted);
+}
+
+.sale-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.sale-total {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--verde);
+}
+
+/* ── Badges de status ────────────────────────────────────── */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03rem;
+}
+
+.status-pago,
+.status-concluido,
+.status-concluida,
+.status-entregue {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--verde);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-pendente,
+.status-aguardando {
+    background: rgba(251, 191, 36, 0.1);
+    color: var(--amarelo);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.status-cancelado,
+.status-cancelada,
+.status-recusado {
+    background: rgba(248, 113, 113, 0.1);
+    color: var(--vermelho);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+}
+
+/* ── Responsivo ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .period-content {
+        grid-template-columns: 1fr;
+    }
+
+    .day-detail-card {
+        position: static;
+    }
+
+    .month-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .month-summary .summary-card:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .month-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .calendar-day {
+        min-height: 46px;
+        padding: 5px 4px;
+    }
+
+    .day-total {
+        display: none;
+    }
+}

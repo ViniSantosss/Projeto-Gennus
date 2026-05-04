@@ -1,0 +1,39 @@
+:root {
+  /* Dark Mode */
+  --bg-primary: #000000;
+  --bg-secondary: #080808;
+  --bg-card: #0a0a0a;
+  --bg-input: #0d0d0d;
+  --bg-navbar: rgba(9, 8, 8, 0.7);
+  
+  --texto-primary: #ffffff;
+  --texto-secondary: #888888;
+  --texto-muted: #555555;
+  
+  --roxo-main: #a855f7;
+  --roxo-dark: #7e22ce;
+  --roxo-glow: rgba(168, 85, 247, 0.12);
+  
+  --borda-sutil: rgba(255, 255, 255, 0.05);
+}
+
+.white-mode {
+  /* White Mode*/
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9f9f9;
+  --bg-card: #ffffff;
+  --bg-input: #f3f3f3;
+  --bg-navbar: rgba(255, 255, 255, 0.8);
+  
+  --texto-primary: #111111;
+  --texto-secondary: #4b5563;
+  --texto-muted: #6b7280;
+  
+  --roxo-main: #9333ea;
+  --roxo-dark: #7e22ce;
+  --roxo-glow: rgba(147, 51, 234, 0.08);
+  
+  --borda-sutil: rgba(0, 0, 0, 0.05);
+}
+
+

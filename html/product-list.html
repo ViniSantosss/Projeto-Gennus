@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos | Gennus</title>
+    
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/products.css">
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/gennus-favicon-A.svg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../assets/gennus-favicon-A.svg">
+</head>
+<body>
+
+    <main class="dashboard-page">
+        <div class="bg-glow"></div>
+
+        <nav class="sidebar-main">
+            <div class="bg-glow"></div>
+            <div class="sidebar-logo"><a href="dashboard.html">GENNUS</a></div>
+
+            <details open>
+                <summary>PRODUTOS</summary>
+                <a href="product-list.html" class="active">Lista de Produtos</a>
+                <a href="product-create.html">Adicionar Produto</a>
+            </details>
+            <details>
+                <summary>VENDAS</summary>
+                <a href="sales-list.html">Lista de Vendas</a>
+                <a href="sales-create.html">Nova Venda</a>
+                <a href="sales-period.html">Resumo do Período</a>
+                <a href="#">Renda Bruta / Líquida</a>
+                <a href="#">Top Itens</a>
+            </details>
+            <details>
+                <summary>FINANÇAS</summary>
+                <a href="#">Receita</a>
+                <a href="#">Despesas</a>
+                <a href="#">Lucro</a>
+                <a href="#">IA Feedback</a>
+            </details>
+            <details>
+                <summary>RELATÓRIOS</summary>
+                <a href="charts.html">Gráficos</a>
+                <a href="#">Relatório Geral</a>
+            </details>
+            <details class="config-details">
+                <summary>CONFIGURAÇÕES</summary>
+                <a href="#">Período de Fechamento</a>
+                <a href="#">Personalizar</a>
+                <a href="#">Dados da Empresa</a>
+                <a href="config.html">Preferências</a>
+            </details>
+
+            <div class="sidebar-user">
+                <div class="perfil-border"></div>
+                <span>Perfil</span>
+                <a href="profile.html">Nome do Usuário</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </nav>
+
+        <section class="products-container fade-in">
+            <div class="products-header">
+                <h1>Gerenciar Produtos</h1>
+                <p>Visualize seu estoque atual, preços e status de cada item.</p>
+            </div>
+
+            <div class="product-list-filters">
+                <div class="product-list-options">
+                    <div class="product-filters-group">
+                        <i class="search-icon"><img src="../assets/search-icon.png" alt=""></i>
+                        <input type="text" id="product-search-filter" placeholder="Pesquisar produto..." class="input-field">
+                        <label for="product-search-filter"></label>
+                    </div>
+
+                    <div class="product-filters-group">
+                        <label for="product-categories-filter">Categorias</label>
+                        <select name="product-categories-filter" id="product-categories-filter">
+                            <option value="all">Todas</option>
+                            <option value="product-category-tools">Ferramentas</option>
+                            <option value="product-category-fashion">Roupas</option>
+                            <option value="product-category-eletronics">Eletrônicos</option>
+                            <option value="product-category-domestic">Coisas de casa</option>
+                            <option value="product-category-self-care">Cuidado pessoal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card-grid" id="product-card-grid">
+                <!-- inserido com o js quando um produto é criado -->
+            </div>
+        </section>
+    </main>
+
+    <script src="../javascript/produtos.js"></script>
+    <script src="../javascript/main.js"></script>
+</body>
+</html>

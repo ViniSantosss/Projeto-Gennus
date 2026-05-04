@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Gennus</title>
 
-    <link rel="stylesheet" href="dashboard.css"> <!--pode fazer o arquivo css e colocar ai-->
-    <link rel="icon" type="image/svg+xml" href="/assets/gennus-favicon-A.svg">
+    <link rel="stylesheet" href="../css/dashboard.css"> <!--pode fazer o arquivo css e colocar ai-->
+    <link rel="icon" type="image/svg+xml" href="../assets/gennus-favicon-A.svg">
     <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="apple-touch-icon" href="/assets/gennus-favicon-A.svg">
+    <link rel="apple-touch-icon" href="../assets/gennus-favicon-A.svg">
 
 </head>
 
@@ -20,57 +20,48 @@
     <main class="dashboard-page">
 
         <nav class="sidebar-main">
-
             <div class="bg-glow"></div>
-
-
-            <div class="sidebar-logo"><a href="index.html">GENNUS</a></div>
-
+            <div class="sidebar-logo"><a href="dashboard.html">GENNUS</a></div>
 
             <details>
                 <summary>PRODUTOS</summary>
-                <a href="#">Lista de Produtos</a>
-                <a href="#">Adicionar Produto</a>
-                <a href="#">Editar / Excluir</a>
+                <a href="product-list.html">Lista de Produtos</a>
+                <a href="product-create.html">Adicionar Produto</a>
             </details>
             <details>
                 <summary>VENDAS</summary>
-                <a href="#">Resumo do Período</a>
-                <a href="#">Renda Bruta / Liquida</a>
+                <a href="sales-list.html">Lista de Vendas</a>
+                <a href="sales-create.html">Nova Venda</a>
+                <a href="sales-period.html">Resumo do Período</a>
+                <a href="#">Renda Bruta / Líquida</a>
                 <a href="#">Top Itens</a>
             </details>
             <details>
                 <summary>FINANÇAS</summary>
                 <a href="#">Receita</a>
-                <a href="#">Despesaso</a>
+                <a href="#">Despesas</a>
                 <a href="#">Lucro</a>
                 <a href="#">IA Feedback</a>
             </details>
             <details>
-                <summary>Relatórios</summary>
+                <summary>RELATÓRIOS</summary>
                 <a href="charts.html">Gráficos</a>
-                <a href="#">Relatório</a>
+                <a href="#">Relatório Geral</a>
             </details>
             <details class="config-details">
                 <summary>CONFIGURAÇÕES</summary>
                 <a href="#">Período de Fechamento</a>
                 <a href="#">Personalizar</a>
                 <a href="#">Dados da Empresa</a>
-
+                <a href="config.html">Preferências</a>
             </details>
 
             <div class="sidebar-user">
                 <div class="perfil-border"></div>
-
-
                 <span>Perfil</span>
-                <!--algum recurso para foto da pessoa-->
-                <a href="profile.html">Nome</a>
+                <a href="profile.html">Nome do Usuário</a>
                 <a href="login.html">Logout</a>
-                <!-- eu pensei em fazer um negocio de perfil ali no canto inferior esquerdo, tipo o do chat que fica embaixo
-             e as configs dai eu nao sei, qualquer coisa só pedir pra mudar depois-->
             </div>
-
         </nav>
 
         <div class="dashboard-cards"> <!--Outdoor antes do destino-->
@@ -144,6 +135,8 @@
 
     </main>
 
+    <script src="../javascript/main.js"></script>
+    <script src="../javascript/config.js"></script>
 </body>
 
 </html>

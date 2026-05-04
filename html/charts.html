@@ -13,8 +13,8 @@
        Versão 4.x — compatível com todos os browsers modernos. -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
  
-  <link rel="stylesheet" href="dashboard.css">
-  <link rel="stylesheet" href="charts.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/charts.css">
 </head>
  
 <body>
@@ -30,47 +30,45 @@
     <nav class="sidebar-main">
       <div class="bg-glow"></div>
       <div class="sidebar-logo"><a href="dashboard.html">GENNUS</a></div>
- 
+
       <details>
-        <summary>Produtos</summary>
-        <a href="#">Lista de Produtos</a>
-        <a href="#">Adicionar Produto</a>
-        <a href="#">Editar / Excluir</a>
+        <summary>PRODUTOS</summary>
+        <a href="product-list.html">Lista de Produtos</a>
+        <a href="product-create.html">Adicionar Produto</a>
       </details>
       <details>
-        <summary>Vendas</summary>
-        <a href="#">Resumo do Período</a>
+        <summary>VENDAS</summary>
+        <a href="sales-list.html">Lista de Vendas</a>
+        <a href="sales-create.html">Nova Venda</a>
+        <a href="sales-period.html">Resumo do Período</a>
         <a href="#">Renda Bruta / Líquida</a>
         <a href="#">Top Itens</a>
       </details>
       <details>
-        <summary>Finanças</summary>
+        <summary>FINANÇAS</summary>
         <a href="#">Receita</a>
         <a href="#">Despesas</a>
         <a href="#">Lucro</a>
         <a href="#">IA Feedback</a>
       </details>
- 
-      <!-- AJUSTE: Relatórios aberto por padrão — estamos nesta seção -->
       <details open>
-        <summary>Relatórios</summary>
-        <a href="charts.html" class="sidebar-link-active">Gráficos</a>
-        <!-- sidebar-link-active = estilo especial no charts.css pra indicar "você está aqui" -->
-        <a href="#">Relatório</a>
+        <summary>RELATÓRIOS</summary>
+        <a href="charts.html" class="active">Gráficos</a>
+        <a href="#">Relatório Geral</a>
       </details>
- 
       <details class="config-details">
-        <summary>Configurações</summary>
+        <summary>CONFIGURAÇÕES</summary>
         <a href="#">Período de Fechamento</a>
         <a href="#">Personalizar</a>
         <a href="#">Dados da Empresa</a>
+        <a href="config.html">Preferências</a>
       </details>
- 
+
       <div class="sidebar-user">
         <div class="perfil-border"></div>
         <span>Perfil</span>
         <a href="profile.html">Nome do Usuário</a>
-        <a href="#">Logout</a>
+        <a href="login.html">Logout</a>
       </div>
     </nav>
  
@@ -198,7 +196,8 @@
  
   </main>
  
-  <script src="charts.js"></script>
+  <script src="../javascript/charts.js"></script>
+  <script src="../javascript/main.js"></script>
   <!-- Script no final do body — os elementos <canvas> já existem quando o JS roda.
        Se estivesse no <head>, getElementById retornaria null. -->
 </body>

@@ -10,11 +10,11 @@ document.addEventListener("DOMContentLoaded", function(){
             e.preventDefault();
             if(errorLoginMsg) errorLoginMsg.textContent="";
 
-            var emailDigitado = emailLoginInput.ariaValueMax.trim();
+            var emailDigitado = emailLoginInput.value.trim();
             var senhaDigitada = passwordLoginInput.value;
 
             //puxa os dados salvoas
-            var usuariosSalvos = JSON.parse(localStorage.getItem("gennus")) || {};
+            var usuariosSalvos = JSON.parse(localStorage.getItem("gennus_usuarios")) || {};
             var usuarioEncontrado = usuariosSalvos[emailDigitado];
 
             //verifica se achou um usuario e se senha esta certa

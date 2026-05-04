@@ -1,31 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
- 
+@import url('variables.css');
+
+/* Reset Global - Essencial para o layout não quebrar */
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* O padding não infla o elemento. O tamanho que você define É o tamanho final. */
+  box-sizing: border-box;
 }
- 
+
+/* Variáveis do Sistema */
 :root {
-  --bg:              #000000;           /* Fundo principal — preto puro */
-  --bg-surface: #080808; 
+  --bg: #000000;
+  --bg-surface: #080808;
   --bg-surface-2: #0f0f0f;
-  --bg-input:        #0d0d0d;           /* Fundo dos campos — levemente diferente do preto pra criar contraste */
-  --bg-input-focus:  #111111;           /* Fundo dos campos quando em foco */
-  --roxo:            #a855f7;           /* Roxo principal do sistema — mesmo da landing */
-  --roxo-escuro:     #7e22ce;           /* Roxo mais escuro pro gradiente e hover */
-  --roxo-hover:      #9333ea;           /* Hover do botão */
-  --roxo-borda:      rgba(168, 85, 247, 0.2);  /* Borda sutil dos inputs */
-  --roxo-borda-foco: rgba(168, 85, 247, 0.7);  /* Borda mais intensa no foco */
-  --verde:           #22c55e;        /* NOVO: cor de positivo (receita, crescimento) */
-  --vermelho:        #f87171;        /* NOVO: cor de negativo (despesas, alertas) */
-  --amarelo:         #fbbf24;        /* NOVO: cor de atenção (alertas moderados) */
-  --texto:           #ffffff;           /* Texto principal */
-  --texto-muted:     #888888;           /* Texto secundário — placeholders, legendas */
-  --texto-label:     #cccccc;           /* Labels dos inputs */
-  --borda-divisor:   rgba(255,255,255,0.06); /* Linhas divisórias sutis */
+  --bg-input: #0d0d0d;
+  --bg-input-focus: #111111;
+  --roxo: #a855f7;
+  --roxo-escuro: #7e22ce;
+  --roxo-hover: #9333ea;
+  --roxo-borda: rgba(168, 85, 247, 0.2);
+  --roxo-borda-foco: rgba(168, 85, 247, 0.7);
+  --verde: #22c55e;
+  --vermelho: #f87171;
+  --amarelo: #fbbf24;
+  --texto: #ffffff;
+  --texto-muted: #888888;
+  --texto-label: #cccccc;
+  --borda-divisor: rgba(255,255,255,0.06);
+  --borda: rgba(255,255,255,0.06); /* Adicionado para compatibilidade */
+}
+
+/* Sobrescrita para White Mode */
+.white-mode {
+  --bg: #ffffff;
+  --bg-surface: #f9fafb;
+  --bg-surface-2: #f3f4f6;
+  --bg-input: #ffffff;
+  --bg-input-focus: #f9fafb;
+  --roxo: #9333ea;
+  --roxo-escuro: #7e22ce;
+  --roxo-hover: #7e22ce;
+  --roxo-borda: rgba(147, 51, 234, 0.2);
+  --roxo-borda-foco: rgba(147, 51, 234, 0.5);
+  --texto: #111827;
+  --texto-muted: #6b7280;
+  --texto-label: #374151;
+  --borda-divisor: rgba(0, 0, 0, 0.08);
 }
 
 body {

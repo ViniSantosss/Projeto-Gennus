@@ -1,0 +1,221 @@
+@import url('dashboard.css');
+
+/* ================================================
+   SETTINGS.CSS
+   Estilos para Perfil e Configurações.
+================================================ */
+
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+}
+
+.settings-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--texto);
+}
+
+.settings-header p {
+    color: var(--texto-muted);
+    font-size: 0.9rem;
+}
+
+/* ================================================
+   CARDS DE CONFIGURAÇÃO
+================================================ */
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Coluna menor para info/avatar, maior para form */
+    gap: 24px;
+}
+
+.settings-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--borda-divisor);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.settings-card h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    color: var(--texto);
+    margin-bottom: 8px;
+}
+
+/* Avatar Placeholder */
+.profile-avatar-section {
+    align-items: center;
+    text-align: center;
+}
+
+.avatar-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo));
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    border: 4px solid var(--bg-surface-2);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+}
+
+.avatar-info h3 {
+    font-size: 1.2rem;
+    color: var(--texto);
+}
+
+.avatar-info p {
+    font-size: 0.85rem;
+    color: var(--texto-muted);
+}
+
+/* Reutilizando estilos de input */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--texto-label);
+}
+
+.input-field {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--roxo-borda);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--texto);
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input-field:focus {
+    border-color: var(--roxo-borda-foco);
+    background: var(--bg-input-focus);
+}
+
+.btn-save {
+    background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: all 0.2s;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+}
+
+/* ================================================
+   ESTILOS DE CONFIGURAÇÃO (CHECKBOXES/SWITCHES)
+================================================ */
+
+.config-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--borda-divisor);
+}
+
+.config-item:last-child {
+    border-bottom: none;
+}
+
+.config-info h4 {
+    font-size: 0.9rem;
+    color: var(--texto);
+}
+
+.config-info p {
+    font-size: 0.8rem;
+    color: var(--texto-muted);
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* modais */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--borda-divisor);
+    border-radius: 16px;
+    padding: 32px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-box h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    color: var(--texto);
+}
+
+.btn-close-modal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    color: var(--texto-muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.btn-close-modal:hover {
+    color: var(--texto);
+}

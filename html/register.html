@@ -6,11 +6,11 @@
   <title>Criar conta — Gennus</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="login.css" />
-  <link rel="stylesheet" href="register.css" />
-  <link rel="icon" type="image/svg+xml" href="/assets/gennus-favicon-A.svg">
+  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="../css/register.css" />
+  <link rel="icon" type="image/svg+xml" href="../assets/gennus-favicon-A.svg">
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="/assets/gennus-favicon-A.svg">
+  <link rel="apple-touch-icon" href="../assets/gennus-favicon-A.svg">
 </head>
 <body>
 
@@ -25,14 +25,18 @@
     <div class="bg-glow"></div>
 
     <div class="login-form-wrapper register-wrapper fade-in">
-      <a href="index.html" class="login-logo">Gennus</a>
+      <a href="../index.html" class="login-logo">Gennus</a>
 
       <div class="login-header">
         <h1 class="login-title">Criar sua conta</h1>
         <p class="login-subtitle">Preencha os dados abaixo para começar</p>
+        <!-- Container para mensagens de erro -->
+        
       </div>
 
       <form class="login-form" action="#" method="post">
+
+        
 
         <!-- SEÇÃO: DADOS PESSOAIS -->
         <p class="form-section-label">Dados pessoais</p>
@@ -170,13 +174,15 @@
           <button type="button" class="btn-link-terms" id="open-terms-btn">Termos de uso</button>
         </label>
 
-        <p class="form-error" id="form-register-error" aria-live="polite"></p>
+        <div id="form-register-error" class="form-error"></div>
+        <p class="form-error" id="form-register-error" aria-live="polite"> erro aqui</p>
 
         <button type="submit" class="btn-entrar">
           Criar conta
           <span class="btn-arrow">→</span>
         </button>
 
+        
       </form>
 
       <p class="login-footer-text">
@@ -268,6 +274,6 @@
     </div>
   </div><!-- fim #terms-modal -->
 
-  <script src="register.js"></script>
+  <script src="../javascript/register.js"></script>
 </body>
 </html>

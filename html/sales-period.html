@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo do Período | Gennus</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sales-period.css">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/gennus-favicon-A.svg">
+</head>
+<body>
+
+<main class="dashboard-page">
+    <div class="bg-glow"></div>
+
+    <nav class="sidebar-main">
+        <div class="bg-glow"></div>
+        <div class="sidebar-logo"><a href="dashboard.html">GENNUS</a></div>
+
+        <details>
+            <summary>PRODUTOS</summary>
+            <a href="product-list.html">Lista de Produtos</a>
+            <a href="product-create.html">Adicionar Produto</a>
+        </details>
+        <details open>
+            <summary>VENDAS</summary>
+            <a href="sales-list.html">Lista de Vendas</a>
+            <a href="sales-create.html">Nova Venda</a>
+            <a href="sales-period.html" class="active">Resumo do Período</a>
+            <a href="#">Renda Bruta / Líquida</a>
+            <a href="#">Top Itens</a>
+        </details>
+        <details>
+            <summary>FINANÇAS</summary>
+            <a href="#">Receita</a>
+            <a href="#">Despesas</a>
+            <a href="#">Lucro</a>
+            <a href="#">IA Feedback</a>
+        </details>
+        <details>
+            <summary>RELATÓRIOS</summary>
+            <a href="charts.html">Gráficos</a>
+            <a href="#">Relatório Geral</a>
+        </details>
+        <details class="config-details">
+            <summary>CONFIGURAÇÕES</summary>
+            <a href="#">Período de Fechamento</a>
+            <a href="#">Personalizar</a>
+            <a href="#">Dados da Empresa</a>
+            <a href="config.html">Preferências</a>
+        </details>
+
+        <div class="sidebar-user">
+            <div class="perfil-border"></div>
+            <span>Perfil</span>
+            <a href="profile.html">Nome do Usuário</a>
+            <a href="login.html">Logout</a>
+        </div>
+    </nav>
+
+    <section class="period-container fade-in">
+        <div class="period-header">
+            <h1>Resumo do Período</h1>
+            <p>Clique em um dia para ver as vendas realizadas.</p>
+        </div>
+
+        <!-- cards de resumo do mês -->
+        <div class="month-summary">
+            <div class="summary-card">
+                <span class="label">Vendas no mês</span>
+                <span class="value" id="summary-count">0</span>
+            </div>
+            <div class="summary-card">
+                <span class="label">Total arrecadado</span>
+                <span class="value purple" id="summary-total">R$ 0,00</span>
+            </div>
+            <div class="summary-card">
+                <span class="label">Produtos vendidos</span>
+                <span class="value" id="summary-qty">0</span>
+            </div>
+        </div>
+
+        <!-- navegação entre meses -->
+        <div class="calendar-nav">
+            <button id="btn-prev">&#8592;</button>
+            <h2 id="calendar-title"></h2>
+            <button id="btn-next">&#8594;</button>
+        </div>
+
+        <div class="period-content">
+
+            <!-- calendário -->
+            <div class="calendar-card">
+                <div class="calendar-weekdays">
+                    <span>Dom</span>
+                    <span>Seg</span>
+                    <span>Ter</span>
+                    <span>Qua</span>
+                    <span>Qui</span>
+                    <span>Sex</span>
+                    <span>Sáb</span>
+                </div>
+                <div class="calendar-grid" id="calendar-grid"></div>
+            </div>
+
+            <!-- painel de detalhes do dia clicado -->
+            <div class="day-detail-card">
+                <div class="day-detail-title" id="detail-title">Selecione um dia</div>
+                <div id="detail-content">
+                    <p class="day-detail-empty">Clique em um dia do calendário para ver as vendas.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="../javascript/sales-period.js"></script>
+<script src="../javascript/main.js"></script>
+<script src="../javascript/config.js"></script>
+</body>
+</html>

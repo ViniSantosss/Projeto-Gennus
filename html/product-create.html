@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produto | Gennus</title>
+    
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/products.css">
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/gennus-favicon-A.svg">
+</head>
+<body>
+
+    <main class="dashboard-page">
+        <div class="bg-glow"></div>
+
+        <nav class="sidebar-main">
+            <div class="bg-glow"></div>
+            <div class="sidebar-logo"><a href="dashboard.html">GENNUS</a></div>
+
+            <details open>
+                <summary>PRODUTOS</summary>
+                <a href="product-list.html">Lista de Produtos</a>
+                <a href="product-create.html" class="active">Adicionar Produto</a>
+            </details>
+            <details>
+                <summary>VENDAS</summary>
+                <a href="sales-list.html">Lista de Vendas</a>
+                <a href="sales-create.html">Nova Venda</a>
+                <a href="sales-period.html">Resumo do Período</a>
+                <a href="#">Renda Bruta / Líquida</a>
+                <a href="#">Top Itens</a>
+            </details>
+            <details>
+                <summary>FINANÇAS</summary>
+                <a href="#">Receita</a>
+                <a href="#">Despesas</a>
+                <a href="#">Lucro</a>
+                <a href="#">IA Feedback</a>
+            </details>
+            <details>
+                <summary>RELATÓRIOS</summary>
+                <a href="charts.html">Gráficos</a>
+                <a href="#">Relatório Geral</a>
+            </details>
+            <details class="config-details">
+                <summary>CONFIGURAÇÕES</summary>
+                <a href="#">Período de Fechamento</a>
+                <a href="#">Personalizar</a>
+                <a href="#">Dados da Empresa</a>
+                <a href="config.html">Preferências</a>
+            </details>
+
+            <div class="sidebar-user">
+                <div class="perfil-border"></div>
+                <span>Perfil</span>
+                <a href="profile.html">Nome do Usuário</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </nav>
+
+        <section class="products-container fade-in">
+            <div class="products-header">
+                <h1>Adicionar Produto</h1>
+                <p>Cadastre um novo item no seu inventário para começar a vender.</p>
+            </div>
+
+            <div class="products-form-card"> <!-- Formulário para adicionar produto, ai voce adiciona um novo campo por aqui-->
+                <form id="form-produto">
+                    <div class="products-form-layout">
+                        <div class="products-form-main">
+                            <div class="products-form-grid">
+                                <div class="input-group col-span-2">
+                                    <label class="input-label">Nome do Produto</label>
+                                    <div class="input-wrapper">
+                                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        </svg>
+                                        <input type="text" id="product-name" placeholder="Ex: Fones de Ouvido" class="input-field" required>
+                                    </div>
+                                </div>
+
+                                <div class="input-group col-span-2">
+                                    <label class="input-label">Descrição</label>
+                                    <div class="input-wrapper">
+                                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                                        </svg>
+                                        <input type="text" id="product-description" placeholder="Ex: Item para uso pessoal" class="input-field" required>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label class="input-label">Preço (R$)</label>
+                                    <div class="input-wrapper">
+                                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.214.19c2.457 2.187 6.314 2.187 8.771 0M9 10.132v.071c0 2.012 1.514 3.731 3.5 3.929m0-7.062V6m0 8.125v.072c0 1.933 1.444 3.5 3.225 3.5a1.8 1.8 0 001.275-.525m-6.3-8.812l-.214-.19c-2.457-2.187-6.314-2.187-8.771 0M9 10.132v.071c0-2.012 1.514-3.731 3.5-3.929" />
+                                        </svg>
+                                        <input type="number" id="product-price" placeholder="0.00" step="0.01" class="input-field" required>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label class="input-label">Estoque Inicial</label>
+                                    <div class="input-wrapper">
+                                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                                        </svg>
+                                        <input type="number" id="product-stock" placeholder="0" class="input-field" required>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label class="input-label">Status do Produto</label>
+                                    <div class="input-wrapper">
+                                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <select id="product-status" class="input-field">
+                                            <option value="active" selected>Ativo (Disponível para venda)</option>
+                                            <option value="inactive">Inativo (Indisponível)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label class="input-label">Categoria</label>
+                                    <div class="input-wrapper">
+                                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                        </svg>
+                                        <select id="product-category" class="input-field">
+                                            <option value="" disabled selected hidden>Selecione a categoria</option>
+                                            <option value="product-category-tools">Ferramentas</option>
+                                            <option value="product-category-fashion">Roupas</option>
+                                            <option value="product-category-eletronics">Eletrônicos</option>
+                                            <option value="product-category-domestic">Coisas de casa</option>
+                                            <option value="product-category-self-care">Cuidado pessoal</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="products-form-side">
+                            <div class="product-image-wrapper">
+                                <label class="input-label">Imagem do Produto</label>
+                                <div class="product-image-upload" id="upload-area">
+                                    <input type="file" id="product-image" accept="image/*" style="display: none;">
+                                    <img id="image-preview" src="" alt="" style="display: none;">
+                                    <div class="upload-placeholder" id="upload-placeholder">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                        </svg>
+                                        <p>Clique para fazer upload</p>
+                                        <span>PNG, JPG até 5MB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="products-form-actions" style="display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid var(--borda-divisor); padding-top: 24px; margin-top: 24px;">
+                        <button type="reset" class="btn-secondary">Redefinir</button>
+                        <button type="submit" id="product-button-save" class="btn-primary">Cadastrar Produto</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="../javascript/produtos.js"></script>
+    <script src="../javascript/main.js"></script>
+</body>
+</html>

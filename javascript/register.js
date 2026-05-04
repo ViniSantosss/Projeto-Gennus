@@ -174,37 +174,43 @@ document.addEventListener("DOMContentLoaded", function () {
       
       // 1ª Validação: Verifica se as duas senhas digitadas são idênticas
       if (passwordInput.value !== confirmPasswordInput.value) {
-        if(errorMsg) errorMsg.textContent = "As senhas não coincidem. Tente novamente.";
-        confirmPasswordInput.focus(); // Coloca o cursor de volta na segunda senha
-        return; // Interrompe o código aqui, não tenta salvar
-      }
-
-      // Puxa do navegador os usuários que já foram criados antes (ou um objeto vazio se for o primeiro)
-      var usuariosSalvos = JSON.parse(localStorage.getItem("gennus_usuarios")) || {};
-      
-      // Pega o email digitado sem espaços vazios nas pontas
-      var emailDigitado = emailInput.value.trim();
-
-      // 2ª Validação: Verifica se esse e-mail já existe na base do navegador
-      if (usuariosSalvos[emailDigitado]) {
-        if(errorMsg) errorMsg.textContent = "Este e-mail já está cadastrado. Tente fazer login.";
+        if(errorMsg) {
+          errorMsg.textContent = "As senhas não coincidem. Tente novamente.";
+          errorMsg.style.display = "block";
+        }
+        confirmPasswordInput.focus();
         return;
       }
 
-      // 3º Passo: Se passou nas validações, cria o pacote de dados do novo usuário
+      // Puxa do navegador os usuários que já foram criados antes
+      var usuariosSalvos = JSON.parse(localStorage.getItem("gennus_usuarios")) || {};
+      
+      var emailDigitado = emailInput.value.trim();
+
+      // 2ª Validação: Verifica se esse e-mail já existe
+      if (usuariosSalvos[emailDigitado]) {
+        if(errorMsg) {
+          errorMsg.textContent = "Este e-mail já está cadastrado. Tente fazer login.";
+          errorMsg.style.display = "block";
+        }
+        emailInput.focus();
+        return;
+      }
+
+      // 3º Passo: Se passou nas validações, cria o pacote de dados
       usuariosSalvos[emailDigitado] = {
         nome: firstNameInput.value.trim(),
         sobrenome: lastNameInput.value.trim(), 
-        documento: documentInput ? documentInput.value.trim() : "",
+        email: emailDigitado,
         senha: passwordInput.value 
       };
 
-      // 4º Passo: Converte o pacote em String e salva no Banco de Dados local do navegador
+      // 4º Passo: Salva no LocalStorage
       localStorage.setItem("gennus_usuarios", JSON.stringify(usuariosSalvos));
 
-      // Feedback final e redirecionamento de tela
+      // Feedback final e redirecionamento
       alert("Conta criada com sucesso! Redirecionando para o login...");
-      window.location.href = "login.html"; // Manda o usuário para a página de entrada
+      window.location.href = "login.html";
     });
   }
 

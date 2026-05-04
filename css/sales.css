@@ -1,0 +1,360 @@
+@import url('dashboard.css');
+
+/* ================================================
+   SALES.CSS
+   Estilos específicos para as páginas de vendas.
+   Baseia-se no design system do Pedro (dashboard.css).
+================================================ */
+
+.sales-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sales-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sales-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--texto);
+}
+
+.sales-header p {
+    font-size: 0.9rem;
+    color: var(--texto-muted);
+}
+
+/* ================================================
+   FORMULÁRIO DE VENDAS
+================================================ */
+
+.sales-form-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--borda-divisor);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: border-color 0.3s;
+}
+
+.sales-form-card:hover {
+    border-color: var(--roxo-borda);
+}
+
+.sales-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.col-span-2 {
+    grid-column: span 2;
+}
+
+/* Reutilizando estilos de input do Pedro */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    color: var(--texto-label);
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #444;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.input-field, .select-field {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--roxo-borda);
+    border-radius: 10px;
+    padding: 13px 16px 13px 42px;
+    color: var(--texto);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input-field:focus, .select-field:focus {
+    border-color: var(--roxo-borda-foco);
+    background: var(--bg-input-focus);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.08);
+}
+
+.input-wrapper:focus-within .input-icon {
+    color: var(--roxo);
+}
+
+/* Select customizado */
+.select-field {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.select-wrapper::after {
+    content: '↓';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: #444;
+    pointer-events: none;
+}
+
+/* ================================================
+   BOTÕES
+================================================ */
+
+.sales-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--borda-divisor);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--borda-divisor);
+    color: var(--texto-muted);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    border-color: var(--roxo-borda);
+    color: var(--texto);
+    background: var(--bg-surface-2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo));
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 32px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* ================================================
+   TABELAS DE VENDAS
+================================================ */
+
+.sales-table-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--borda-divisor);
+    border-radius: 16px;
+    padding: 24px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+
+.sales-table-card:hover {
+    border-color: var(--roxo-borda);
+}
+
+.sales-table-actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 16px;
+}
+
+.sales-filters {
+    display: flex;
+    gap: 12px;
+}
+
+.sales-table-info {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.sales-table-info th {
+    text-align: left;
+    padding: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: var(--texto-muted);
+    border-bottom: 1px solid var(--borda-divisor);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Centralizando cabeçalho e célula de ações */
+.sales-table-info th:last-child,
+.sales-table-info td:last-child {
+    text-align: center !important;
+}
+
+.sales-table-info td {
+    padding: 16px;
+    font-size: 0.85rem;
+    color: var(--texto-label);
+    border-bottom: 1px solid var(--borda-divisor);
+    transition: background 0.2s;
+}
+
+.sales-table-info tr:hover td {
+    background: rgba(168, 85, 247, 0.03);
+    color: var(--texto);
+}
+
+.sales-table-info tr:last-child td {
+    border-bottom: none;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03rem;
+}
+
+.status-concluida {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--verde);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-pendente {
+    background: rgba(251, 191, 36, 0.1);
+    color: var(--amarelo);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.status-cancelada {
+    background: rgba(248, 113, 113, 0.1);
+    color: var(--vermelho);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+}
+
+/* Modal de Edição (Estilo Pedro) */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--roxo-borda);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 440px;
+    padding: 32px;
+    position: relative;
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.modal-overlay.active .modal-box {
+    transform: scale(1) translateY(0);
+}
+
+.modal-box h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    color: var(--texto);
+}
+
+.btn-close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-surface-2);
+    border: 1px solid var(--borda-divisor);
+    color: var(--texto-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.btn-close-modal:hover {
+    background: var(--roxo);
+    color: white;
+    border-color: var(--roxo);
+}

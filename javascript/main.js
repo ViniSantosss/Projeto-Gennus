@@ -99,4 +99,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // ===============================
+  // NOME DO USUÁRIO DINÂMICO
+  // ===============================
+  const usuarioLogado = JSON.parse(localStorage.getItem('gennus_usuario_logado'));
+  if (usuarioLogado && usuarioLogado.nome) {
+      // Procura pelo link que contém o texto placeholder
+      const sidebarLinks = document.querySelectorAll('.sidebar-user a');
+      sidebarLinks.forEach(link => {
+          if (link.textContent.includes('Nome do Usuário') || link.textContent === 'Nome') {
+              link.textContent = usuarioLogado.nome;
+          }
+      });
+  }
 });

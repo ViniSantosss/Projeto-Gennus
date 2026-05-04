@@ -1,0 +1,786 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+@import url('variables.css');
+
+/* Reset Global */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base Body */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-primary);
+  font-family: "Inter", sans-serif;
+  padding-top: 70px;
+  color: var(--texto-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Títulos */
+h1,
+h2,
+h3 {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* SEÇÃO - NAVBAR */
+
+.navbar-main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 64px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg-navbar);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--borda-sutil);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* NOVO: estilo do logo da navbar */
+.nav-logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--roxo-main), var(--roxo-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-logo a {
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-ul {
+  display: flex; /* trilho flex pros itens do menu. */
+  align-items: center; /* centraliza verticalmente os itens no trilho. */
+  gap: 4px; /* espaço entre os links. */
+  list-style: none; /* remove as bolinhas padrão de lista. */
+}
+
+.nav-table {
+  list-style: none; /* redundante com o ul, mas garante que cada li também não mostre bullet (bolinha das listas). */
+}
+
+.nav-a {
+  color: var(--texto-links);
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.1rem;
+  display: inline-block;
+  padding: 10px 16px;
+  position: relative;
+  font-size: 12px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-a:hover {
+  color: var(--texto-primary);
+}
+
+.nav-a::after {
+  content: "";
+  position: absolute;
+  width: calc(100% - 32px);
+  height: 2px;
+  background-color: var(--roxo-main);
+  bottom: 6px;
+  left: 16px;
+  border-radius: 40px;
+  transform: scaleX(0);
+  transition: transform 0.35s;
+  transform-origin: right;
+}
+
+.nav-a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btn-entrar {
+  background: var(--roxo-hover);
+  color: white;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  margin-left: 16px;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.btn-entrar:hover {
+  background: var(--roxo-dark);
+  transform: translateY(-1px);
+}
+
+/* ================================================
+   HERO SECTION
+================================================ */
+
+.hero-section-main-container {
+  background-color: var(--bg-primary);
+  padding: 120px 10%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+
+/* NOVO: efeito de brilho/glow roxo no fundo do hero */
+.hero-section-main-container::before {
+  content: "";
+  position: absolute;
+  top: -200px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    var(--roxo-glow) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 680px;
+}
+
+/* NOVO: badge de destaque acima do título */
+.hero-badge {
+  display: inline-block;
+  background: var(--roxo-glow);
+  border: 1px solid var(--roxo-borda);
+  color: var(--roxo-light);
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+  color: var(--texto-primary);
+}
+
+.hero-title span {
+  background: linear-gradient(90deg, var(--roxo-dark), var(--roxo-main));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px var(--roxo-glow));
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  color: var(--texto-secondary);
+  margin-bottom: 36px;
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.btn-primary {
+  background: var(--roxo-main);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--roxo-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border: 1px solid var(--borda-dark);
+  color: var(--texto-secondary);
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: border-color 0.25s, color 0.25s, background 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--roxo-main);
+  color: var(--roxo-main);
+  background: var(--roxo-glow);
+}
+
+/* NOVO: bloco de estatísticas do hero */
+.hero-stats {
+  display: flex; /* Itens em linha. */
+  align-items: center; /* Centraliza verticalmente — importante pra alinhar o stat-divider com os textos. */
+  gap: 24px; /* Espaço entre cada stat-item e os divisores. */
+  padding-top: 32px; /* Respiro acima das estatísticas. */
+  border-top: 1px solid rgba(255, 255, 255, 0.06); /* Linha sutil separando os botões das estatísticas. 6% de opacidade = quase invisível, só um detalhe. */
+}
+
+.stat-item {
+  display: flex; /* Coloca stat-number e stat-label em coluna. */
+  flex-direction: column; /* Direção coluna = um embaixo do outro (ao contrário do padrão que é row). */
+  gap: 2px; /* Espaço mínimo entre número e legenda. */
+}
+
+.stat-number {
+  font-family:
+    "Space Grotesk", sans-serif; /* Fonte de display pra os números grandes. */
+  font-size: 1.4rem; /* Número bem maior que a legenda pra criar hierarquia visual. */
+  font-weight: 700;
+  color: var(--texto-primary);
+}
+
+.stat-label {
+  font-size: 0.75rem; /* Bem menor que o número. */
+  color: var(--texto-muted); /* Cinza escuro — discreto. */
+  text-transform: uppercase;
+  letter-spacing: 0.06rem;
+}
+
+.stat-divider {
+  width: 1px; /* Linha vertical de 1px de largura. */
+  height: 36px; /* Altura definida — a div vazia seria invisível sem height. */
+  background: var(--borda-sutil); /* Quase transparente. Serve só como separador visual suave. */
+}
+
+/* ================================================
+   SEÇÃO SOBRE
+================================================ */
+
+.about-us-main-container {
+  padding: 100px 10%; /* Mesmo ritmo de espaçamento das outras seções. */
+  background: var(--bg-secondary); /* Alternância sutil entre #000 e #080808 nas seções cria profundidade sem ser óbvio. */
+  border-top: 1px solid var(--borda-sutil); /* NOVO: linha de separação entre seções. Mais sutil que usar background muito diferente. */
+}
+
+.about-content {
+  display: flex; /* Flexbox pra colocar texto (esquerda) e mockup (direita) lado a lado. */
+  align-items: center; /* Centraliza verticalmente os dois lados. */
+  justify-content: space-between; /* Empurra texto pra esquerda e mockup pra direita. */
+  gap: 60px; /* MUDANÇA: era 50px. Mais respiro entre as duas colunas. */
+}
+
+.about-text {
+  max-width: 560px; /* MUDANÇA: era 600px. Reduzido levemente pra equilibrar melhor com o mockup. */
+}
+
+/* NOVO: label de seção reutilizável */
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem; /* Letras bem espaçadas — efeito "eyebrow" (sobrancelha) acima do título. */
+  color: var(--roxo-main); /* Roxo pra conectar visualmente com o sistema de cores. */
+  margin-bottom: 14px; /* Espaço antes do título principal. */
+}
+
+.about-title {
+  font-size: 3rem; /* MUDANÇA: era 3.2rem. Levemente menor — esse é um h2, deve ser hierarquicamente menor que o h1 do hero (3.4rem). */
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em; /* NOVO: mesmo aperto de letra dos outros títulos. Consistência. */
+}
+
+.about-description,
+.about-mission {
+  color: var(--texto-secondary); /* MUDANÇA: era #aaa. Mais escuro = maior contraste. */
+  margin-bottom: 15px;
+  line-height: 1.75; /* NOVO: line-height maior que o padrão do body. Parágrafos de "sobre" são texto corrido — mais respiro facilita a leitura. */
+  font-size: 0.95rem; /* NOVO: levemente menor que 1rem. Texto de suporte pode ser um pouco menor que o corpo principal. */
+}
+
+.about-visual {
+  flex: 1; /* flex: 1 = ocupa todo o espaço restante do flex container depois que .about-text usou o seu. É como dividir o espaço: texto pega 560px, visual pega "o resto". */
+  display: flex;
+  justify-content: center; /* Centraliza o mockup dentro do espaço disponível. */
+}
+
+/* MUDANÇA: mockup deixou de ser uma caixa vazia e ganhou estrutura interna */
+.mockup-box {
+  width: 420px; /* MUDANÇA: era 400px. Levemente maior pra acomodar a estrutura interna. */
+  height: 280px; /* MUDANÇA: era 250px. Mais alto pra mostrar mais conteúdo simulado. */
+  background: var(--bg-input); /* Fundo bem escuro pra contrastar com os elementos internos. */
+  border-radius: 14px; /* MUDANÇA: era 12px. Cantos mais arredondados — visual mais moderno. */
+  border: 1px solid var(--roxo-borda); /* Borda roxa sutil. */
+  overflow: hidden; /* NOVO: essencial — esconde qualquer filho que ultrapasse o border-radius. Sem isso, os cantos dos elementos internos ficariam quadrados "vazando" pra fora. */
+  box-shadow: 0 0 60px var(--shadow-main); /* NOVO: sombra roxa difusa ao redor do mockup. Cria um leve "brilho" sem ser exagerado. Valores: 0 (x), 0 (y), 60px (blur), cor com 6% de opacidade. */
+}
+
+.mockup-inner {
+  display: flex;
+  flex-direction: column; /* Header em cima, body embaixo. */
+  height: 100%; /* Ocupa a altura total do mockup-box. */
+}
+
+.mockup-header {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Espaço entre os pontinhos coloridos. */
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--borda-dark); /* Linha separando header do body do mockup. */
+}
+
+.mockup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; /* 50% = círculo perfeito. */
+}
+.mockup-dot.red {
+  background: #ff5f57;
+} /* Cor real dos botões do macOS. */
+.mockup-dot.yellow {
+  background: #febc2e;
+}
+.mockup-dot.green {
+  background: #28c840;
+}
+
+.mockup-title-bar {
+  font-size: 11px;
+  color: var(--texto-muted); /* Cinza bem escuro — texto de interface, não de leitura. */
+  margin-left: 8px;
+  font-family: "Inter", sans-serif;
+}
+
+.mockup-body {
+  display: flex;
+  flex: 1; /* Ocupa todo o espaço restante após o header. */
+}
+
+.mockup-sidebar {
+  width: 50px; /* Sidebar estreita — como nos apps de desktop. */
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--borda-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 0;
+  gap: 10px;
+}
+
+.sidebar-item {
+  width: 28px;
+  height: 6px; /* Retângulo achatado simulando um item de menu. */
+  border-radius: 3px;
+  background: var(--bg-input); /* Cinza escuro = item inativo. */
+}
+
+.sidebar-item.active {
+  background: var(--roxo-main); /* Roxo = item ativo/selecionado. */
+}
+
+.mockup-main {
+  flex: 1; /* Ocupa o restante da largura após a sidebar. */
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mockup-card {
+  height: 40px;
+  border-radius: 8px;
+}
+
+.mockup-card.purple {
+  background: linear-gradient(
+    90deg,
+    var(--roxo-glow),
+    transparent
+  ); /* Card com gradiente roxo. Simula um card de KPI destacado. */
+  border: 1px solid var(--roxo-borda);
+}
+
+.mockup-card.dark {
+  background: var(--bg-card);
+  border: 1px solid var(--borda-dark);
+  width: 60%; /* Card menor que o anterior — hierarquia visual. */
+}
+
+.mockup-chart {
+  flex: 1; /* Ocupa todo o espaço vertical restante — simula uma área de gráfico. */
+  background: var(--bg-card);
+  border-radius: 8px;
+  border: 1px solid var(--borda-dark);
+}
+
+/* ================================================
+   SEÇÃO DIFERENCIAIS
+   MUDANÇA: era uma ul simples. Agora é um grid de cards.
+================================================ */
+
+.diferentials-main-container {
+  padding: 100px 10%;
+  background: var(--bg-primary); /* Alterna com o #080808 da seção anterior. Diferença sutil cria ritmo. */
+  border-top: 1px solid var(--borda-sutil);
+}
+
+/* NOVO: container centralizador do cabeçalho das seções */
+.section-header {
+  text-align: center; /* Centraliza texto. Funciona porque os filhos são inline/inline-block. */
+  margin-bottom: 60px; /* Espaço entre o cabeçalho e o grid de cards. */
+}
+
+.diferentials-title,
+.reviews-title {
+  font-size: 2.6rem; /* Menor que o hero (3.4rem) e o about (3rem) — hierarquia de seção. */
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  color: #666; /* Cinza mais escuro que o #888 dos parágrafos. Texto de suporte, menos importante. */
+  font-size: 0.95rem;
+}
+
+/* NOVO: grid de 3 colunas para os cards de diferenciais */
+.diferentials-grid {
+  display: grid; /* CSS Grid: sistema de layout bidimensional (linhas E colunas). Diferente do Flexbox (unidimensional). */
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* Cria 3 colunas de tamanho igual. repeat(3, 1fr) = repita 3x uma coluna de "1 fração" do espaço disponível. */
+  gap: 20px; /* Espaço entre todas as células do grid. */
+}
+
+/* NOVO: card individual de diferencial */
+.diferential-card {
+  background: var(--bg-card);
+  border: 1px solid var(--borda-dark);
+  border-radius: 14px;
+  padding: 28px;
+  transition:
+    border-color 0.3s,
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.diferential-card:hover {
+  border-color: var(--roxo-main);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px var(--shadow-main);
+}
+
+/* NOVO: container do ícone SVG */
+.card-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--roxo-glow);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--roxo-main);
+  margin-bottom: 18px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--texto-primary);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.card-desc {
+  font-size: 0.875rem;
+  color: var(--texto-secondary);
+  line-height: 1.7;
+}
+
+/* ================================================
+   SEÇÃO REVIEWS
+   MUDANÇA: era divs planas com texto de placeholder.
+   Agora é um grid de cards com avatar, estrelas e depoimento estruturado.
+================================================ */
+
+.reviews-main-container {
+  padding: 100px 10%;
+  background: var(--bg-secondary); /* Alterna com o #000 da seção anterior. */
+  border-top: 1px solid var(--borda-sutil);
+}
+
+/* NOVO: mesmo padrão de grid dos diferenciais */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* NOVO: card de review */
+.review-card {
+  background: var(--bg-card);
+  border: 1px solid var(--borda-dark);
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column; /* Empilha: estrelas → texto → autor. */
+  gap: 16px; /* Espaço uniforme entre cada parte do card. */
+  transition:
+    border-color 0.3s,
+    transform 0.3s;
+}
+
+.review-card:hover {
+  border-color: var(--roxo-borda); /* Borda roxa sutil no hover — mais discreto que nos cards de diferenciais. */
+  transform: translateY(-3px); /* Mesmo efeito de elevação. */
+}
+
+/* NOVO: variante "featured" pro card do meio */
+.review-card.featured {
+  border-color: var(--roxo-borda); /* Borda roxa já visível sem precisar do hover. */
+  background: linear-gradient(
+    160deg,
+    var(--bg-input),
+    var(--bg-card)
+  ); /* Gradiente sutil com um leve roxo escuro. 160deg = diagonal. Diferencia o card sem ser gritante. */
+  box-shadow: 0 0 40px var(--shadow-main); /* Brilho suave ao redor — destaque visual. */
+}
+
+/* NOVO: estrelas de avaliação */
+.review-stars {
+  color: var(--roxo-main); /* Estrelas roxas — coerente com o sistema de cores. */
+  font-size: 0.9rem;
+  letter-spacing: 2px; /* Espaço entre as estrelas pra elas não ficarem grudadas. */
+}
+
+.review-text {
+  color: var(--texto-secondary); /* Cinza médio — texto de depoimento, menos importante que o autor. */
+  font-size: 0.9rem;
+  line-height: 1.75;
+  font-style: italic; /* Texto em itálico = convenção visual pra indicar citação/depoimento. */
+  flex: 1; /* flex: 1 faz este parágrafo "crescer" pra preencher o espaço disponível no card. Garante que o autor sempre fique na base, mesmo com textos de tamanhos diferentes. */
+}
+
+/* NOVO: linha horizontal com avatar + nome + cargo */
+.review-author-row {
+  display: flex;
+  align-items: center; /* Avatar and textos alinhados verticalmente no centro. */
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--borda-dark); /* Linha separando o depoimento do autor. */
+}
+
+/* NOVO: avatar circular com iniciais */
+.review-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%; /* 50% = círculo. */
+  background: linear-gradient(
+    135deg,
+    var(--roxo-dark),
+    var(--roxo-main)
+  ); /* Gradiente roxo pra cada avatar. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.review-author-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--texto-primary);
+}
+
+.review-author-role {
+  font-size: 0.75rem;
+  color: var(--texto-muted);
+}
+
+/* ================================================
+   FOOTER
+   MUDANÇA: era só uma linha de copyright.
+   Agora tem logo, tagline, links e linha de copyright separada.
+================================================ */
+
+.footer-gennus {
+  background: var(--bg-primary);
+  border-top: 1px solid var(--borda-sutil);
+  padding: 48px 10% 28px;
+}
+
+/* NOVO: divide footer em logo/tagline (esquerda) e links (direita) */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinha pelo topo — evita que links fiquem centralizados verticalmente em relação ao logo+tagline. */
+  margin-bottom: 36px;
+}
+
+.footer-logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--roxo-main), var(--roxo-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-tagline {
+  font-size: 0.8rem;
+  color: var(--texto-muted);
+  margin-top: 6px;
+}
+
+/* NOVO: links de navegação no rodapé */
+.footer-links {
+  display: flex;
+  gap: 28px; /* Espaçamento generoso entre links. */
+}
+
+.footer-links a {
+  color: var(--texto-links);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--roxo-main);
+}
+
+/* NOVO: linha de copyright separada na base do footer */
+.footer-bottom {
+  border-top: 1px solid var(--borda-sutil);
+  padding-top: 20px;
+}
+
+.footer-bottom p {
+  color: var(--texto-muted);
+  font-size: 0.78rem;
+}
+
+/* ================================================
+   ANIMAÇÕES
+================================================ */
+
+/* A classe fade-in já existia no original, mas o keyframe estava incompleto */
+.fade-in {
+  opacity: 0; /* Começa invisível. opacity: 0 = 0% de visibilidade. */
+  transform: translateY(20px); /* Começa 20px abaixo da posição final. */
+  animation: fadeInUp 0.6s ease forwards; /* Executa a animação fadeInUp por 0.6s com aceleração ease, e mantém o estado final (forwards). */
+}
+
+.delay-2 {
+  animation-delay: 0.2s; /* Atrasa o início da animação em 0.2s. O elemento aparece depois do primeiro — sequência visual. */
+}
+
+@keyframes fadeInUp {
+  /* Define os "fotogramas" da animação. "to" = estado final. "from" = estado inicial (herdado das propriedades do .fade-in). */
+  to {
+    opacity: 1; /* Termina completamente visível. */
+    transform: translateY(
+      0
+    ); /* Termina na posição original (sem deslocamento). */
+  }
+}
+
+/* ================================================
+   RESPONSIVIDADE
+   NOVO: o original não tinha media queries.
+   Media queries são como "IFs" do CSS: "se a tela for menor que X, aplique estes estilos".
+================================================ */
+
+@media (max-width: 900px) {
+  /* Tablets e telas médias */
+
+  .diferentials-grid,
+  .reviews-grid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 3 colunas viram 2. Cards não ficam minúsculos em telas médias. */
+  }
+
+  .about-content {
+    flex-direction: column; /* Texto e mockup param de ficar lado a lado e vão pra coluna (um embaixo do outro). */
+  }
+
+  .mockup-box {
+    width: 100%; /* Em coluna, o mockup ocupa a largura total disponível. */
+  }
+
+  .hero-title {
+    font-size: 2.4rem; /* Título menor em tela menor — proporcionalidade. */
+  }
+}
+
+@media (max-width: 600px) {
+  /* Celulares */
+
+  .diferentials-grid,
+  .reviews-grid {
+    grid-template-columns: 1fr; /* Coluna única em mobile. Um card por vez. */
+  }
+
+  .nav-a {
+    display: none; /* Esconde os links de texto da navbar em mobile. Em produção, substituiríamos por um menu hambúrguer com JavaScript. */
+  }
+
+  .hero-stats {
+    flex-direction: column; /* Stats viram coluna em mobile. */
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .stat-divider {
+    display: none; /* Os divisores verticais não fazem sentido em layout de coluna. */
+  }
+}
+
+/* animação da pagina */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-a.active {
+  color: var(--roxo-main);
+}
