@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nome do Produto | Gennus</title> <!-- isso aqui é -->
+    <link rel="stylesheet" href="../css/css-provisório.css">
+</head>
+<body>
+
+    <main class="product-table-main-page">
+
+        <nav class="sidebar-main">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="product-list.html">Produtos</a>
+            <a href="sales.html">Vendas</a>
+            <a href="financial.html">Finanças</a>
+            <a href="reports.html">Relatórios</a>
+
+            <nav class="sidebar-user">
+                <h3>Perfil</h3>
+                <a href="profile.html">nome do caba</a>
+                <a href="config.html">Configurações</a>
+            </nav>
+        </nav>
+
+        <div class="product-table-cards"> <!-- só avisando que aqui ta muito ruim os nomes das classes, fiquei sem ideia do que colocar-->
+
+            <h1 id="view-name">nome do produto</h1>
+            <h1 id="view-price">Preço Unitário: R$ 0.00</h1>
+            <h1 id="view-category">Categoria: </h1>
+            
+            <div class="product-table-details-container">
+
+                <img src="" id="view-image" alt="imagem do produto" class="product-table-image">
+                
+
+                <div class="product-table-info">
+                    <h2>Desempenho de Vendas</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Período</th>
+                                <th>Quantidade</th>
+                                <th>Rendimento</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td><span>Ultimas 24 Horas</span></td>
+                                <td><span id="product-table-daily-sales">0</span></td>
+                                <td><span id="product-table-daily-income">R$ 0.00</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Ultimos 7 dias</span></td>
+                                <td><span id="product-table-weekly-sales">0</span></td>
+                                <td><span id="product-table-weekly-income">R$ 0.00</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>  
+
+    </main>
+</body>
+</html>
