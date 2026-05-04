@@ -1,0 +1,694 @@
+/* ================================================
+   renda.css — Renda Bruta / Líquida — Gennus
+   Complementa dashboard.css.
+   Mesmo sistema de design das páginas anteriores.
+================================================ */
+
+:root {
+  --borda: rgba(255,255,255,0.07);
+}
+
+/* ------------------------------------------------
+   SIDEBAR: link ativo
+------------------------------------------------ */
+.sidebar-link-active {
+  color: var(--roxo) !important;
+  background: rgba(168, 85, 247, 0.08);
+  border-radius: 6px;
+}
+
+.sidebar-link-active::before {
+  opacity: 1 !important;
+}
+
+/* ------------------------------------------------
+   CABEÇALHO
+------------------------------------------------ */
+.renda-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--borda);
+  animation: fadeSlideDown 0.45s ease both;
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.renda-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.renda-eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--roxo);
+  opacity: 0.8;
+}
+
+.renda-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--texto);
+  line-height: 1;
+}
+
+/* O "/" entre Bruta e Líquida em cor roxa */
+.renda-title .divider {
+  color: var(--roxo);
+  margin: 0 6px;
+  opacity: 0.7;
+}
+
+.renda-subtitle {
+  font-size: 0.82rem;
+  color: var(--texto-muted);
+  margin-top: 2px;
+}
+
+/* ------------------------------------------------
+   FILTRO DE PERÍODO — idêntico ao charts.css
+------------------------------------------------ */
+.period-filter {
+  display: flex;
+  gap: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.period-btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  padding: 7px 16px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--texto-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.period-btn:hover {
+  color: var(--texto);
+  background: var(--bg-surface-2);
+}
+
+.period-btn.active {
+  background: var(--roxo);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.35);
+}
+
+/* ------------------------------------------------
+   FAIXA DE KPIs
+   4 cards em linha: bruta | líquida | deduções | margem
+------------------------------------------------ */
+.renda-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  animation: fadeSlideUp 0.5s ease both;
+  animation-delay: 0.05s;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.kpi-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow sutil no topo de cada card KPI */
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: 14px 14px 0 0;
+  opacity: 0.7;
+}
+
+.kpi-bruta::before   { background: var(--verde); }
+.kpi-liquida::before { background: var(--roxo); }
+.kpi-deducoes::before{ background: var(--vermelho); }
+.kpi-margem::before  { background: #60a5fa; }
+
+.kpi-card:hover {
+  border-color: rgba(168, 85, 247, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+}
+
+.kpi-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+}
+
+.kpi-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.kpi-bruta   .kpi-value { color: var(--verde); }
+.kpi-liquida .kpi-value { color: var(--roxo); }
+.kpi-deducoes .kpi-value{ color: var(--vermelho); }
+.kpi-margem  .kpi-value { color: #60a5fa; }
+
+/* Delta: +12% vs período anterior */
+.kpi-delta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.kpi-delta.pos { color: var(--verde); }
+.kpi-delta.neg { color: var(--vermelho); }
+
+/* Subtítulo pequeno (ex: "impostos + custos") */
+.kpi-sub {
+  font-size: 0.7rem;
+  color: #444;
+}
+
+/* ------------------------------------------------
+   CARD BASE REUTILIZÁVEL
+------------------------------------------------ */
+.renda-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color 0.25s ease;
+}
+
+.renda-card:hover {
+  border-color: var(--roxo-borda);
+}
+
+.renda-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.renda-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--texto-muted);
+  margin: 0;
+}
+
+.renda-card-subtitle {
+  font-size: 0.75rem;
+  color: #444;
+  margin-top: 3px;
+}
+
+/* Badge do período selecionado */
+.renda-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06rem;
+  color: var(--roxo);
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 6px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------
+   LINHA PRINCIPAL (composição + detalhamento)
+------------------------------------------------ */
+.renda-main-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+  align-items: start;
+  animation: fadeSlideUp 0.5s ease both;
+  animation-delay: 0.1s;
+}
+
+/* ------------------------------------------------
+   WATERFALL — barra de composição visual
+   Receita Bruta → deduções → Renda Líquida
+------------------------------------------------ */
+.waterfall {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wf-separator {
+  height: 1px;
+  background: var(--borda);
+  margin: 4px 0;
+}
+
+.wf-separator-resultado {
+  background: rgba(168, 85, 247, 0.2);
+}
+
+.wf-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 52px;
+  align-items: center;
+  gap: 14px;
+}
+
+.wf-row-resultado {
+  margin-top: 2px;
+}
+
+.wf-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wf-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--texto-muted);
+}
+
+/* Labels de dedução ficam com cor avermelhada */
+.wf-deducao {
+  color: #664444;
+}
+
+/* Label do resultado líquido */
+.wf-resultado {
+  color: var(--roxo);
+  font-weight: 600;
+}
+
+.wf-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.wf-neg { color: var(--vermelho); }
+.wf-pos { color: var(--roxo); }
+
+/* Track da barra */
+.wf-bar-track {
+  height: 8px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+/* Barras */
+.wf-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wf-bar-bruta   { background: linear-gradient(90deg, var(--verde), #16a34a); }
+.wf-bar-deducao { background: linear-gradient(90deg, #7f2020, var(--vermelho)); }
+.wf-bar-liquida { background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo)); box-shadow: 0 0 12px rgba(168,85,247,0.4); }
+
+/* Percentual à direita de cada barra */
+.wf-pct {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #444;
+  text-align: right;
+}
+
+/* ------------------------------------------------
+   CARD DETALHAMENTO — lista de categorias
+------------------------------------------------ */
+.detalhe-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.detalhe-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.detalhe-item:hover {
+  background: var(--bg-surface-2);
+  border-color: var(--borda);
+}
+
+/* Bolinha colorida */
+.detalhe-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.detalhe-nome {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--texto-muted);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.detalhe-valor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--vermelho);
+}
+
+.detalhe-pct-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #444;
+  background: rgba(255,255,255,0.04);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Rodapé do detalhamento */
+.detalhe-footer {
+  border-top: 1px solid var(--borda);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detalhe-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--texto-muted);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.detalhe-footer-destaque {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--texto);
+}
+
+.detalhe-footer-divider {
+  height: 1px;
+  background: var(--borda);
+}
+
+.df-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.df-neg { color: var(--vermelho); }
+.df-pos { color: var(--roxo); }
+
+/* ------------------------------------------------
+   LINHA INFERIOR (histórico + saúde)
+------------------------------------------------ */
+.renda-bottom-row {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 16px;
+  align-items: start;
+  animation: fadeSlideUp 0.5s ease both;
+  animation-delay: 0.15s;
+}
+
+/* ------------------------------------------------
+   TABELA HISTÓRICO
+------------------------------------------------ */
+.historico-table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+.historico-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+}
+
+.historico-table thead th {
+  padding: 10px 14px;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.08rem;
+  font-weight: 600;
+  color: #444;
+  border-bottom: 1px solid var(--borda);
+  white-space: nowrap;
+}
+
+.historico-table thead th:not(:first-child) {
+  text-align: right;
+}
+
+.historico-table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.15s ease;
+}
+
+.historico-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.historico-table tbody tr:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.historico-table tbody td {
+  padding: 12px 14px;
+  color: var(--texto-muted);
+  white-space: nowrap;
+}
+
+.historico-table tbody td:not(:first-child) {
+  text-align: right;
+}
+
+/* Período (coluna 1) */
+.historico-table tbody td:first-child {
+  font-weight: 500;
+  color: var(--texto);
+}
+
+/* Valores bruto/líquido */
+.td-bruto  { color: var(--verde) !important; font-weight: 600 !important; }
+.td-liquido{ color: var(--roxo)  !important; font-weight: 600 !important; }
+
+/* Variação positiva / negativa */
+.td-var-pos {
+  color: var(--verde) !important;
+  font-weight: 700 !important;
+}
+.td-var-neg {
+  color: var(--vermelho) !important;
+  font-weight: 700 !important;
+}
+
+/* Margem com tag visual */
+.margem-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.margem-tag.alta  { background: rgba(34,197,94,0.1);  color: var(--verde); }
+.margem-tag.media { background: rgba(251,191,36,0.1); color: var(--amarelo); }
+.margem-tag.baixa { background: rgba(248,113,113,0.1);color: var(--vermelho); }
+
+/* ------------------------------------------------
+   INDICADORES DE SAÚDE FINANCEIRA
+------------------------------------------------ */
+.saude-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.saude-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.saude-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saude-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--texto-muted);
+}
+
+.saude-valor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+/* Barra de progresso dos indicadores */
+.saude-bar-track {
+  height: 5px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.saude-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.saude-bar-margem     { background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo)); }
+.saude-bar-eficiencia { background: linear-gradient(90deg, #1d4ed8, #60a5fa); }
+.saude-bar-tributos   { background: linear-gradient(90deg, #7f1d1d, var(--vermelho)); }
+
+.saude-referencia {
+  font-size: 0.65rem;
+  color: #333;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Item de crescimento (sem barra) */
+.saude-item-crescimento {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 14px 16px;
+  gap: 6px;
+}
+
+.saude-valor-crescimento {
+  font-size: 1.1rem;
+}
+
+.saude-valor-crescimento.pos { color: var(--verde); }
+.saude-valor-crescimento.neg { color: var(--vermelho); }
+
+.saude-crescimento-desc {
+  font-size: 0.72rem;
+  color: #444;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ------------------------------------------------
+   RESPONSIVIDADE
+------------------------------------------------ */
+@media (max-width: 1100px) {
+  .renda-main-row,
+  .renda-bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-row {
+    grid-template-columns: 160px 1fr 44px;
+  }
+}
+
+@media (max-width: 900px) {
+  .renda-kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .renda-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .renda-kpis {
+    grid-template-columns: 1fr;
+  }
+
+  .period-filter {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .period-btn {
+    flex: 1;
+    text-align: center;
+    padding: 7px 6px;
+  }
+
+  .wf-row {
+    grid-template-columns: 130px 1fr 36px;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renda Bruta / Líquida — Gennus</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="submenu-renda.css">
+</head>
+
+<body>
+
+  <main class="dashboard-page">
+
+    <!-- ================================================
+         SIDEBAR
+    ================================================ -->
+    <nav class="sidebar-main">
+      <div class="bg-glow"></div>
+      <div class="sidebar-logo">GENNUS</div>
+
+      <details>
+        <summary>Produtos</summary>
+        <a href="#">Lista de Produtos</a>
+        <a href="#">Adicionar Produto</a>
+        <a href="#">Editar / Excluir</a>
+      </details>
+
+      <!-- AJUSTE: Vendas aberto — estamos dentro desta seção -->
+      <details open>
+        <summary>Vendas</summary>
+        <a href="#">Resumo do Período</a>
+        <a href="submenu-renda.html" class="sidebar-link-active">Renda Bruta / Líquida</a>
+        <a href="#">Top Itens</a>
+      </details>
+
+      <details>
+        <summary>Finanças</summary>
+        <a href="#">Receita</a>
+        <a href="#">Despesas</a>
+        <a href="#">Lucro</a>
+        <a href="#">IA Feedback</a>
+      </details>
+
+      <details>
+        <summary>Relatórios</summary>
+        <a href="charts.html">Gráficos</a>
+        <a href="#">Relatório</a>
+      </details>
+
+      <details class="config-details">
+        <summary>Configurações</summary>
+        <a href="#">Período de Fechamento</a>
+        <a href="#">Personalizar</a>
+        <a href="#">Dados da Empresa</a>
+      </details>
+
+      <div class="sidebar-user">
+        <div class="perfil-border"></div>
+        <span>Perfil</span>
+        <a href="profile.html">Nome do Usuário</a>
+        <a href="#">Logout</a>
+      </div>
+    </nav>
+
+    <!-- ================================================
+         CABEÇALHO DA PÁGINA
+    ================================================ -->
+    <div class="renda-header">
+      <div class="renda-header-left">
+        <span class="renda-eyebrow">Vendas</span>
+        <h1 class="renda-title">Renda Bruta <span class="divider">/</span> Líquida</h1>
+        <p class="renda-subtitle">Comparativo de receita e margens do negócio</p>
+      </div>
+
+      <!-- Filtro de período -->
+      <div class="period-filter" id="period-filter">
+        <button class="period-btn active" data-period="7d">7 dias</button>
+        <button class="period-btn" data-period="30d">30 dias</button>
+        <button class="period-btn" data-period="90d">3 meses</button>
+        <button class="period-btn" data-period="1y">1 ano</button>
+      </div>
+    </div>
+
+    <!-- ================================================
+         FAIXA DE MÉTRICAS PRINCIPAIS
+         4 KPIs no topo: Bruta | Líquida | Deduções | Margem
+    ================================================ -->
+    <div class="renda-kpis" id="renda-kpis">
+
+      <div class="kpi-card kpi-bruta">
+        <span class="kpi-label">Renda Bruta</span>
+        <span class="kpi-value" id="kpi-bruta">—</span>
+        <span class="kpi-delta" id="kpi-bruta-delta"></span>
+      </div>
+
+      <div class="kpi-card kpi-liquida">
+        <span class="kpi-label">Renda Líquida</span>
+        <span class="kpi-value" id="kpi-liquida">—</span>
+        <span class="kpi-delta" id="kpi-liquida-delta"></span>
+      </div>
+
+      <div class="kpi-card kpi-deducoes">
+        <span class="kpi-label">Total de Deduções</span>
+        <span class="kpi-value" id="kpi-deducoes">—</span>
+        <span class="kpi-sub">impostos + custos</span>
+      </div>
+
+      <div class="kpi-card kpi-margem">
+        <span class="kpi-label">Margem Líquida</span>
+        <span class="kpi-value" id="kpi-margem">—</span>
+        <span class="kpi-sub">do total bruto</span>
+      </div>
+
+    </div>
+
+    <!-- ================================================
+         LINHA PRINCIPAL: BARRA COMPARATIVA + DETALHAMENTO
+    ================================================ -->
+    <div class="renda-main-row">
+
+      <!-- CARD ESQUERDO: barra de composição visual -->
+      <div class="renda-card renda-composicao">
+        <div class="renda-card-header">
+          <div>
+            <h3 class="renda-card-title">Composição da Renda</h3>
+            <p class="renda-card-subtitle">Do bruto ao líquido</p>
+          </div>
+          <span class="renda-badge" id="badge-periodo">7 dias</span>
+        </div>
+
+        <!-- Barra de waterfall visual -->
+        <div class="waterfall" id="waterfall">
+
+          <!-- Linha: Receita Bruta -->
+          <div class="wf-row" id="wf-bruta">
+            <div class="wf-meta">
+              <span class="wf-label">Receita Bruta</span>
+              <span class="wf-value" id="wf-bruta-val">—</span>
+            </div>
+            <div class="wf-bar-track">
+              <div class="wf-bar wf-bar-bruta" id="wf-bar-bruta" style="width:100%"></div>
+            </div>
+            <span class="wf-pct">100%</span>
+          </div>
+
+          <div class="wf-separator"></div>
+
+          <!-- Linha: Impostos -->
+          <div class="wf-row" id="wf-impostos">
+            <div class="wf-meta">
+              <span class="wf-label wf-deducao">− Impostos</span>
+              <span class="wf-value wf-neg" id="wf-impostos-val">—</span>
+            </div>
+            <div class="wf-bar-track">
+              <div class="wf-bar wf-bar-deducao" id="wf-bar-impostos" style="width:0%"></div>
+            </div>
+            <span class="wf-pct" id="wf-impostos-pct">—</span>
+          </div>
+
+          <!-- Linha: Custos Operacionais -->
+          <div class="wf-row" id="wf-custos">
+            <div class="wf-meta">
+              <span class="wf-label wf-deducao">− Custos Operacionais</span>
+              <span class="wf-value wf-neg" id="wf-custos-val">—</span>
+            </div>
+            <div class="wf-bar-track">
+              <div class="wf-bar wf-bar-deducao" id="wf-bar-custos" style="width:0%"></div>
+            </div>
+            <span class="wf-pct" id="wf-custos-pct">—</span>
+          </div>
+
+          <!-- Linha: Outras Deduções -->
+          <div class="wf-row" id="wf-outras">
+            <div class="wf-meta">
+              <span class="wf-label wf-deducao">− Outras Deduções</span>
+              <span class="wf-value wf-neg" id="wf-outras-val">—</span>
+            </div>
+            <div class="wf-bar-track">
+              <div class="wf-bar wf-bar-deducao" id="wf-bar-outras" style="width:0%"></div>
+            </div>
+            <span class="wf-pct" id="wf-outras-pct">—</span>
+          </div>
+
+          <div class="wf-separator wf-separator-resultado"></div>
+
+          <!-- Linha: Renda Líquida (resultado) -->
+          <div class="wf-row wf-row-resultado" id="wf-liquida">
+            <div class="wf-meta">
+              <span class="wf-label wf-resultado">= Renda Líquida</span>
+              <span class="wf-value wf-pos" id="wf-liquida-val">—</span>
+            </div>
+            <div class="wf-bar-track">
+              <div class="wf-bar wf-bar-liquida" id="wf-bar-liquida" style="width:0%"></div>
+            </div>
+            <span class="wf-pct" id="wf-liquida-pct">—</span>
+          </div>
+
+        </div>
+        <!-- fim .waterfall -->
+
+      </div>
+      <!-- fim .renda-composicao -->
+
+      <!-- CARD DIREITO: painel de detalhes em lista -->
+      <div class="renda-card renda-detalhes">
+        <div class="renda-card-header">
+          <div>
+            <h3 class="renda-card-title">Detalhamento</h3>
+            <p class="renda-card-subtitle">Valores por categoria</p>
+          </div>
+        </div>
+
+        <!-- Lista de categorias de dedução -->
+        <ul class="detalhe-list" id="detalhe-list">
+          <!-- Populada pelo JS -->
+        </ul>
+
+        <!-- Rodapé: total deduzido e líquido -->
+        <div class="detalhe-footer">
+          <div class="detalhe-footer-row">
+            <span>Total Deduzido</span>
+            <span class="df-val df-neg" id="df-deducoes">—</span>
+          </div>
+          <div class="detalhe-footer-divider"></div>
+          <div class="detalhe-footer-row detalhe-footer-destaque">
+            <span>Renda Líquida</span>
+            <span class="df-val df-pos" id="df-liquida">—</span>
+          </div>
+        </div>
+
+      </div>
+      <!-- fim .renda-detalhes -->
+
+    </div>
+    <!-- fim .renda-main-row -->
+
+    <!-- ================================================
+         LINHA INFERIOR: HISTÓRICO + COMPARATIVO MENSAL
+    ================================================ -->
+    <div class="renda-bottom-row">
+
+      <!-- CARD: Evolução mês a mês (tabela) -->
+      <div class="renda-card renda-historico">
+        <div class="renda-card-header">
+          <div>
+            <h3 class="renda-card-title">Histórico de Períodos</h3>
+            <p class="renda-card-subtitle">Comparativo bruto × líquido</p>
+          </div>
+        </div>
+
+        <div class="historico-table-wrapper">
+          <table class="historico-table" id="historico-table">
+            <thead>
+              <tr>
+                <th>Período</th>
+                <th>Bruto</th>
+                <th>Deduções</th>
+                <th>Líquido</th>
+                <th>Margem</th>
+                <th>Variação</th>
+              </tr>
+            </thead>
+            <tbody id="historico-tbody">
+              <!-- Populado pelo JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CARD: Indicadores de saúde financeira -->
+      <div class="renda-card renda-saude">
+        <div class="renda-card-header">
+          <div>
+            <h3 class="renda-card-title">Saúde Financeira</h3>
+            <p class="renda-card-subtitle">Indicadores do período</p>
+          </div>
+        </div>
+
+        <div class="saude-list" id="saude-list">
+
+          <!-- Indicador 1: Margem -->
+          <div class="saude-item" id="saude-margem">
+            <div class="saude-item-top">
+              <span class="saude-label">Margem Líquida</span>
+              <span class="saude-valor" id="saude-margem-val">—</span>
+            </div>
+            <div class="saude-bar-track">
+              <div class="saude-bar saude-bar-margem" id="saude-bar-margem" style="width:0%"></div>
+            </div>
+            <span class="saude-referencia">Meta: 40%</span>
+          </div>
+
+          <!-- Indicador 2: Eficiência operacional -->
+          <div class="saude-item" id="saude-eficiencia">
+            <div class="saude-item-top">
+              <span class="saude-label">Eficiência Operacional</span>
+              <span class="saude-valor" id="saude-eficiencia-val">—</span>
+            </div>
+            <div class="saude-bar-track">
+              <div class="saude-bar saude-bar-eficiencia" id="saude-bar-eficiencia" style="width:0%"></div>
+            </div>
+            <span class="saude-referencia">Custos / Bruto</span>
+          </div>
+
+          <!-- Indicador 3: Carga tributária -->
+          <div class="saude-item" id="saude-tributos">
+            <div class="saude-item-top">
+              <span class="saude-label">Carga Tributária</span>
+              <span class="saude-valor" id="saude-tributos-val">—</span>
+            </div>
+            <div class="saude-bar-track">
+              <div class="saude-bar saude-bar-tributos" id="saude-bar-tributos" style="width:0%"></div>
+            </div>
+            <span class="saude-referencia">Impostos / Bruto</span>
+          </div>
+
+          <!-- Indicador 4: Crescimento líquido -->
+          <div class="saude-item saude-item-crescimento">
+            <div class="saude-item-top">
+              <span class="saude-label">Crescimento Líquido</span>
+              <span class="saude-valor saude-valor-crescimento" id="saude-crescimento-val">—</span>
+            </div>
+            <p class="saude-crescimento-desc" id="saude-crescimento-desc">vs. período anterior</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- fim .renda-bottom-row -->
+
+  </main>
+
+  <script src="renda.js"></script>
+
+</body>
+</html>
