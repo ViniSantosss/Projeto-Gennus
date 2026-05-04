@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+  <!-- Título descritivo — o que aparece na aba e no Google.
+       "Gennus — Termos de Uso" é mais informativo que só "Termos". -->
+  <title>Termos de Uso — Gennus</title>
+ 
+  <!-- Meta descrição: o Google usa esse texto no resultado de busca.
+       Não aparece na página, mas é fundamental pra SEO. -->
+  <meta name="description" content="Leia os Termos de Uso da plataforma Gennus. Saiba seus direitos, responsabilidades e como tratamos seus dados.">
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/assets/gennus-favicon-A.svg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/gennus-favicon-A.svg">
+ 
+  <style>
+    /* ================================================
+       RESET GLOBAL
+       Mesmo reset da landing e do login — base consistente
+       em todas as páginas do projeto.
+    ================================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+ 
+    /* ================================================
+       VARIÁVEIS — MESMA PALETA DO LOGIN.CSS
+       Copiamos as variáveis aqui porque esta página
+       não depende do login.css. Se no futuro você criar
+       um arquivo global.css com as variáveis, pode importar
+       de lá em vez de repetir.
+    ================================================ */
+    :root {
+      --bg:              #000000;
+      --bg-surface:      #080808;    /* Fundo levemente elevado — cards, sidebar */
+      --bg-surface-2:    #0f0f0f;    /* Segunda camada — hover de itens */
+      --roxo:            #a855f7;
+      --roxo-escuro:     #7e22ce;
+      --roxo-borda:      rgba(168, 85, 247, 0.15);
+      --roxo-borda-foco: rgba(168, 85, 247, 0.4);
+      --texto:           #ffffff;
+      --texto-muted:     #777777;
+      --texto-dim:       #444444;
+      --borda:           rgba(255, 255, 255, 0.06);
+    }
+ 
+    /* ================================================
+       BODY — BASE DA PÁGINA
+    ================================================ */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--texto);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+ 
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif; /* Fonte de display pra títulos. */
+    }
+ 
+    /* ================================================
+       NAVBAR — mesma do login/landing
+       Reaproveitamos o padrão: fixed, blur, roxo.
+    ================================================ */
+    .navbar {
+      position: fixed;   /* Flutua no topo — fica visível ao rolar. */
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);          /* Vidro fosco. */
+      border-bottom: 1px solid var(--borda);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 100;     /* Na frente do conteúdo ao rolar. */
+    }
+ 
+    .navbar-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; /* Gradiente no texto do logo. */
+      text-decoration: none;
+    }
+ 
+    .navbar-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--texto-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+ 
+    .navbar-back:hover {
+      color: var(--roxo); /* Roxo no hover — padrão do sistema. */
+    }
+ 
+    /* ================================================
+       LAYOUT PRINCIPAL
+       Estrutura de duas colunas: sidebar fixa à esquerda
+       + conteúdo que rola à direita.
+ 
+       É como um livro com índice fixo na margem e
+       texto que você pode rolar independentemente.
+    ================================================ */
+    .page-wrapper {
+      display: flex;
+      padding-top: 60px; /* Compensa a altura da navbar fixed. */
+      min-height: 100vh;
+      max-width: 1100px;
+      margin: 0 auto;   /* Centraliza o layout na tela. */
+    }
+ 
+    /* ================================================
+       SIDEBAR — índice de navegação
+       position: sticky faz a sidebar "grudar" ao rolar.
+       Diferente de fixed: sticky respeita o fluxo do documento
+       e para quando chega no fim do pai.
+    ================================================ */
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;   /* Não encolhe quando o conteúdo é grande. */
+      padding: 48px 0 48px 24px;
+      position: sticky;
+      top: 60px;        /* Fica 60px abaixo do topo = logo abaixo da navbar. */
+      height: calc(100vh - 60px); /* Altura da tela menos a navbar. */
+      overflow-y: auto; /* Scroll próprio se o índice for maior que a tela. */
+    }
+ 
+    .sidebar-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15rem;
+      color: var(--texto-dim);
+      margin-bottom: 16px;
+      padding-left: 12px;
+    }
+ 
+    /* Lista de links de navegação da sidebar */
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+ 
+    .sidebar-nav a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: var(--texto-muted);
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+      border-left: 2px solid transparent; /* Borda que fica roxa no item ativo. */
+    }
+ 
+    .sidebar-nav a:hover {
+      color: var(--texto);
+      background: var(--bg-surface-2);
+    }
+ 
+    /* Classe .active adicionada via JS conforme o usuário rola */
+    .sidebar-nav a.active {
+      color: var(--roxo);
+      background: rgba(168, 85, 247, 0.06);
+      border-left-color: var(--roxo); /* Linha roxa à esquerda = destaque de item ativo. */
+    }
+ 
+    /* ================================================
+       ÁREA DE CONTEÚDO
+       flex: 1 = ocupa todo o espaço restante depois da sidebar.
+       É o "resto da largura" do layout de duas colunas.
+    ================================================ */
+    .content {
+      flex: 1;
+      padding: 48px 40px 80px 48px;
+      border-left: 1px solid var(--borda); /* Linha separando sidebar do conteúdo. */
+      max-width: 720px; /* Largura máxima do texto — ~80 chars por linha, ideal pra leitura. */
+    }
+ 
+    /* ================================================
+       CABEÇALHO DO DOCUMENTO
+    ================================================ */
+    .doc-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--borda);
+    }
+ 
+    /* Badge "Documento legal" acima do título */
+    .doc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid var(--roxo-borda);
+      color: var(--roxo);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08rem;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+ 
+    .doc-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--texto);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+ 
+    .doc-subtitle {
+      font-size: 0.9rem;
+      color: var(--texto-muted);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+ 
+    /* Metadados: data de atualização + versão */
+    .doc-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+ 
+    .doc-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+ 
+    .meta-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: var(--texto-dim);
+      font-weight: 600;
+    }
+ 
+    .meta-value {
+      font-size: 0.82rem;
+      color: var(--texto-muted);
+      font-weight: 500;
+    }
+ 
+    /* ================================================
+       SEÇÕES DO DOCUMENTO
+       Cada seção tem um id que a sidebar usa como âncora.
+       O scroll suave entre seções é feito no CSS (scroll-behavior)
+       e o destaque do item ativo é feito no JS (IntersectionObserver).
+    ================================================ */
+    .terms-section {
+      margin-bottom: 52px;
+      scroll-margin-top: 80px; /* Quando navegado via âncora, para 80px abaixo do topo.
+                                   Sem isso, a seção ficaria atrás da navbar fixed. */
+    }
+ 
+    /* Número + título de cada seção */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+ 
+    /* Número da seção (ex: "01") em roxo grande */
+    .section-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--roxo);
+      opacity: 0.6;
+      letter-spacing: 0.05rem;
+      min-width: 24px;
+    }
+ 
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--texto);
+      letter-spacing: -0.02em;
+    }
+ 
+    /* Parágrafos do conteúdo */
+    .terms-text {
+      font-size: 0.875rem;
+      color: var(--texto-muted);
+      line-height: 1.85; /* line-height generoso pra textos longos — mais confortável. */
+      margin-bottom: 14px;
+    }
+ 
+    .terms-text:last-child {
+      margin-bottom: 0; /* Remove margem do último parágrafo — evita espaço duplo. */
+    }
+ 
+    /* Lista de itens dentro das seções */
+    .terms-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 16px 0;
+    }
+ 
+    .terms-list li {
+      display: flex;
+      gap: 12px;
+      font-size: 0.875rem;
+      color: var(--texto-muted);
+      line-height: 1.7;
+    }
+ 
+    /* Bolinha roxa antes de cada item da lista */
+    .terms-list li::before {
+      content: ''; /* Elemento vazio que vira a bolinha no CSS. */
+      width: 5px;
+      height: 5px;
+      min-width: 5px;    /* min-width impede de encolher em flex. */
+      border-radius: 50%;
+      background: var(--roxo);
+      opacity: 0.5;
+      margin-top: 8px;   /* Alinha com a primeira linha do texto. */
+    }
+ 
+    /* Card de destaque — usado em seções importantes como LGPD */
+    .highlight-card {
+      background: rgba(168, 85, 247, 0.05);
+      border: 1px solid var(--roxo-borda);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 20px 0;
+      font-size: 0.875rem;
+      color: var(--texto-muted);
+      line-height: 1.7;
+    }
+ 
+    .highlight-card strong {
+      color: var(--roxo); /* Destaque em roxo dentro do card. */
+      font-weight: 600;
+    }
+ 
+    /* Email / links de contato */
+    .terms-link {
+      color: var(--roxo);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+ 
+    .terms-link:hover {
+      border-bottom-color: var(--roxo); /* Sublinhado aparece no hover. */
+    }
+ 
+    /* ================================================
+       DIVISOR ENTRE SEÇÕES
+       Linha sutil que separa visualmente as seções.
+    ================================================ */
+    .section-divider {
+      height: 1px;
+      background: var(--borda);
+      margin-bottom: 52px;
+    }
+ 
+    /* ================================================
+       RODAPÉ DO DOCUMENTO
+    ================================================ */
+    .doc-footer {
+      margin-top: 60px;
+      padding-top: 32px;
+      border-top: 1px solid var(--borda);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+ 
+    .doc-footer-text {
+      font-size: 0.8rem;
+      color: var(--texto-dim);
+      line-height: 1.7;
+    }
+ 
+    /* Botão de voltar ao cadastro — CTA do rodapé */
+    .btn-back-register {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo));
+      color: #fff;
+      text-decoration: none;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      align-self: flex-start; /* Não estica pra ocupar a largura toda. */
+    }
+ 
+    .btn-back-register:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(168, 85, 247, 0.3);
+    }
+ 
+    /* ================================================
+       SCROLL SUAVE
+       scroll-behavior: smooth faz que links de âncora
+       (#section-1) rolem suavemente em vez de "pular".
+       É CSS puro — sem JavaScript.
+    ================================================ */
+    html {
+      scroll-behavior: smooth;
+    }
+ 
+    /* ================================================
+       RESPONSIVIDADE
+       Em telas menores, a sidebar some e o conteúdo
+       ocupa a largura toda.
+    ================================================ */
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none; /* Sidebar escondida em mobile. */
+      }
+ 
+      .content {
+        border-left: none;
+        padding: 32px 20px 60px;
+      }
+ 
+      .navbar {
+        padding: 0 20px;
+      }
+ 
+      .doc-title {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+ 
+<body>
+ 
+  <!-- ================================================
+       NAVBAR
+  ================================================ -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-logo">Gennus</a>
+    <a href="register.html" class="navbar-back">
+      <!-- Seta de voltar -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+      </svg>
+      Voltar ao cadastro
+    </a>
+  </nav>
+ 
+  <div class="page-wrapper">
+ 
+    <!-- ================================================
+         SIDEBAR — índice de navegação
+         Os hrefs (#section-1, etc.) são âncoras internas.
+         O JS vai adicionar a classe .active no item
+         correspondente à seção visível na tela.
+    ================================================ -->
+    <aside class="sidebar">
+      <p class="sidebar-label">Nesta página</p>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#section-1" class="active">1. Aceitação</a></li>
+        <li><a href="#section-2">2. Serviço</a></li>
+        <li><a href="#section-3">3. Uso permitido</a></li>
+        <li><a href="#section-4">4. Conta e segurança</a></li>
+        <li><a href="#section-5">5. Privacidade e LGPD</a></li>
+        <li><a href="#section-6">6. Propriedade intelectual</a></li>
+        <li><a href="#section-7">7. Pagamentos</a></li>
+        <li><a href="#section-8">8. Responsabilidades</a></li>
+        <li><a href="#section-9">9. Suspensão</a></li>
+        <li><a href="#section-10">10. Modificações</a></li>
+        <li><a href="#section-11">11. Contato</a></li>
+      </ul>
+    </aside>
+ 
+    <!-- ================================================
+         CONTEÚDO PRINCIPAL
+    ================================================ -->
+    <main class="content">
+ 
+      <!-- Cabeçalho do documento -->
+      <header class="doc-header">
+        <div class="doc-badge">
+          <!-- Ícone de documento legal -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+          </svg>
+          Documento legal
+        </div>
+ 
+        <h1 class="doc-title">Termos de Uso</h1>
+        <p class="doc-subtitle">
+          Ao utilizar o Gennus, você concorda com estes termos. Leia com atenção
+          — eles definem seus direitos, responsabilidades e como operamos.
+        </p>
+ 
+        <div class="doc-meta">
+          <div class="doc-meta-item">
+            <span class="meta-label">Última atualização</span>
+            <span class="meta-value">Janeiro de 2026</span>
+          </div>
+          <div class="doc-meta-item">
+            <span class="meta-label">Versão</span>
+            <span class="meta-value">1.0.0</span>
+          </div>
+          <div class="doc-meta-item">
+            <span class="meta-label">Aplica-se a</span>
+            <span class="meta-value">Todos os usuários da plataforma</span>
+          </div>
+        </div>
+      </header>
+ 
+      <!-- ============ SEÇÃO 1 ============ -->
+      <section class="terms-section" id="section-1">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2 class="section-title">Aceitação dos Termos</h2>
+        </div>
+        <p class="terms-text">
+          Ao acessar ou utilizar a plataforma Gennus — incluindo criar uma conta, acessar o sistema de gestão ou qualquer funcionalidade oferecida — você declara que leu, compreendeu e concorda em estar vinculado a estes Termos de Uso e à nossa Política de Privacidade.
+        </p>
+        <p class="terms-text">
+          Caso não concorde com qualquer parte destes termos, você não deve utilizar a plataforma. O uso continuado após mudanças nos termos constitui aceitação das modificações.
+        </p>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 2 ============ -->
+      <section class="terms-section" id="section-2">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title">Descrição do Serviço</h2>
+        </div>
+        <p class="terms-text">
+          O Gennus é uma plataforma de gestão empresarial (ERP) de código aberto desenvolvida para facilitar o gerenciamento de processos de pequenas e médias empresas. O serviço inclui, mas não se limita a:
+        </p>
+        <ul class="terms-list">
+          <li>Controle financeiro e fluxo de caixa</li>
+          <li>Gestão de estoque e inventário</li>
+          <li>Emissão de relatórios e dashboards analíticos</li>
+          <li>Integração entre departamentos da empresa</li>
+          <li>Gerenciamento de usuários e permissões</li>
+        </ul>
+        <p class="terms-text">
+          Por ser um projeto de código aberto, o Gennus pode ser inspecionado, modificado e distribuído conforme a licença aplicável. Versões autogerenciadas (self-hosted) estão sujeitas a termos adicionais.
+        </p>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 3 ============ -->
+      <section class="terms-section" id="section-3">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2 class="section-title">Uso Permitido</h2>
+        </div>
+        <p class="terms-text">
+          Você pode usar o Gennus exclusivamente para fins legais e comerciais legítimos. É expressamente proibido:
+        </p>
+        <ul class="terms-list">
+          <li>Utilizar a plataforma para atividades fraudulentas, ilegais ou que prejudiquem terceiros</li>
+          <li>Tentar acessar contas, sistemas ou dados de outros usuários sem autorização</li>
+          <li>Realizar engenharia reversa, descompilar ou extrair código-fonte não público</li>
+          <li>Enviar spam, vírus ou qualquer código malicioso através da plataforma</li>
+          <li>Revender ou sublicenciar o acesso à plataforma sem autorização expressa</li>
+          <li>Sobrecarregar intencionalmente a infraestrutura do serviço (ataques DDoS)</li>
+        </ul>
+        <p class="terms-text">
+          Violações podem resultar na suspensão imediata da conta e, quando aplicável, em medidas legais cabíveis.
+        </p>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 4 ============ -->
+      <section class="terms-section" id="section-4">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2 class="section-title">Conta e Segurança</h2>
+        </div>
+        <p class="terms-text">
+          Para utilizar o Gennus, você precisa criar uma conta fornecendo informações verdadeiras, precisas e atualizadas. Você é o único responsável por:
+        </p>
+        <ul class="terms-list">
+          <li>Manter a confidencialidade da sua senha e credenciais de acesso</li>
+          <li>Todas as atividades realizadas sob sua conta</li>
+          <li>Notificar imediatamente a equipe Gennus em caso de acesso não autorizado</li>
+          <li>Manter seu e-mail de cadastro atualizado para comunicações importantes</li>
+        </ul>
+        <div class="highlight-card">
+          <strong>Recomendação de segurança:</strong> utilize uma senha única para o Gennus, com no mínimo 8 caracteres, combinando letras maiúsculas, minúsculas, números e símbolos. Nunca compartilhe sua senha com terceiros.
+        </div>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 5 ============ -->
+      <section class="terms-section" id="section-5">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2 class="section-title">Privacidade e LGPD</h2>
+        </div>
+        <p class="terms-text">
+          O Gennus opera em total conformidade com a Lei Geral de Proteção de Dados Pessoais — LGPD (Lei nº 13.709/2018). Coletamos apenas os dados estritamente necessários para o funcionamento da plataforma.
+        </p>
+        <div class="highlight-card">
+          <strong>Seus dados nunca são vendidos.</strong> Não comercializamos, alugamos ou cedemos suas informações pessoais a terceiros para fins de marketing ou publicidade.
+        </div>
+        <p class="terms-text">Como titular dos seus dados, você tem direito a:</p>
+        <ul class="terms-list">
+          <li>Confirmar a existência de tratamento dos seus dados</li>
+          <li>Acessar os dados que possuímos sobre você</li>
+          <li>Corrigir dados incompletos, inexatos ou desatualizados</li>
+          <li>Solicitar a anonimização, bloqueio ou eliminação dos seus dados</li>
+          <li>Revogar o consentimento a qualquer momento</li>
+          <li>Portabilidade dos dados para outro fornecedor de serviço</li>
+        </ul>
+        <p class="terms-text">
+          Para exercer qualquer desses direitos, entre em contato pelo e-mail
+          <a href="mailto:privacidade@gennus.com.br" class="terms-link">privacidade@gennus.com.br</a>.
+          Respondemos todas as solicitações em até 15 dias úteis.
+        </p>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 6 ============ -->
+      <section class="terms-section" id="section-6">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <h2 class="section-title">Propriedade Intelectual</h2>
+        </div>
+        <p class="terms-text">
+          O código-fonte do Gennus é distribuído sob licença de código aberto. No entanto, a marca, o nome "Gennus", logotipos, design da interface e materiais de marketing são propriedade exclusiva do projeto e não podem ser usados sem autorização.
+        </p>
+        <p class="terms-text">
+          Os dados inseridos por você na plataforma — registros financeiros, cadastros de clientes, estoque — pertencem exclusivamente a você. O Gennus não reivindica qualquer direito sobre esses dados.
+        </p>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 7 ============ -->
+      <section class="terms-section" id="section-7">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <h2 class="section-title">Pagamentos e Planos</h2>
+        </div>
+        <p class="terms-text">
+          O Gennus oferece uma versão gratuita com funcionalidades essenciais. Planos pagos, quando disponíveis, terão condições específicas detalhadas no momento da contratação.
+        </p>
+        <ul class="terms-list">
+          <li>Cobranças são processadas mensalmente ou anualmente, conforme o plano escolhido</li>
+          <li>Cancelamentos podem ser feitos a qualquer momento, sem multa</li>
+          <li>Reembolsos são analisados caso a caso dentro de 7 dias após a cobrança</li>
+          <li>Preços podem ser alterados com aviso prévio de 30 dias por e-mail</li>
+        </ul>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 8 ============ -->
+      <section class="terms-section" id="section-8">
+        <div class="section-header">
+          <span class="section-number">08</span>
+          <h2 class="section-title">Limitação de Responsabilidade</h2>
+        </div>
+        <p class="terms-text">
+          O Gennus é disponibilizado "no estado em que se encontra" (<em>as is</em>), sem garantias expressas ou implícitas de adequação a um propósito específico.
+        </p>
+        <p class="terms-text">
+          Não nos responsabilizamos por perdas de dados resultantes de uso indevido, por interrupções de serviço causadas por fatores externos (quedas de energia, falhas de provedor de internet, desastres naturais) ou por danos indiretos decorrentes do uso ou impossibilidade de uso da plataforma.
+        </p>
+        <div class="highlight-card">
+          <strong>Recomendação:</strong> mantenha backups regulares dos seus dados. O Gennus realiza cópias de segurança periódicas, mas a responsabilidade final pela guarda dos dados da sua empresa é sua.
+        </div>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 9 ============ -->
+      <section class="terms-section" id="section-9">
+        <div class="section-header">
+          <span class="section-number">09</span>
+          <h2 class="section-title">Suspensão e Encerramento</h2>
+        </div>
+        <p class="terms-text">
+          Reservamo-nos o direito de suspender ou encerrar contas que violem estes termos, sem aviso prévio em casos graves. Em situações menos críticas, notificaremos por e-mail antes de qualquer ação.
+        </p>
+        <p class="terms-text">
+          Você pode encerrar sua conta a qualquer momento nas configurações da plataforma. Após o encerramento, seus dados serão mantidos por 90 dias (para eventual recuperação) e então excluídos permanentemente.
+        </p>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 10 ============ -->
+      <section class="terms-section" id="section-10">
+        <div class="section-header">
+          <span class="section-number">10</span>
+          <h2 class="section-title">Modificações dos Termos</h2>
+        </div>
+        <p class="terms-text">
+          Podemos atualizar estes Termos de Uso periodicamente. Sempre que houver mudanças significativas, você será notificado por e-mail com antecedência mínima de 15 dias.
+        </p>
+        <p class="terms-text">
+          O uso continuado da plataforma após a data de vigência das novas condições implica aceitação automática. Se não concordar com as mudanças, você pode encerrar sua conta antes da data de vigência.
+        </p>
+      </section>
+ 
+      <div class="section-divider"></div>
+ 
+      <!-- ============ SEÇÃO 11 ============ -->
+      <section class="terms-section" id="section-11">
+        <div class="section-header">
+          <span class="section-number">11</span>
+          <h2 class="section-title">Contato e Foro</h2>
+        </div>
+        <p class="terms-text">
+          Dúvidas, reclamações ou sugestões sobre estes termos podem ser enviadas para:
+        </p>
+        <ul class="terms-list">
+          <li>E-mail geral: <a href="mailto:suporte@gennus.com.br" class="terms-link">suporte@gennus.com.br</a></li>
+          <li>Privacidade e LGPD: <a href="mailto:privacidade@gennus.com.br" class="terms-link">privacidade@gennus.com.br</a></li>
+        </ul>
+        <p class="terms-text">
+          Estes Termos são regidos pelas leis brasileiras. Fica eleito o foro da comarca de Curitiba — PR como competente para dirimir quaisquer litígios decorrentes deste instrumento.
+        </p>
+      </section>
+ 
+      <!-- Rodapé do documento -->
+      <footer class="doc-footer">
+        <p class="doc-footer-text">
+          Ao criar uma conta no Gennus, você confirma que leu e concorda integralmente com estes Termos de Uso. Este documento tem validade legal e constitui um acordo vinculante entre você e o Gennus.
+        </p>
+        <a href="register.html" class="btn-back-register">
+          Voltar ao cadastro
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </footer>
+ 
+    </main>
+  </div>
+ 
+  <script>
+    /* ================================================
+       INTERSECTION OBSERVER — destaque do item ativo na sidebar
+ 
+       Funciona assim: o browser "observa" cada seção.
+       Quando uma seção entra na área visível da tela,
+       o observer dispara uma callback que marca o link
+       correspondente na sidebar como .active.
+ 
+       É mais eficiente que ficar checando scroll a cada
+       pixel com window.addEventListener('scroll') —
+       o browser só chama a callback quando necessário.
+    ================================================ */
+ 
+    /* Seleciona todas as seções com id que começa com "section-" */
+    var sections = document.querySelectorAll('.terms-section');
+    var navLinks = document.querySelectorAll('.sidebar-nav a');
+ 
+    var observer = new IntersectionObserver(function(entries) {
+      /* entries = array das seções que mudaram de estado (entraram ou saíram da tela) */
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          /* isIntersecting = true quando a seção está visível na tela */
+ 
+          /* Remove .active de todos os links */
+          navLinks.forEach(function(link) {
+            link.classList.remove('active');
+          });
+ 
+          /* Adiciona .active só no link que aponta pra seção visível.
+             entry.target.id = id da seção (ex: "section-3")
+             href="#section-3" corresponde a esse id. */
+          var activeLink = document.querySelector('.sidebar-nav a[href="#' + entry.target.id + '"]');
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      });
+    }, {
+      /* rootMargin define uma margem virtual ao redor da viewport.
+         "-20% 0px -70% 0px" = a seção é considerada "ativa" quando
+         está entre 20% e 30% do topo da tela — evita trocas bruscas. */
+      rootMargin: '-20% 0px -70% 0px'
+    });
+ 
+    /* Diz pro observer pra monitorar cada seção */
+    sections.forEach(function(section) {
+      observer.observe(section);
+    });
+  </script>
+ 
+</body>
+</html>

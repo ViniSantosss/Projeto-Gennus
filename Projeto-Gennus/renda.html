@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gennus - Renda</title>
+    <link rel="stylesheet" href="renda.css">
+</head>
+<body>
+    <main class="dashboard-page">
+        <nav class="sidebar-main">
+            <div class="sidebar-logo">GENNUS</div>
+            <a href="dashboard.html" class="sidebar-link-root">DASHBOARD</a>
+            <div class="sidebar-separator"></div>
+            <a href="vendas.html" class="sidebar-link-root">VENDAS</a>
+            <a href="renda.html" class="sidebar-link-root active" style="color:var(--roxo)">RENDA</a>
+        </nav>
+        <div class="dashboard-content">
+            <h1>Financeiro Detalhado</h1>
+            <div class="dashboard-values">
+                <div class="metric-card">
+                    <h3>Receita Bruta</h3>
+                    <span id="r-bruta" class="txt-verde">R$ 0,00</span>
+                </div>
+                <div class="metric-card">
+                    <h3>Receita Líquida</h3>
+                    <span id="r-liquida" class="txt-roxo">R$ 0,00</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const v = JSON.parse(localStorage.getItem("gennus_vendas")) || [];
+            const f = JSON.parse(localStorage.getItem("gennus_funcs")) || [];
+            const bruto = v.reduce((acc, item) => acc + (item.valorTotal || 0), 0);
+            const despesa = f.reduce((acc, func) => acc + (parseFloat(func.salario) || 0), 0) + 5100;
+            
+            document.getElementById("r-bruta").textContent = bruto.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+            document.getElementById("r-liquida").textContent = (bruto - despesa).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+        });
+    </script>
+</body>
+</html>

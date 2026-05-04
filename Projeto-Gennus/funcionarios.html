@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gennus - Gestão de Funcionários</title>
+    <link rel="stylesheet" href="funcionarios.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/gennus-favicon-A.svg">
+</head>
+<body>
+    <main class="dashboard-page">
+        <nav class="sidebar-main">
+            <div class="sidebar-logo"><a href="dashboard.html" style="text-decoration:none">GENNUS</a></div>
+            <a href="dashboard.html" class="sidebar-link-root">DASHBOARD</a>
+            <div class="sidebar-separator"></div>
+            <a href="clientes.html" class="sidebar-link-root">CLIENTES</a>
+            <a href="funcionarios.html" class="sidebar-link-root active" style="color: var(--roxo);">FUNCIONÁRIOS</a>
+            <div class="sidebar-separator"></div>
+            <a href="login.html" class="logout-link">Sair</a>
+        </nav>
+
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <h1>Gestão de Funcionários</h1>
+                <p style="color: var(--texto-muted);">Cadastre sua equipe e gerencie contratos e benefícios.</p>
+            </div>
+
+            <section class="card-base">
+                <form id="func-form">
+                    <input type="hidden" id="func-id">
+                    
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Nome Completo</label>
+                            <input type="text" id="nome" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Tipo de Contrato</label>
+                            <select id="tipo-contrato">
+                                <option value="CLT">CLT</option>
+                                <option value="PJ">PJ</option>
+                            </select>
+                        </div>
+                        <div class="input-group" id="doc-group">
+                            <label id="label-doc">CPF</label>
+                            <input type="text" id="documento" placeholder="000.000.000-00" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Salário Base (R$)</label>
+                            <input type="number" id="salario" step="0.01" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Status</label>
+                            <select id="status">
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                            <small class="helper-text">
+                                <strong>Ativo:</strong> Em atividade normal.<br>
+                                <strong>Inativo:</strong> Atestado, licença médica ou gestacional.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="beneficios-section">
+                        <h3>Benefícios</h3>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Vale Transporte (VT)</label>
+                                <input type="text" id="vt" placeholder="Valor ou Sim/Não">
+                            </div>
+                            <div class="input-group">
+                                <label>Vale Refeição (VR)</label>
+                                <input type="text" id="vr" placeholder="Valor Mensal">
+                            </div>
+                        </div>
+                        <div id="extra-benefits-container"></div>
+                        <button type="button" id="add-benefit" class="btn-outline">+ Adicionar Outro Benefício</button>
+                    </div>
+
+                    <button type="submit" id="btn-salvar" style="margin-top: 20px;">Salvar Funcionário</button>
+                </form>
+            </section>
+
+            <section class="card-base">
+                <h3>Equipe Cadastrada</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Contrato</th>
+                                <th>Documento</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-func"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="funcionarios.js"></script>
+</body>
+</html>

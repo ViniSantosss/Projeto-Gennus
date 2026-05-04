@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --bg: #000000;
+    --bg-side: #080808;
+    --bg-card: #0c0c0c;
+    --roxo: #a855f7;
+    --verde: #22c55e;
+    --vermelho: #f87171;
+    --texto: #ffffff;
+    --texto-muted: #666666;
+    --borda: rgba(255, 255, 255, 0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--texto); }
+
+.dashboard-page { display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar-main { width: 300px; height: 100vh; position: fixed; background: var(--bg-side); border-right: 1px solid var(--borda); padding: 40px 24px; }
+.sidebar-logo { font-family: 'Space Grotesk'; font-size: 1.5rem; background: linear-gradient(90deg, #7e22ce, var(--roxo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; }
+.sidebar-link-root { display: block; color: var(--texto-muted); text-decoration: none; padding: 12px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+.sidebar-link-root.active { color: var(--roxo); }
+
+/* CONTEÚDO FINANCEIRO */
+.dashboard-content { flex: 1; margin-left: 300px; padding: 50px; }
+.dashboard-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; margin-bottom: 40px; }
+
+/* GRID DE CARDS (3 COLUNAS) */
+.dashboard-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.metric-card { 
+    background: var(--bg-card); 
+    border: 1px solid var(--borda); 
+    border-radius: 12px; 
+    padding: 30px 24px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.metric-card:hover { transform: translateY(-5px); border-color: rgba(168, 85, 247, 0.3); }
+
+.metric-card h3 { font-size: 0.7rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; }
+.metric-card span { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; }
+
+/* CORES DINÂMICAS */
+.txt-verde { color: var(--verde); text-shadow: 0 0 20px rgba(34, 197, 94, 0.2); }
+.txt-vermelho { color: var(--vermelho); text-shadow: 0 0 20px rgba(248, 113, 113, 0.2); }
+.txt-roxo { color: var(--roxo); text-shadow: 0 0 20px rgba(168, 85, 247, 0.2); }

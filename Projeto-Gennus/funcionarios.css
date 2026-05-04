@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --bg: #000000; --bg-side: #080808; --bg-card: #0c0c0c;
+    --roxo: #a855f7; --verde: #22c55e; --vermelho: #f87171;
+    --texto: #ffffff; --texto-muted: #666666; --borda: rgba(255, 255, 255, 0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--texto); }
+.dashboard-page { display: flex; }
+
+.sidebar-main { width: 300px; height: 100vh; position: fixed; background: var(--bg-side); border-right: 1px solid var(--borda); padding: 40px 24px; }
+.sidebar-logo { font-family: 'Space Grotesk'; font-size: 1.5rem; background: linear-gradient(90deg, #7e22ce, var(--roxo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; }
+.sidebar-link-root { display: block; color: var(--texto-muted); text-decoration: none; padding: 12px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+.sidebar-link-root.active { color: var(--roxo); }
+.sidebar-separator { height: 1px; background: var(--borda); margin: 10px 0; }
+
+.dashboard-content { flex: 1; margin-left: 300px; padding: 50px; }
+.card-base { background: var(--bg-card); border: 1px solid var(--borda); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.input-group label { display: block; font-size: 0.7rem; color: var(--texto-muted); text-transform: uppercase; margin-bottom: 8px; }
+.input-group input, .input-group select { width: 100%; background: #000; border: 1px solid var(--borda); padding: 12px; border-radius: 8px; color: #fff; }
+.helper-text { display: block; margin-top: 8px; font-size: 0.65rem; color: #444; line-height: 1.4; }
+
+.beneficios-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--borda); }
+.beneficios-section h3 { font-size: 0.8rem; margin-bottom: 15px; color: var(--roxo); }
+
+button { background: var(--roxo); color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.btn-outline { background: none; border: 1px dashed var(--roxo); color: var(--roxo); margin-top: 10px; width: 100%; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+th { text-align: left; font-size: 0.7rem; color: var(--texto-muted); padding: 12px; border-bottom: 1px solid var(--borda); }
+td { padding: 12px; font-size: 0.85rem; border-bottom: 1px solid var(--borda); }
+
+.status-ativo { color: var(--verde); font-weight: bold; }
+.status-inativo { color: var(--vermelho); font-weight: bold; }

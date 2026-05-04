@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gennus — Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="login-page">
+        <div class="bg-glow"></div>
+        <div class="login-form-wrapper fade-in">
+            <a href="index.html" class="login-logo">Gennus</a>
+            <div class="login-header">
+                <h1 class="login-title">Bem-vindo de volta</h1>
+                <p class="login-subtitle">Acesse sua conta corporativa</p>
+            </div>
+
+            <form class="login-form" id="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">E-mail</label>
+                    <input type="email" id="email" class="input-field" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password" class="input-label">Senha</label>
+                    <input type="password" id="password" class="input-field" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-entrar">Entrar no Painel <span class="btn-arrow">→</span></button>
+            </form>
+
+            <p class="login-footer-text">
+                Novo por aqui? <a href="register.html" class="link-register">Criar conta grátis</a>
+            </p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("login-form");
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const email = document.getElementById("email").value;
+                const senha = document.getElementById("password").value;
+
+                const usuarios = JSON.parse(localStorage.getItem("gennus_db_usuarios")) || [];
+                const encontrado = usuarios.find(u => u.email === email && u.senha === senha);
+
+                if (encontrado) {
+                    localStorage.setItem("gennus_usuario_logado", JSON.stringify(encontrado));
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("Dados incorretos ou usuário não encontrado!");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

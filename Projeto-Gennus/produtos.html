@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gennus - Produtos</title>
+    <link rel="stylesheet" href="produtos.css">
+</head>
+<body>
+    <main class="dashboard-page">
+        <nav class="sidebar-main">
+            <div class="sidebar-logo">GENNUS</div>
+            <a href="dashboard.html" class="sidebar-link-root">DASHBOARD</a>
+            <a href="produtos.html" class="sidebar-link-root active">PRODUTOS</a>
+            <a href="vendas.html" class="sidebar-link-root">VENDAS</a>
+            <a href="renda.html" class="sidebar-link-root">RENDA</a>
+        </nav>
+
+        <div class="dashboard-content">
+            <h1>Produtos</h1>
+            <section class="card-base">
+                <form id="produto-form">
+                    <input type="hidden" id="prod-id">
+                    <div class="form-grid">
+                        <div class="input-group"><label>Nome</label><input type="text" id="prod-nome" required></div>
+                        <div class="input-group"><label>Categoria</label><input type="text" id="prod-categoria"></div>
+                        <div class="input-group">
+                            <label>Unidade</label>
+                            <select id="prod-unidade">
+                                <option value="un">Unidade (un)</option>
+                                <option value="kg">Quilo (kg)</option>
+                                <option value="L">Litro (L)</option>
+                            </select>
+                        </div>
+                        <div class="input-group"><label>Custo (R$)</label><input type="number" id="prod-custo" step="0.01" required></div>
+                        <div class="input-group"><label>Venda (R$)</label><input type="number" id="prod-preco" step="0.01" required></div>
+                        <div class="input-group"><label>Estoque</label><input type="number" id="prod-estoque" required></div>
+                    </div>
+                    <button type="submit" id="btn-salvar-prod" style="margin-top:20px;">Salvar Produto</button>
+                </form>
+            </section>
+
+            <section class="card-base">
+                <table>
+                    <thead><tr><th>Nome</th><th>Custo</th><th>Venda</th><th>Estoque</th><th>Ações</th></tr></thead>
+                    <tbody id="lista-produtos"></tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+    <script src="produtos.js"></script>
+</body>
+</html>

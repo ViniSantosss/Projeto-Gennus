@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gennus — Criar Conta</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="login-page">
+        <div class="bg-glow"></div>
+        <div class="login-form-wrapper fade-in">
+            <a href="index.html" class="login-logo">Gennus</a>
+            <div class="login-header">
+                <h1 class="login-title">Criar sua conta</h1>
+                <p class="login-subtitle">Preencha os dados profissionais abaixo</p>
+            </div>
+
+            <form class="login-form" id="register-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <label for="reg-nome" class="input-label">Nome</label>
+                        <input type="text" id="reg-nome" class="input-field" placeholder="João" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-sobrenome" class="input-label">Sobrenome</label>
+                        <input type="text" id="reg-sobrenome" class="input-field" placeholder="Silva" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-email" class="input-label">E-mail Corporativo</label>
+                    <input type="email" id="reg-email" class="input-field" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-tel" class="input-label">Telefone / WhatsApp</label>
+                    <input type="text" id="reg-tel" class="input-field" placeholder="(11) 99999-9999" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-documento" class="input-label">CPF ou CNPJ</label>
+                    <input type="text" id="reg-documento" class="input-field" placeholder="000.000.000-00" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-password" class="input-label">Senha de Acesso</label>
+                    <input type="password" id="reg-password" class="input-field" placeholder="No mínimo 8 caracteres" required>
+                </div>
+
+                <button type="submit" class="btn-entrar">Finalizar Cadastro <span class="btn-arrow">→</span></button>
+            </form>
+
+            <p class="login-footer-text">
+                Já tem conta? <a href="login.html" class="link-register">Faça login</a>
+            </p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("register-form");
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const novoUsuario = {
+                    nome: document.getElementById("reg-nome").value,
+                    sobrenome: document.getElementById("reg-sobrenome").value,
+                    email: document.getElementById("reg-email").value,
+                    telefone: document.getElementById("reg-tel").value,
+                    documento: document.getElementById("reg-documento").value,
+                    senha: document.getElementById("reg-password").value
+                };
+
+                let usuarios = JSON.parse(localStorage.getItem("gennus_db_usuarios")) || [];
+
+                if (usuarios.find(u => u.email === novoUsuario.email)) {
+                    alert("Este e-mail já está em uso!");
+                    return;
+                }
+
+                usuarios.push(novoUsuario);
+                localStorage.setItem("gennus_db_usuarios", JSON.stringify(usuarios));
+
+                alert("Conta Gennus criada com sucesso!");
+                window.location.href = "login.html";
+            });
+        });
+    </script>
+</body>
+</html>

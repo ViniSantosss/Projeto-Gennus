@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gennus - Editar Perfil</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <main class="dashboard-page">
+        <nav class="sidebar-main">
+            <div class="sidebar-logo">GENNUS</div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="sidebar-link-root">Voltar ao Painel</a>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <h1>Configurações de Perfil</h1>
+            
+            <div class="card-base" style="max-width: 600px;">
+                <form id="profile-form">
+                    <div class="input-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="edit-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label>E-mail (Login)</label>
+                        <input type="email" id="edit-email" readonly style="opacity: 0.5;">
+                        <small style="color: var(--texto-muted);">O e-mail não pode ser alterado.</small>
+                    </div>
+                    <div class="input-group">
+                        <label>Nova Senha</label>
+                        <input type="password" id="edit-password" placeholder="Deixe em branco para manter a atual">
+                    </div>
+                    <hr style="border: 0; border-top: 1px solid var(--borda); margin: 20px 0;">
+                    <button type="submit">Salvar Alterações</button>
+                    <a href="dashboard.html" style="color: var(--texto-muted); text-decoration: none; margin-left: 20px; font-size: 0.9rem;">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = JSON.parse(localStorage.getItem("gennus_usuario_logado"));
+            if (!user) window.location.href = "login.html";
+
+            // Preenche os campos
+            document.getElementById("edit-name").value = user.nome;
+            document.getElementById("edit-email").value = user.email;
+
+            document.getElementById("profile-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                // Atualiza o objeto do usuário
+                user.nome = document.getElementById("edit-name").value;
+                const novaSenha = document.getElementById("edit-password").value;
+                if (novaSenha) user.senha = novaSenha;
+
+                // Salva na "sessão" e no "banco" (opcional dependendo da sua lógica de usuários)
+                localStorage.setItem("gennus_usuario_logado", JSON.stringify(user));
+                
+                // Se você tiver uma lista de usuários, precisaria atualizar lá também:
+                // const usuarios = JSON.parse(localStorage.getItem("usuarios"));
+                // ... lógica de find e update ...
+
+                alert("Perfil atualizado com sucesso!");
+                window.location.href = "dashboard.html";
+            });
+        });
+    </script>
+</body>
+</html>
